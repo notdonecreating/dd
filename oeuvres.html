@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oeuvres - DONEDL ARCHIVE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+        
+        :root {
+            --background-color: #f5f5f5;
+            --text-color: #333;
+            --border-color: #333;
+            --secondary-text-color: #666;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: #1a1a1a;
+                --text-color: #e0e0e0;
+                --border-color: #e0e0e0;
+                --secondary-text-color: #aaa;
+            }
+        }
+        
+        [data-theme="light"] {
+            --background-color: #f5f5f5;
+            --text-color: #333;
+            --border-color: #333;
+            --secondary-text-color: #666;
+        }
+        
+        [data-theme="dark"] {
+            --background-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --border-color: #e0e0e0;
+            --secondary-text-color: #aaa;
+        }
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-gap: 20px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            background: var(--text-color);
+            color: var(--background-color);
+            border: 1px solid var(--border-color);
+            padding: 5px 8px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            opacity: 0.6;
+        }
+        
+        .theme-toggle:hover {
+            opacity: 1;
+        }
+        
+        .header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        
+        .main-content {
+            padding: 20px 0;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.8em;
+        }
+        
+        h1 {
+            font-size: 24px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        h2 {
+            font-size: 18px;
+            text-transform: uppercase;
+            margin-top: 40px;
+        }
+        
+        h3 {
+            font-size: 16px;
+        }
+        
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2px;
+            transition: opacity 0.3s;
+        }
+        
+        a:hover {
+            opacity: 0.7;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .project {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px dotted var(--border-color);
+        }
+        
+        .project:last-child {
+            border-bottom: none;
+        }
+        
+        .project-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        
+        .project-category {
+            font-style: italic;
+            color: var(--secondary-text-color);
+            margin-bottom: 10px;
+        }
+        
+        .project-description {
+            margin-bottom: 15px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>DONEDL ARCHIVE</h1>
+                <p>Optimist / Dreamer / Aspiring Magician</p>
+            </div>
+            <div style="text-align: right;">
+                <p>Location: TBD</p>
+                <p>Contact: notdonecreating@gmail.com</p>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <a href="index.html" class="back-link">← Back to Home</a>
+            
+            <h1>Oeuvres</h1>
+            <p>Projects beyond my present priorities that I hope to make happen someday (or that someone else makes them happen!)</p>
+            
+            <div class="divider">• • • • • • • • • • • • • • • • • • • • • • • • •</div>
+            
+            <div class="project">
+                <div class="project-title">Digital Garden Platform</div>
+                <div class="project-category">Software / Knowledge Management</div>
+                <div class="project-description">
+                    An elegant, simple platform for creating and maintaining digital gardens - public spaces for organizing and sharing knowledge that grow organically over time. Focus on beautiful typography, sustainable long-term use, and tools for connecting ideas across entries.
+                </div>
+            </div>
+            
+            <div class="project">
+                <div class="project-title">Analog Social Media</div>
+                <div class="project-category">Social / Hardware</div>
+                <div class="project-description">
+                    A physical device that allows people to share updates, photos, and messages with loved ones without screens or traditional social media. Think digital picture frame meets private newsletter, but with intentionally limited features to avoid addictive patterns.
+                </div>
+            </div>
+            
+            <div class="project">
+                <div class="project-title">Wonder Education Framework</div>
+                <div class="project-category">Education / Curriculum</div>
+                <div class="project-description">
+                    A comprehensive approach to education that centers wonder, curiosity, and true understanding rather than memorization or test performance. Developing materials and training for educators who want to preserve the innate joy of learning children are born with.
+                </div>
+            </div>
+            
+            <div class="project">
+                <div class="project-title">Third Space Community Centers</div>
+                <div class="project-category">Community / Architecture</div>
+                <div class="project-description">
+                    A network of thoughtfully designed physical spaces that serve as neither home nor work, but as true "third places" where community can form naturally. Combining elements of libraries, cafes, makerspaces, and parks into spaces that foster meaningful connections.
+                </div>
+            </div>
+            
+            <div class="project">
+                <div class="project-title">Low-Tech Luxury</div>
+                <div class="project-category">Consumer Products / Design</div>
+                <div class="project-description">
+                    A brand creating high-quality, beautiful products that intentionally eschew "smart" technology in favor of durability, repairability, and timeless design. Reframing the absence of technology as a feature rather than a limitation.
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>This website is a gateway to my projects and thoughts | Created 2025</p>
+            <p>
+                <a href="#">Substack</a> •
+                <a href="https://x.com/doughneigh?s=21">Twitter</a> •
+                <a href="mailto:notdonecreating@gmail.com">Email</a>
+            </p>
+        </div>
+    </div>
+    
+    <button class="theme-toggle" id="theme-toggle">Toggle Dark Mode</button>
+    
+    <script>
+        // Function to set the theme
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            // Try to use localStorage but fallback gracefully if unavailable
+            try {
+                localStorage.setItem('theme', theme);
+            } catch (e) {
+                console.log('localStorage not available, theme preference will not persist');
+            }
+        }
+        
+        // Check for saved theme preference or use system preference
+        let savedTheme = null;
+        try {
+            savedTheme = localStorage.getItem('theme');
+        } catch (e) {
+            console.log('localStorage not available, using system preference only');
+        }
+        
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (prefersDark) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+        
+        // Toggle theme button
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+            
+            // Update button text
+            updateToggleText();
+        });
+        
+        // Set initial button text
+        function updateToggleText() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        }
+        
+        // Call once on load
+        updateToggleText();
+    </script>
+</body>
+</html>
