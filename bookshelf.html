@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookshelf Favourites - DONEDL ARCHIVE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+        
+        :root {
+            --background-color: #f5f5f5;
+            --text-color: #333;
+            --border-color: #333;
+            --secondary-text-color: #666;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: #1a1a1a;
+                --text-color: #e0e0e0;
+                --border-color: #e0e0e0;
+                --secondary-text-color: #aaa;
+            }
+        }
+        
+        [data-theme="light"] {
+            --background-color: #f5f5f5;
+            --text-color: #333;
+            --border-color: #333;
+            --secondary-text-color: #666;
+        }
+        
+        [data-theme="dark"] {
+            --background-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --border-color: #e0e0e0;
+            --secondary-text-color: #aaa;
+        }
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-gap: 20px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            background: var(--text-color);
+            color: var(--background-color);
+            border: 1px solid var(--border-color);
+            padding: 5px 8px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            opacity: 0.6;
+        }
+        
+        .theme-toggle:hover {
+            opacity: 1;
+        }
+        
+        .header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        
+        .main-content {
+            padding: 20px 0;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.8em;
+        }
+        
+        h1 {
+            font-size: 24px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        h2 {
+            font-size: 18px;
+            text-transform: uppercase;
+            margin-top: 40px;
+        }
+        
+        h3 {
+            font-size: 16px;
+        }
+        
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2px;
+            transition: opacity 0.3s;
+        }
+        
+        a:hover {
+            opacity: 0.7;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .book {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px dotted var(--border-color);
+        }
+        
+        .book:last-child {
+            border-bottom: none;
+        }
+        
+        .book-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .book-author {
+            font-style: italic;
+            color: var(--secondary-text-color);
+            margin-bottom: 10px;
+        }
+        
+        .book-description {
+            margin-bottom: 15px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+        
+        .book-category {
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>DONEDL ARCHIVE</h1>
+                <p>Optimist / Dreamer / Aspiring Magician</p>
+            </div>
+            <div style="text-align: right;">
+                <p>Location: TBD</p>
+                <p>Contact: notdonecreating@gmail.com</p>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <a href="index.html" class="back-link">← Back to Home</a>
+            
+            <h1>Bookshelf Favourites</h1>
+            <p>Literature that has shaped my thinking and perspective</p>
+            
+            <div class="divider">• • • • • • • • • • • • • • • • • • • • • • • • •</div>
+            
+            <div class="featured-text">
+                I don't tend to read much fiction, though I'd like to. Almost all fiction listed here are childhood reads. I don't necessarily like every book for the main message it purports to give. But every book here left me with something lasting. I haven't reread most of the fiction as an adult so I can't recommend them with certainty, but the others I recommend wholeheartedly.
+            </div>
+            
+            <div class="book-category">
+                <h2>Philosophy & Meaning</h2>
+                
+                <div class="book">
+                    <div class="book-title">Man's Search for Meaning</div>
+                    <div class="book-author">By Viktor E. Frankl</div>
+                    <div class="book-description">
+                        A profound exploration of finding purpose even in the most difficult circumstances. Frankl's experiences in Nazi concentration camps formed the basis for his approach to discovering meaning in all forms of existence, even the most brutal ones.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">The Courage to Be</div>
+                    <div class="book-author">By Paul Tillich</div>
+                    <div class="book-description">
+                        An examination of anxiety and courage in the modern world. Tillich's analysis of how we face the anxiety of fate and death, emptiness and meaninglessness, and guilt and condemnation has deeply influenced my understanding of the human condition.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">The Confessions of St. Augustine</div>
+                    <div class="book-author">By Saint Augustine</div>
+                    <div class="book-description">
+                        An introspective masterpiece exploring the journey from worldly desires to spiritual awakening. Augustine's candid reflections on his own struggles and transformation continue to resonate across centuries.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">Mere Christianity</div>
+                    <div class="book-author">By C.S. Lewis</div>
+                    <div class="book-description">
+                        A thoughtful defense of core Christian beliefs that transcends denominational boundaries. Lewis's logical approach and accessible metaphors make complex theological concepts remarkably clear.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">The Hero with a Thousand Faces</div>
+                    <div class="book-author">By Joseph Campbell</div>
+                    <div class="book-description">
+                        A comparative exploration of mythology that reveals the common patterns in hero stories across cultures. Campbell's concept of the monomyth has influenced my understanding of narrative, meaning, and the human journey.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">Jung's Red Book</div>
+                    <div class="book-author">By Carl Jung</div>
+                    <div class="book-description">
+                        A deeply personal record of Jung's confrontation with his unconscious. This visually stunning and psychologically profound work represents Jung's attempt to understand the universal patterns underlying the human psyche.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="book-category">
+                <h2>Technology & Society</h2>
+                
+                <div class="book">
+                    <div class="book-title">Technopoly</div>
+                    <div class="book-author">By Neil Postman</div>
+                    <div class="book-description">
+                        A prescient critique of technology's domination of culture and thought. Though written before the internet age, Postman's warnings about surrendering culture to technology feel more relevant than ever.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">The Glass Cage</div>
+                    <div class="book-author">By Nicholas Carr</div>
+                    <div class="book-description">
+                        An exploration of automation's human consequences. Carr's nuanced look at how automation changes our relationship with our work, our environment, and ourselves has influenced my thinking on how we should design technology.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">The World-Ending Fire</div>
+                    <div class="book-author">By Wendell Berry</div>
+                    <div class="book-description">
+                        A collection of essays that articulates a profound vision of sustainable living and local economics. Berry's insights on community, agriculture, and our relationship with the land offer an alternative to technological solutionism.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">Zero to One</div>
+                    <div class="book-author">By Peter Thiel</div>
+                    <div class="book-description">
+                        A contrarian perspective on innovation and startup building. Thiel's emphasis on creating new categories rather than competing in existing ones has shaped my thinking about genuine progress.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">The Prosperity Paradox</div>
+                    <div class="book-author">By Clayton M. Christensen, Efosa Ojomo, and Karen Dillon</div>
+                    <div class="book-description">
+                        A fresh approach to addressing poverty through market-creating innovations. The authors' focus on developing solutions from within rather than imposing external aid has influenced my thinking on sustainable development.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="book-category">
+                <h2>Wonder & Creativity</h2>
+                
+                <div class="book">
+                    <div class="book-title">The Zen of Seeing</div>
+                    <div class="book-author">By Frederick Franck</div>
+                    <div class="book-description">
+                        A meditation on seeing as a form of contemplation. Franck's approach to drawing not as a technical skill but as a way of truly seeing the world has transformed how I experience everyday life.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">The Little Prince</div>
+                    <div class="book-author">By Antoine de Saint-Exupéry</div>
+                    <div class="book-description">
+                        A deceptively simple tale that contains profound truths about human connection. The fox's lesson that "what is essential is invisible to the eye" remains one of the most important principles in my life.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">The Artist's Way</div>
+                    <div class="book-author">By Julia Cameron</div>
+                    <div class="book-description">
+                        A spiritual path to higher creativity through practical exercises and insights. Cameron's morning pages and artist dates have become essential tools for reconnecting with my creative self.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">Leonardo da Vinci</div>
+                    <div class="book-author">By Walter Isaacson</div>
+                    <div class="book-description">
+                        A comprehensive biography that explores da Vinci's extraordinary curiosity and creativity. Isaacson's portrayal of Leonardo's integration of art and science continues to inspire my approach to learning.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">Deep Work</div>
+                    <div class="book-author">By Cal Newport</div>
+                    <div class="book-description">
+                        A compelling case for focused, distraction-free work in an increasingly fragmented world. Newport's practical strategies for cultivating depth have improved both my productivity and satisfaction.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">Range</div>
+                    <div class="book-author">By David Epstein</div>
+                    <div class="book-description">
+                        A counterintuitive exploration of how generalists often thrive in a specialized world. Epstein's research on the benefits of diverse experiences has validated my own nonlinear path.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="book-category">
+                <h2>Essays & Literary Works</h2>
+                
+                <div class="book">
+                    <div class="book-title">A Room of One's Own</div>
+                    <div class="book-author">By Virginia Woolf</div>
+                    <div class="book-description">
+                        My introduction to Woolf's brilliant prose. Beyond its feminist themes, this book contains underappreciated gems that form a decent base of my worldview—not what I expected from the premise.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">The Common Reader</div>
+                    <div class="book-author">By Virginia Woolf</div>
+                    <div class="book-description">
+                        A collection of essays that demonstrate Woolf's extraordinary insight into literature and life. Her ability to inhabit the minds of authors across centuries continues to astound me.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">Emerson's Essays</div>
+                    <div class="book-author">By Ralph Waldo Emerson</div>
+                    <div class="book-description">
+                        A treasure trove of wisdom on self-reliance, nature, and the human spirit. There's so much in here that even reading just one essay can be transformative.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">Lost in Thought</div>
+                    <div class="book-author">By Zena Hitz</div>
+                    <div class="book-description">
+                        A defense of intellectual life for its own sake. Hitz's exploration of how learning can be a refuge and source of dignity has affirmed my belief in the inherent value of contemplation.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">The Intellectual Life</div>
+                    <div class="book-author">By A.G. Sertillanges</div>
+                    <div class="book-description">
+                        A guide to cultivating a life of the mind that balances intellectual pursuit with spiritual growth. Sertillanges' practical wisdom on reading, writing, and thinking has shaped my approach to scholarship.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="book-category">
+                <h2>Poetry</h2>
+                
+                <div class="book">
+                    <div class="book-title">Leaves of Grass</div>
+                    <div class="book-author">By Walt Whitman</div>
+                    <div class="book-description">
+                        A revolutionary collection that celebrates the individual and the interconnectedness of all life. Whitman's democratic vision and embrace of the body, soul, and natural world continue to resonate deeply with me.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">Howl</div>
+                    <div class="book-author">By Allen Ginsberg</div>
+                    <div class="book-description">
+                        A raw, unfiltered cry against conformity and materialism. Ginsberg's passionate defense of those who live outside conventional boundaries challenged me to question societal norms.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="book-category">
+                <h2>Fiction</h2>
+                
+                <div class="book">
+                    <div class="book-title">The Midnight Library</div>
+                    <div class="book-author">By Matt Haig</div>
+                    <div class="book-description">
+                        A favorite of my youth that explores the infinite possibilities of life through the story of a library between life and death. It made me consider how seemingly small choices can lead to vastly different lives.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">The Raven Cycle Series</div>
+                    <div class="book-author">By Maggie Stiefvater</div>
+                    <div class="book-description">
+                        Another favorite from my youth that made the world around me feel a little more magical. These books awakened my appreciation for the mystical possibilities hidden in ordinary places.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">Life After Life</div>
+                    <div class="book-author">By Kate Atkinson</div>
+                    <div class="book-description">
+                        A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">Eleanor Oliphant is Completely Fine</div>
+                    <div class="book-author">By Gail Honeyman</div>
+                    <div class="book-description">
+                        A touching story about loneliness, trauma, and the healing power of connection. Eleanor's journey from isolation to community resonated deeply with my understanding of human relationships.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">The Alchemist</div>
+                    <div class="book-author">By Paulo Coelho</div>
+                    <div class="book-description">
+                        I read this when I was 12 and feeling depressed, and it made things feel meaningful. The simple fable about following one's dreams contains wisdom that spoke to me during a difficult time.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">Anne of Green Gables</div>
+                    <div class="book-author">By L.M. Montgomery</div>
+                    <div class="book-description">
+                        Just magic. Anne's imaginative spirit and ability to find wonder in everyday life continue to inspire me to look at the world with fresh eyes.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">Purple Hibiscus</div>
+                    <div class="book-author">By Chimamanda Ngozi Adichie</div>
+                    <div class="book-description">
+                        A powerful coming-of-age story set in postcolonial Nigeria. Adichie's nuanced portrayal of family, faith, and political turmoil offers insights into the complexity of Nigerian society.
+                    </div>
+                </div>
+                
+                <div class="book">
+                    <div class="book-title">Fine Boys</div>
+                    <div class="book-author">By Eghosa Imasuen</div>
+                    <div class="book-description">
+                        A compelling novel about university life in Nigeria during the 1990s. Its authentic depiction of friendship, cult violence, and resilience provides a window into a specific moment in Nigerian history.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>This website is a gateway to my projects and thoughts | Created 2025</p>
+            <p>
+                <a href="#">Substack</a> •
+                <a href="https://x.com/doughneigh?s=21">Twitter</a> •
+                <a href="mailto:notdonecreating@gmail.com">Email</a>
+            </p>
+        </div>
+    </div>
+    
+    <button class="theme-toggle" id="theme-toggle">Toggle Dark Mode</button>
+    
+    <script>
+        // Function to set the theme
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            // Try to use localStorage but fallback gracefully if unavailable
+            try {
+                localStorage.setItem('theme', theme);
+            } catch (e) {
+                console.log('localStorage not available, theme preference will not persist');
+            }
+        }
+        
+        // Check for saved theme preference or use system preference
+        let savedTheme = null;
+        try {
+            savedTheme = localStorage.getItem('theme');
+        } catch (e) {
+            console.log('localStorage not available, using system preference only');
+        }
+        
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (prefersDark) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+        
+        // Toggle theme button
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+            
+            // Update button text
+            updateToggleText();
+        });
+        
+        // Set initial button text
+        function updateToggleText() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        }
+        
+        // Call once on load
+        updateToggleText();
+    </script>
+</body>
+</html>
