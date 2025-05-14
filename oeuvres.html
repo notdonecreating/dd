@@ -69,12 +69,12 @@
             font-family: 'Space Mono', monospace;
             font-size: 12px;
             cursor: pointer;
-            transition: opacity 0.3s;
-            opacity: 0.6;
+            transition: background-color 0.3s, color 0.3s;
+            opacity: 1; /* Changed from 0.6 to 1 to make it fully opaque */
         }
         
         .theme-toggle:hover {
-            opacity: 1;
+            opacity: 1; /* This can stay the same */
         }
         
         .header {
