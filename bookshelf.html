@@ -12,8 +12,8 @@
             --text-color: #333;
             --border-color: #333;
             --secondary-text-color: #666;
-            --shelf-color: #ddd;
-            --book-shadow: rgba(0,0,0,0.1);
+            --shelf-color: #e0e0e0;
+            --book-hover-shadow: rgba(0,0,0,0.2);
         }
         
         @media (prefers-color-scheme: dark) {
@@ -23,7 +23,7 @@
                 --border-color: #e0e0e0;
                 --secondary-text-color: #aaa;
                 --shelf-color: #333;
-                --book-shadow: rgba(255,255,255,0.1);
+                --book-hover-shadow: rgba(255,255,255,0.1);
             }
         }
         
@@ -32,8 +32,8 @@
             --text-color: #333;
             --border-color: #333;
             --secondary-text-color: #666;
-            --shelf-color: #ddd;
-            --book-shadow: rgba(0,0,0,0.1);
+            --shelf-color: #e0e0e0;
+            --book-hover-shadow: rgba(0,0,0,0.2);
         }
         
         [data-theme="dark"] {
@@ -42,7 +42,7 @@
             --border-color: #e0e0e0;
             --secondary-text-color: #aaa;
             --shelf-color: #333;
-            --book-shadow: rgba(255,255,255,0.1);
+            --book-hover-shadow: rgba(255,255,255,0.1);
         }
         
         body {
@@ -66,7 +66,7 @@
             position: fixed;
             top: 10px;
             right: 10px;
-            z-index: 1000;
+            z-index: 2000;
             background: var(--text-color);
             color: var(--background-color);
             border: 1px solid var(--border-color);
@@ -82,12 +82,328 @@
             padding-bottom: 20px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
         
         .back-link {
             display: inline-block;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 24px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .intro-text {
+            margin: 20px 0 40px 0;
+            padding: 20px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .shelf-navigation {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .shelf-nav-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px 16px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .shelf-nav-btn:hover {
+            background: var(--text-color);
+            color: var(--background-color);
+        }
+        
+        .shelf-nav-btn.active {
+            background: var(--text-color);
+            color: var(--background-color);
+        }
+        
+        .bookshelf-section {
+            margin-bottom: 60px;
+            display: none;
+        }
+        
+        .bookshelf-section.active {
+            display: block;
+        }
+        
+        .shelf-label {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .bookshelf {
+            position: relative;
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                transparent 75%, 
+                var(--shelf-color) 75%, 
+                var(--shelf-color) 85%, 
+                var(--border-color) 85%, 
+                var(--border-color) 100%);
+            min-height: 400px;
+            overflow-x: auto;
+            overflow-y: visible;
+            padding: 0 10px 20px 10px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-color) transparent;
+            display: flex;
+            align-items: flex-end;
+        }
+        
+        .bookshelf::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .bookshelf::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .bookshelf::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+        
+        .books-container {
+            display: flex;
+            gap: 2px;
+            padding-bottom: 10px;
+            min-width: max-content;
+            align-items: flex-end;
+        }
+        
+        .book {
+            position: relative;
+            width: 40px;
+            height: 180px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 8px 4px;
+            box-sizing: border-box;
+            background: var(--background-color);
+            border-radius: 2px 2px 0 0;
+        }
+        
+        .book:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px var(--book-hover-shadow);
+            z-index: 100;
+        }
+        
+        .book-spine-title {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 9px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.2;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            word-break: break-word;
+        }
+        
+        .book-spine-author {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 7px;
+            text-align: center;
+            margin-top: 5px;
+            line-height: 1.1;
+            overflow: hidden;
+            opacity: 0.8;
+        }
+        
+        /* Book color variations - Monochrome grey scale */
+        .book:nth-child(6n+1) { 
+            background: linear-gradient(90deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+        }
+        .book:nth-child(6n+2) { 
+            background: linear-gradient(90deg, #dee2e6 0%, #ced4da 100%);
+            color: #333;
+        }
+        .book:nth-child(6n+3) { 
+            background: linear-gradient(90deg, #adb5bd 0%, #868e96 100%);
+            color: #fff;
+        }
+        .book:nth-child(6n+4) { 
+            background: linear-gradient(90deg, #6c757d 0%, #495057 100%);
+            color: #fff;
+        }
+        .book:nth-child(6n+5) { 
+            background: linear-gradient(90deg, #343a40 0%, #212529 100%);
+            color: #fff;
+        }
+        .book:nth-child(6n+6) { 
+            background: linear-gradient(90deg, #ffffff 0%, #f1f3f4 100%);
+            color: #333;
+        }
+        
+        [data-theme="dark"] .book:nth-child(6n+1) { 
+            background: linear-gradient(90deg, #4a5568 0%, #2d3748 100%);
+            color: #e2e8f0;
+        }
+        [data-theme="dark"] .book:nth-child(6n+2) { 
+            background: linear-gradient(90deg, #2d3748 0%, #1a202c 100%);
+            color: #e2e8f0;
+        }
+        [data-theme="dark"] .book:nth-child(6n+3) { 
+            background: linear-gradient(90deg, #718096 0%, #4a5568 100%);
+            color: #fff;
+        }
+        [data-theme="dark"] .book:nth-child(6n+4) { 
+            background: linear-gradient(90deg, #a0aec0 0%, #718096 100%);
+            color: #1a202c;
+        }
+        [data-theme="dark"] .book:nth-child(6n+5) { 
+            background: linear-gradient(90deg, #e2e8f0 0%, #cbd5e0 100%);
+            color: #1a202c;
+        }
+        [data-theme="dark"] .book:nth-child(6n+6) { 
+            background: linear-gradient(90deg, #1a202c 0%, #171923 100%);
+            color: #e2e8f0;
+        }
+        
+        .book-overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--background-color);
+            border: 2px solid var(--border-color);
+            padding: 30px;
+            max-width: 500px;
+            width: 90vw;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            box-shadow: 0 20px 40px var(--book-hover-shadow);
+        }
+        
+        .book-hover-overlay {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--background-color);
+            border: 2px solid var(--border-color);
+            padding: 15px;
+            width: 280px;
+            max-width: 90vw;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 200;
+            box-shadow: 0 10px 30px var(--book-hover-shadow);
+            margin-bottom: 10px;
+            pointer-events: none;
+        }
+        
+        .book:hover .book-hover-overlay {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .book-hover-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .book-hover-author {
+            font-style: italic;
+            color: var(--secondary-text-color);
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+        
+        .book-hover-description {
+            font-size: 11px;
+            line-height: 1.4;
+        }
+        
+        .book-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .overlay-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        .overlay-backdrop.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .overlay-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .overlay-author {
+            font-style: italic;
+            color: var(--secondary-text-color);
+            margin-bottom: 20px;
+        }
+        
+        .overlay-description {
+            line-height: 1.6;
+        }
+        
+        .close-overlay {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--text-color);
+            font-family: 'Space Mono', monospace;
+        }
+        
+        a {
             color: var(--text-color);
             text-decoration: none;
             border-bottom: 1px solid var(--border-color);
@@ -95,173 +411,8 @@
             transition: opacity 0.3s;
         }
         
-        .back-link:hover {
+        a:hover {
             opacity: 0.7;
-        }
-        
-        h1 {
-            font-size: 24px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin: 0 0 10px 0;
-        }
-        
-        .intro-text {
-            margin-bottom: 40px;
-            font-style: italic;
-            border-left: 2px solid var(--border-color);
-            padding-left: 20px;
-            color: var(--secondary-text-color);
-        }
-        
-        .bookcase {
-            margin-bottom: 60px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .shelf-label {
-            font-size: 14px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-            color: var(--text-color);
-            position: relative;
-            z-index: 2;
-        }
-        
-        .shelf {
-            position: relative;
-            height: 180px;
-            overflow-x: auto;
-            overflow-y: visible;
-            margin-bottom: 40px;
-            padding-bottom: 10px;
-            z-index: 3;
-        }
-        
-        .shelf::-webkit-scrollbar {
-            height: 8px;
-        }
-        
-        .shelf::-webkit-scrollbar-track {
-            background: var(--background-color);
-        }
-        
-        .shelf::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 4px;
-        }
-        
-        .shelf::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--shelf-color);
-            border: 1px solid var(--border-color);
-            border-top: none;
-        }
-        
-        .books-container {
-            display: flex;
-            gap: 2px;
-            padding: 0 10px;
-            min-width: fit-content;
-            height: 160px;
-            align-items: flex-end;
-        }
-        
-        .book {
-            position: relative;
-            width: 25px;
-            height: 140px;
-            background: var(--background-color);
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            flex-shrink: 0;
-            box-shadow: 2px 2px 4px var(--book-shadow);
-        }
-        
-        .book:hover {
-            transform: translateY(-20px);
-            z-index: 100;
-        }
-        
-        .book-spine {
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            height: 100%;
-            padding: 8px 4px;
-            font-size: 8px;
-            line-height: 1.2;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            overflow: hidden;
-        }
-        
-        .book-title {
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        
-        .book-author {
-            font-size: 7px;
-            color: var(--secondary-text-color);
-        }
-        
-        /* Book color variations */
-        .book:nth-child(3n+1) { background-color: #f9f9f9; }
-        .book:nth-child(3n+2) { background-color: #f0f0f0; }
-        .book:nth-child(3n+3) { background-color: #e8e8e8; }
-        
-        [data-theme="dark"] .book:nth-child(3n+1) { background-color: #2a2a2a; }
-        [data-theme="dark"] .book:nth-child(3n+2) { background-color: #333; }
-        [data-theme="dark"] .book:nth-child(3n+3) { background-color: #3a3a3a; }
-        
-        /* Tooltip */
-        .book-tooltip {
-            position: fixed;
-            background: var(--background-color);
-            border: 2px solid var(--border-color);
-            padding: 15px;
-            width: 280px;
-            font-size: 12px;
-            box-shadow: 8px 8px 16px var(--book-shadow);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            z-index: 9999;
-            pointer-events: none;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        
-        .book:hover .book-tooltip {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .tooltip-title {
-            font-weight: bold;
-            margin-bottom: 5px;
-            font-size: 13px;
-        }
-        
-        .tooltip-author {
-            font-style: italic;
-            color: var(--secondary-text-color);
-            margin-bottom: 10px;
-            font-size: 11px;
-        }
-        
-        .tooltip-description {
-            line-height: 1.4;
         }
         
         .footer {
@@ -271,31 +422,55 @@
             font-size: 0.8em;
         }
         
-        .footer a {
-            color: var(--text-color);
-            text-decoration: none;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 2px;
-            transition: opacity 0.3s;
-        }
-        
-        .footer a:hover {
-            opacity: 0.7;
-        }
-        
         @media (max-width: 768px) {
             .header {
                 grid-template-columns: 1fr;
             }
             
-            .book-tooltip {
-                width: 200px;
-                font-size: 11px;
+            .book {
+                width: 35px;
+                height: 160px;
+            }
+            
+            .book-spine-title {
+                font-size: 8px;
+            }
+            
+            .book-spine-author {
+                font-size: 6px;
+            }
+            
+            .book-overlay {
+                padding: 20px;
+                width: 95vw;
+            }
+            
+            .bookshelf {
+                min-height: 350px;
+            }
+            
+            .book-hover-overlay {
+                width: 220px;
+                padding: 12px;
+            }
+            
+            .book-hover-title {
+                font-size: 12px;
+            }
+            
+            .book-hover-author {
+                font-size: 10px;
+            }
+            
+            .book-hover-description {
+                font-size: 10px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="overlay-backdrop" id="overlay-backdrop"></div>
+    
     <div class="container">
         <div class="header">
             <div>
@@ -317,600 +492,363 @@
             I don't tend to read much fiction, though I'd like to. Almost all fiction listed here are childhood reads. I don't necessarily like every book for the main message it purports to give. But every book here left me with something lasting. I haven't reread most of the fiction as an adult so I can't recommend them with certainty, but the others I recommend wholeheartedly.
         </div>
         
-        <div class="bookcase">
+        <div class="shelf-navigation">
+            <button class="shelf-nav-btn active" onclick="showShelf(0)">Philosophy & Meaning</button>
+            <button class="shelf-nav-btn" onclick="showShelf(1)">Technology & Society</button>
+            <button class="shelf-nav-btn" onclick="showShelf(2)">Wonder & Creativity</button>
+            <button class="shelf-nav-btn" onclick="showShelf(3)">Essays & Literary Works</button>
+            <button class="shelf-nav-btn" onclick="showShelf(4)">Poetry</button>
+            <button class="shelf-nav-btn" onclick="showShelf(5)">Fiction</button>
+        </div>
+        
+        <div class="bookshelf-section active">
             <div class="shelf-label">Philosophy & Meaning</div>
-            <div class="shelf">
+            <div class="bookshelf">
                 <div class="books-container">
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Man's Search for Meaning</div>
-                            <div class="book-author">Viktor E. Frankl</div>
+                    <div class="book" data-title="Man's Search for Meaning" data-author="Viktor E. Frankl" data-description="A profound exploration of finding purpose even in the most difficult circumstances. Frankl's experiences in Nazi concentration camps formed the basis for his approach to discovering meaning in all forms of existence, even the most brutal ones.">
+                        <div class="book-hover-overlay">
+                            <div class="book-hover-title">Man's Search for Meaning</div>
+                            <div class="book-hover-author">By Viktor E. Frankl</div>
+                            <div class="book-hover-description">A profound exploration of finding purpose even in the most difficult circumstances. Frankl's experiences in Nazi concentration camps formed the basis for his approach to discovering meaning in all forms of existence, even the most brutal ones.</div>
                         </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Man's Search for Meaning</div>
-                            <div class="tooltip-author">By Viktor E. Frankl</div>
-                            <div class="tooltip-description">A profound exploration of finding purpose even in the most difficult circumstances. Frankl's experiences in Nazi concentration camps formed the basis for his approach to discovering meaning in all forms of existence, even the most brutal ones.</div>
-                        </div>
+                        <div class="book-spine-title">Man's Search for Meaning</div>
+                        <div class="book-spine-author">Frankl</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">The Courage to Be</div>
-                            <div class="book-author">Paul Tillich</div>
+                    <div class="book" data-title="The Courage to Be" data-author="Paul Tillich" data-description="An examination of anxiety and courage in the modern world. Tillich's analysis of how we face the anxiety of fate and death, emptiness and meaninglessness, and guilt and condemnation has deeply influenced my understanding of the human condition.">
+                        <div class="book-hover-overlay">
+                            <div class="book-hover-title">The Courage to Be</div>
+                            <div class="book-hover-author">By Paul Tillich</div>
+                            <div class="book-hover-description">An examination of anxiety and courage in the modern world. Tillich's analysis of how we face the anxiety of fate and death, emptiness and meaninglessness, and guilt and condemnation has deeply influenced my understanding of the human condition.</div>
                         </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">The Courage to Be</div>
-                            <div class="tooltip-author">By Paul Tillich</div>
-                            <div class="tooltip-description">An examination of anxiety and courage in the modern world. Tillich's analysis of how we face the anxiety of fate and death, emptiness and meaninglessness, and guilt and condemnation has deeply influenced my understanding of the human condition.</div>
-                        </div>
+                        <div class="book-spine-title">The Courage to Be</div>
+                        <div class="book-spine-author">Tillich</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">The Confessions of St. Augustine</div>
-                            <div class="book-author">Saint Augustine</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">The Confessions of St. Augustine</div>
-                            <div class="tooltip-author">By Saint Augustine</div>
-                            <div class="tooltip-description">An introspective masterpiece exploring the journey from worldly desires to spiritual awakening. Augustine's candid reflections on his own struggles and transformation continue to resonate across centuries.</div>
-                        </div>
+                    <div class="book" data-title="The Confessions of St. Augustine" data-author="Saint Augustine" data-description="An introspective masterpiece exploring the journey from worldly desires to spiritual awakening. Augustine's candid reflections on his own struggles and transformation continue to resonate across centuries.">
+                        <div class="book-spine-title">Confessions</div>
+                        <div class="book-spine-author">Augustine</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Mere Christianity</div>
-                            <div class="book-author">C.S. Lewis</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Mere Christianity</div>
-                            <div class="tooltip-author">By C.S. Lewis</div>
-                            <div class="tooltip-description">A thoughtful defense of core Christian beliefs that transcends denominational boundaries. Lewis's logical approach and accessible metaphors make complex theological concepts remarkably clear.</div>
-                        </div>
+                    <div class="book" data-title="Mere Christianity" data-author="C.S. Lewis" data-description="A thoughtful defense of core Christian beliefs that transcends denominational boundaries. Lewis's logical approach and accessible metaphors make complex theological concepts remarkably clear.">
+                        <div class="book-spine-title">Mere Christianity</div>
+                        <div class="book-spine-author">Lewis</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">The Hero with a Thousand Faces</div>
-                            <div class="book-author">Joseph Campbell</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">The Hero with a Thousand Faces</div>
-                            <div class="tooltip-author">By Joseph Campbell</div>
-                            <div class="tooltip-description">A comparative exploration of mythology that reveals the common patterns in hero stories across cultures. Campbell's concept of the monomyth has influenced my understanding of narrative, meaning, and the human journey.</div>
-                        </div>
+                    <div class="book" data-title="The Hero with a Thousand Faces" data-author="Joseph Campbell" data-description="A comparative exploration of mythology that reveals the common patterns in hero stories across cultures. Campbell's concept of the monomyth has influenced my understanding of narrative, meaning, and the human journey.">
+                        <div class="book-spine-title">Hero with Thousand Faces</div>
+                        <div class="book-spine-author">Campbell</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Jung's Red Book</div>
-                            <div class="book-author">Carl Jung</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Jung's Red Book</div>
-                            <div class="tooltip-author">By Carl Jung</div>
-                            <div class="tooltip-description">A deeply personal record of Jung's confrontation with his unconscious. This visually stunning and psychologically profound work represents Jung's attempt to understand the universal patterns underlying the human psyche.</div>
-                        </div>
+                    <div class="book" data-title="Jung's Red Book" data-author="Carl Jung" data-description="A deeply personal record of Jung's confrontation with his unconscious. This visually stunning and psychologically profound work represents Jung's attempt to understand the universal patterns underlying the human psyche.">
+                        <div class="book-spine-title">Red Book</div>
+                        <div class="book-spine-author">Jung</div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="bookcase">
+        <div class="bookshelf-section">
             <div class="shelf-label">Technology & Society</div>
-            <div class="shelf">
+            <div class="bookshelf">
                 <div class="books-container">
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Technopoly</div>
-                            <div class="book-author">Neil Postman</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Technopoly</div>
-                            <div class="tooltip-author">By Neil Postman</div>
-                            <div class="tooltip-description">A prescient critique of technology's domination of culture and thought. Though written before the internet age, Postman's warnings about surrendering culture to technology feel more relevant than ever.</div>
-                        </div>
+                    <div class="book" data-title="Technopoly" data-author="Neil Postman" data-description="A prescient critique of technology's domination of culture and thought. Though written before the internet age, Postman's warnings about surrendering culture to technology feel more relevant than ever.">
+                        <div class="book-spine-title">Technopoly</div>
+                        <div class="book-spine-author">Postman</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">The Glass Cage</div>
-                            <div class="book-author">Nicholas Carr</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">The Glass Cage</div>
-                            <div class="tooltip-author">By Nicholas Carr</div>
-                            <div class="tooltip-description">An exploration of automation's human consequences. Carr's nuanced look at how automation changes our relationship with our work, our environment, and ourselves has influenced my thinking on how we should design technology.</div>
-                        </div>
+                    <div class="book" data-title="The Glass Cage" data-author="Nicholas Carr" data-description="An exploration of automation's human consequences. Carr's nuanced look at how automation changes our relationship with our work, our environment, and ourselves has influenced my thinking on how we should design technology.">
+                        <div class="book-spine-title">Glass Cage</div>
+                        <div class="book-spine-author">Carr</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">The World-Ending Fire</div>
-                            <div class="book-author">Wendell Berry</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">The World-Ending Fire</div>
-                            <div class="tooltip-author">By Wendell Berry</div>
-                            <div class="tooltip-description">A collection of essays that articulates a profound vision of sustainable living and local economics. Berry's insights on community, agriculture, and our relationship with the land offer an alternative to technological solutionism.</div>
-                        </div>
+                    <div class="book" data-title="The World-Ending Fire" data-author="Wendell Berry" data-description="A collection of essays that articulates a profound vision of sustainable living and local economics. Berry's insights on community, agriculture, and our relationship with the land offer an alternative to technological solutionism.">
+                        <div class="book-spine-title">World-Ending Fire</div>
+                        <div class="book-spine-author">Berry</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Zero to One</div>
-                            <div class="book-author">Peter Thiel</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Zero to One</div>
-                            <div class="tooltip-author">By Peter Thiel</div>
-                            <div class="tooltip-description">A contrarian perspective on innovation and startup building. Thiel's emphasis on creating new categories rather than competing in existing ones has shaped my thinking about genuine progress.</div>
-                        </div>
+                    <div class="book" data-title="Zero to One" data-author="Peter Thiel" data-description="A contrarian perspective on innovation and startup building. Thiel's emphasis on creating new categories rather than competing in existing ones has shaped my thinking about genuine progress.">
+                        <div class="book-spine-title">Zero to One</div>
+                        <div class="book-spine-author">Thiel</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">The Prosperity Paradox</div>
-                            <div class="book-author">Clayton M. Christensen</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">The Prosperity Paradox</div>
-                            <div class="tooltip-author">By Clayton M. Christensen, Efosa Ojomo, and Karen Dillon</div>
-                            <div class="tooltip-description">A fresh approach to addressing poverty through market-creating innovations. The authors' focus on developing solutions from within rather than imposing external aid has influenced my thinking on sustainable development.</div>
-                        </div>
+                    <div class="book" data-title="The Prosperity Paradox" data-author="Clayton M. Christensen, Efosa Ojomo, and Karen Dillon" data-description="A fresh approach to addressing poverty through market-creating innovations. The authors' focus on developing solutions from within rather than imposing external aid has influenced my thinking on sustainable development.">
+                        <div class="book-spine-title">Prosperity Paradox</div>
+                        <div class="book-spine-author">Christensen</div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="bookcase">
+        <div class="bookshelf-section">
             <div class="shelf-label">Wonder & Creativity</div>
-            <div class="shelf">
+            <div class="bookshelf">
                 <div class="books-container">
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">The Zen of Seeing</div>
-                            <div class="book-author">Frederick Franck</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">The Zen of Seeing</div>
-                            <div class="tooltip-author">By Frederick Franck</div>
-                            <div class="tooltip-description">A meditation on seeing as a form of contemplation. Franck's approach to drawing not as a technical skill but as a way of truly seeing the world has transformed how I experience everyday life.</div>
-                        </div>
+                    <div class="book" data-title="The Zen of Seeing" data-author="Frederick Franck" data-description="A meditation on seeing as a form of contemplation. Franck's approach to drawing not as a technical skill but as a way of truly seeing the world has transformed how I experience everyday life.">
+                        <div class="book-spine-title">Zen of Seeing</div>
+                        <div class="book-spine-author">Franck</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">The Little Prince</div>
-                            <div class="book-author">Antoine de Saint-Exupéry</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">The Little Prince</div>
-                            <div class="tooltip-author">By Antoine de Saint-Exupéry</div>
-                            <div class="tooltip-description">A deceptively simple tale that contains profound truths about human connection. The fox's lesson that "what is essential is invisible to the eye" remains one of the most important principles in my life.</div>
-                        </div>
+                    <div class="book" data-title="The Little Prince" data-author="Antoine de Saint-Exupéry" data-description="A deceptively simple tale that contains profound truths about human connection. The fox's lesson that 'what is essential is invisible to the eye' remains one of the most important principles in my life.">
+                        <div class="book-spine-title">Little Prince</div>
+                        <div class="book-spine-author">Saint-Exupéry</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">The Artist's Way</div>
-                            <div class="book-author">Julia Cameron</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">The Artist's Way</div>
-                            <div class="tooltip-author">By Julia Cameron</div>
-                            <div class="tooltip-description">A spiritual path to higher creativity through practical exercises and insights. Cameron's morning pages and artist dates have become essential tools for reconnecting with my creative self.</div>
-                        </div>
+                    <div class="book" data-title="The Artist's Way" data-author="Julia Cameron" data-description="A spiritual path to higher creativity through practical exercises and insights. Cameron's morning pages and artist dates have become essential tools for reconnecting with my creative self.">
+                        <div class="book-spine-title">Artist's Way</div>
+                        <div class="book-spine-author">Cameron</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Leonardo da Vinci</div>
-                            <div class="book-author">Walter Isaacson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Leonardo da Vinci</div>
-                            <div class="tooltip-author">By Walter Isaacson</div>
-                            <div class="tooltip-description">A comprehensive biography that explores da Vinci's extraordinary curiosity and creativity. Isaacson's portrayal of Leonardo's integration of art and science continues to inspire my approach to learning.</div>
-                        </div>
+                    <div class="book" data-title="Leonardo da Vinci" data-author="Walter Isaacson" data-description="A comprehensive biography that explores da Vinci's extraordinary curiosity and creativity. Isaacson's portrayal of Leonardo's integration of art and science continues to inspire my approach to learning.">
+                        <div class="book-spine-title">Leonardo da Vinci</div>
+                        <div class="book-spine-author">Isaacson</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Deep Work</div>
-                            <div class="book-author">Cal Newport</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Deep Work</div>
-                            <div class="tooltip-author">By Cal Newport</div>
-                            <div class="tooltip-description">A compelling case for focused, distraction-free work in an increasingly fragmented world. Newport's practical strategies for cultivating depth have improved both my productivity and satisfaction.</div>
-                        </div>
+                    <div class="book" data-title="Deep Work" data-author="Cal Newport" data-description="A compelling case for focused, distraction-free work in an increasingly fragmented world. Newport's practical strategies for cultivating depth have improved both my productivity and satisfaction.">
+                        <div class="book-spine-title">Deep Work</div>
+                        <div class="book-spine-author">Newport</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Range</div>
-                            <div class="book-author">David Epstein</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Range</div>
-                            <div class="tooltip-author">By David Epstein</div>
-                            <div class="tooltip-description">A counterintuitive exploration of how generalists often thrive in a specialized world. Epstein's research on the benefits of diverse experiences has validated my own nonlinear path.</div>
-                        </div>
+                    <div class="book" data-title="Range" data-author="David Epstein" data-description="A counterintuitive exploration of how generalists often thrive in a specialized world. Epstein's research on the benefits of diverse experiences has validated my own nonlinear path.">
+                        <div class="book-spine-title">Range</div>
+                        <div class="book-spine-author">Epstein</div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="bookcase">
+        <div class="bookshelf-section">
             <div class="shelf-label">Essays & Literary Works</div>
-            <div class="shelf">
+            <div class="bookshelf">
                 <div class="books-container">
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">A Room of One's Own</div>
-                            <div class="book-author">Virginia Woolf</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">A Room of One's Own</div>
-                            <div class="tooltip-author">By Virginia Woolf</div>
-                            <div class="tooltip-description">My introduction to Woolf's brilliant prose. Beyond its feminist themes, this book contains underappreciated gems that form a decent base of my worldview—not what I expected from the premise.</div>
-                        </div>
+                    <div class="book" data-title="A Room of One's Own" data-author="Virginia Woolf" data-description="My introduction to Woolf's brilliant prose. Beyond its feminist themes, this book contains underappreciated gems that form a decent base of my worldview—not what I expected from the premise.">
+                        <div class="book-spine-title">Room of One's Own</div>
+                        <div class="book-spine-author">Woolf</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">The Common Reader</div>
-                            <div class="book-author">Virginia Woolf</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">The Common Reader</div>
-                            <div class="tooltip-author">By Virginia Woolf</div>
-                            <div class="tooltip-description">A collection of essays that demonstrate Woolf's extraordinary insight into literature and life. Her ability to inhabit the minds of authors across centuries continues to astound me.</div>
-                        </div>
+                    <div class="book" data-title="The Common Reader" data-author="Virginia Woolf" data-description="A collection of essays that demonstrate Woolf's extraordinary insight into literature and life. Her ability to inhabit the minds of authors across centuries continues to astound me.">
+                        <div class="book-spine-title">Common Reader</div>
+                        <div class="book-spine-author">Woolf</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Emerson's Essays</div>
-                            <div class="book-author">Ralph Waldo Emerson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Emerson's Essays</div>
-                            <div class="tooltip-author">By Ralph Waldo Emerson</div>
-                            <div class="tooltip-description">A treasure trove of wisdom on self-reliance, nature, and the human spirit. There's so much in here that even reading just one essay can be transformative.</div>
-                        </div>
+                    <div class="book" data-title="Emerson's Essays" data-author="Ralph Waldo Emerson" data-description="A treasure trove of wisdom on self-reliance, nature, and the human spirit. There's so much in here that even reading just one essay can be transformative.">
+                        <div class="book-spine-title">Essays</div>
+                        <div class="book-spine-author">Emerson</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Lost in Thought</div>
-                            <div class="book-author">Zena Hitz</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Lost in Thought</div>
-                            <div class="tooltip-author">By Zena Hitz</div>
-                            <div class="tooltip-description">A defense of intellectual life for its own sake. Hitz's exploration of how learning can be a refuge and source of dignity has affirmed my belief in the inherent value of contemplation.</div>
-                        </div>
+                    <div class="book" data-title="Lost in Thought" data-author="Zena Hitz" data-description="A defense of intellectual life for its own sake. Hitz's exploration of how learning can be a refuge and source of dignity has affirmed my belief in the inherent value of contemplation.">
+                        <div class="book-spine-title">Lost in Thought</div>
+                        <div class="book-spine-author">Hitz</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">The Intellectual Life</div>
-                            <div class="book-author">A.G. Sertillanges</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">The Intellectual Life</div>
-                            <div class="tooltip-author">By A.G. Sertillanges</div>
-                            <div class="tooltip-description">A guide to cultivating a life of the mind that balances intellectual pursuit with spiritual growth. Sertillanges' practical wisdom on reading, writing, and thinking has shaped my approach to scholarship.</div>
-                        </div>
+                    <div class="book" data-title="The Intellectual Life" data-author="A.G. Sertillanges" data-description="A guide to cultivating a life of the mind that balances intellectual pursuit with spiritual growth. Sertillanges' practical wisdom on reading, writing, and thinking has shaped my approach to scholarship.">
+                        <div class="book-spine-title">Intellectual Life</div>
+                        <div class="book-spine-author">Sertillanges</div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="bookcase">
+        <div class="bookshelf-section">
             <div class="shelf-label">Poetry</div>
-            <div class="shelf">
+            <div class="bookshelf">
                 <div class="books-container">
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Leaves of Grass</div>
-                            <div class="book-author">Walt Whitman</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Leaves of Grass</div>
-                            <div class="tooltip-author">By Walt Whitman</div>
-                            <div class="tooltip-description">A revolutionary collection that celebrates the individual and the interconnectedness of all life. Whitman's democratic vision and embrace of the body, soul, and natural world continue to resonate deeply with me.</div>
-                        </div>
+                    <div class="book" data-title="Leaves of Grass" data-author="Walt Whitman" data-description="A revolutionary collection that celebrates the individual and the interconnectedness of all life. Whitman's democratic vision and embrace of the body, soul, and natural world continue to resonate deeply with me.">
+                        <div class="book-spine-title">Leaves of Grass</div>
+                        <div class="book-spine-author">Whitman</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Howl</div>
-                            <div class="book-author">Allen Ginsberg</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Howl</div>
-                            <div class="tooltip-author">By Allen Ginsberg</div>
-                            <div class="tooltip-description">A raw, unfiltered cry against conformity and materialism. Ginsberg's passionate defense of those who live outside conventional boundaries challenged me to question societal norms.</div>
-                        </div>
+                    <div class="book" data-title="Howl" data-author="Allen Ginsberg" data-description="A raw, unfiltered cry against conformity and materialism. Ginsberg's passionate defense of those who live outside conventional boundaries challenged me to question societal norms.">
+                        <div class="book-spine-title">Howl</div>
+                        <div class="book-spine-author">Ginsberg</div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="bookcase">
+        <div class="bookshelf-section">
             <div class="shelf-label">Fiction</div>
-            <div class="shelf">
+            <div class="bookshelf">
                 <div class="books-container">
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">The Midnight Library</div>
-                            <div class="book-author">Matt Haig</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">The Midnight Library</div>
-                            <div class="tooltip-author">By Matt Haig</div>
-                            <div class="tooltip-description">A favorite of my youth that explores the infinite possibilities of life through the story of a library between life and death. It made me consider how seemingly small choices can lead to vastly different lives.</div>
-                        </div>
+                    <div class="book" data-title="The Midnight Library" data-author="Matt Haig" data-description="A favorite of my youth that explores the infinite possibilities of life through the story of a library between life and death. It made me consider how seemingly small choices can lead to vastly different lives.">
+                        <div class="book-spine-title">Midnight Library</div>
+                        <div class="book-spine-author">Haig</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">The Raven Cycle Series</div>
-                            <div class="book-author">Maggie Stiefvater</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">The Raven Cycle Series</div>
-                            <div class="tooltip-author">By Maggie Stiefvater</div>
-                            <div class="tooltip-description">Another favorite from my youth that made the world around me feel a little more magical. These books awakened my appreciation for the mystical possibilities hidden in ordinary places.</div>
-                        </div>
+                    <div class="book" data-title="The Raven Cycle Series" data-author="Maggie Stiefvater" data-description="Another favorite from my youth that made the world around me feel a little more magical. These books awakened my appreciation for the mystical possibilities hidden in ordinary places.">
+                        <div class="book-spine-title">Raven Cycle</div>
+                        <div class="book-spine-author">Stiefvater</div>
                     </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Life After Life</div>
-                            <div class="book-author">Kate Atkinson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Life After Life</div>
-                            <div class="tooltip-author">By Kate Atkinson</div>
-                            <div class="tooltip-description">A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.</div>
-                        </div>
+                    <div class="book" data-title="Life After Life" data-author="Kate Atkinson" data-description="A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.">
+                        <div class="book-spine-title">Life After Life</div>
+                        <div class="book-spine-author">Atkinson</div>
                     </div>
-
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Life After Life</div>
-                            <div class="book-author">Kate Atkinson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Life After Life</div>
-                            <div class="tooltip-author">By Kate Atkinson</div>
-                            <div class="tooltip-description">A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.</div>
-                        </div>
+                    <div class="book" data-title="Eleanor Oliphant is Completely Fine" data-author="Gail Honeyman" data-description="A touching story about loneliness, trauma, and the healing power of connection. Eleanor's journey from isolation to community resonated deeply with my understanding of human relationships.">
+                        <div class="book-spine-title">Eleanor Oliphant</div>
+                        <div class="book-spine-author">Honeyman</div>
                     </div>
-
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Life After Life</div>
-                            <div class="book-author">Kate Atkinson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Life After Life</div>
-                            <div class="tooltip-author">By Kate Atkinson</div>
-                            <div class="tooltip-description">A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.</div>
-                        </div>
+                    <div class="book" data-title="The Alchemist" data-author="Paulo Coelho" data-description="I read this when I was 12 and feeling depressed, and it made things feel meaningful. The simple fable about following one's dreams contains wisdom that spoke to me during a difficult time.">
+                        <div class="book-spine-title">The Alchemist</div>
+                        <div class="book-spine-author">Coelho</div>
                     </div>
-
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Life After Life</div>
-                            <div class="book-author">Kate Atkinson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Life After Life</div>
-                            <div class="tooltip-author">By Kate Atkinson</div>
-                            <div class="tooltip-description">A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.</div>
-                        </div>
+                    <div class="book" data-title="Anne of Green Gables" data-author="L.M. Montgomery" data-description="Just magic. Anne's imaginative spirit and ability to find wonder in everyday life continue to inspire me to look at the world with fresh eyes.">
+                        <div class="book-spine-title">Anne of Green Gables</div>
+                        <div class="book-spine-author">Montgomery</div>
                     </div>
-
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Life After Life</div>
-                            <div class="book-author">Kate Atkinson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Life After Life</div>
-                            <div class="tooltip-author">By Kate Atkinson</div>
-                            <div class="tooltip-description">A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.</div>
-                        </div>
+                    <div class="book" data-title="Purple Hibiscus" data-author="Chimamanda Ngozi Adichie" data-description="A powerful coming-of-age story set in postcolonial Nigeria. Adichie's nuanced portrayal of family, faith, and political turmoil offers insights into the complexity of Nigerian society.">
+                        <div class="book-spine-title">Purple Hibiscus</div>
+                        <div class="book-spine-author">Adichie</div>
                     </div>
-
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Life After Life</div>
-                            <div class="book-author">Kate Atkinson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Life After Life</div>
-                            <div class="tooltip-author">By Kate Atkinson</div>
-                            <div class="tooltip-description">A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.</div>
-                        </div>
+                    <div class="book" data-title="Fine Boys" data-author="Eghosa Imasuen" data-description="A compelling novel about university life in Nigeria during the 1990s. Its authentic depiction of friendship, cult violence, and resilience provides a window into a specific moment in Nigerian history.">
+                        <div class="book-spine-title">Fine Boys</div>
+                        <div class="book-spine-author">Imasuen</div>
                     </div>
-
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Life After Life</div>
-                            <div class="book-author">Kate Atkinson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Life After Life</div>
-                            <div class="tooltip-author">By Kate Atkinson</div>
-                            <div class="tooltip-description">A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.</div>
-                        </div>
-                    </div>
-
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Life After Life</div>
-                            <div class="book-author">Kate Atkinson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Life After Life</div>
-                            <div class="tooltip-author">By Kate Atkinson</div>
-                            <div class="tooltip-description">A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.</div>
-                        </div>
-                    </div>
-
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Life After Life</div>
-                            <div class="book-author">Kate Atkinson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Life After Life</div>
-                            <div class="tooltip-author">By Kate Atkinson</div>
-                            <div class="tooltip-description">A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.</div>
-                        </div>
-                    </div>
-
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Life After Life</div>
-                            <div class="book-author">Kate Atkinson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Life After Life</div>
-                            <div class="tooltip-author">By Kate Atkinson</div>
-                            <div class="tooltip-description">A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.</div>
-                        </div>
-                    </div>
-
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Life After Life</div>
-                            <div class="book-author">Kate Atkinson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Life After Life</div>
-                            <div class="tooltip-author">By Kate Atkinson</div>
-                            <div class="tooltip-description">A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.</div>
-                        </div>
-                    </div>
-
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Life After Life</div>
-                            <div class="book-author">Kate Atkinson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Life After Life</div>
-                            <div class="tooltip-author">By Kate Atkinson</div>
-                            <div class="tooltip-description">A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.</div>
-                        </div>
-                    </div>
-
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Life After Life</div>
-                            <div class="book-author">Kate Atkinson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Life After Life</div>
-                            <div class="tooltip-author">By Kate Atkinson</div>
-                            <div class="tooltip-description">A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.</div>
-                        </div>
-                    </div>
-
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Life After Life</div>
-                            <div class="book-author">Kate Atkinson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Life After Life</div>
-                            <div class="tooltip-author">By Kate Atkinson</div>
-                            <div class="tooltip-description">A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.</div>
-                        </div>
-                    </div>
-
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Life After Life</div>
-                            <div class="book-author">Kate Atkinson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Life After Life</div>
-                            <div class="tooltip-author">By Kate Atkinson</div>
-                            <div class="tooltip-description">A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.</div>
-                        </div>
-                    </div>
-
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Life After Life</div>
-                            <div class="book-author">Kate Atkinson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Life After Life</div>
-                            <div class="tooltip-author">By Kate Atkinson</div>
-                            <div class="tooltip-description">A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.</div>
-                        </div>
-                    </div>
-
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Life After Life</div>
-                            <div class="book-author">Kate Atkinson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Life After Life</div>
-                            <div class="tooltip-author">By Kate Atkinson</div>
-                            <div class="tooltip-description">A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.</div>
-                        </div>
-                    </div>
-
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Life After Life</div>
-                            <div class="book-author">Kate Atkinson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Life After Life</div>
-                            <div class="tooltip-author">By Kate Atkinson</div>
-                            <div class="tooltip-description">A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.</div>
-                        </div>
-                    </div>
-
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Life After Life</div>
-                            <div class="book-author">Kate Atkinson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Life After Life</div>
-                            <div class="tooltip-author">By Kate Atkinson</div>
-                            <div class="tooltip-description">A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.</div>
-                        </div>
-                    </div>
-
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Life After Life</div>
-                            <div class="book-author">Kate Atkinson</div>
-                        </div>
-                        <div class="book-tooltip">
-                            <div class="tooltip-title">Life After Life</div>
-                            <div class="tooltip-author">By Kate Atkinson</div>
-                            <div class="tooltip-description">A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="book">
-                        <div class="book-spine">
-                            <div class="book-title">Eleanor Oliphant is Completely Fine</div>
-                            <div class="book-author">Gail Honeyman</div>
-                        </div>
-                        <div class
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>This website is a gateway to my projects and thoughts | Created 2025</p>
+            <p>
+                <a href="#">Substack</a> •
+                <a href="https://x.com/doughneigh?s=21">Twitter</a> •
+                <a href="mailto:notdonecreating@gmail.com">Email</a>
+            </p>
+        </div>
+    </div>
+    
+    <div class="book-overlay" id="book-overlay">
+        <button class="close-overlay" id="close-overlay">×</button>
+        <div class="overlay-title" id="overlay-title"></div>
+        <div class="overlay-author" id="overlay-author"></div>
+        <div class="overlay-description" id="overlay-description"></div>
+    </div>
+    
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">🌙</button>
+    
+    <script>
+        // Define functions immediately - no waiting
+        function showShelf(index) {
+            console.log('showShelf called with index:', index);
+            
+            var shelves = document.querySelectorAll('.bookshelf-section');
+            var buttons = document.querySelectorAll('.shelf-nav-btn');
+            
+            // Hide all shelves and deactivate all buttons
+            for (var i = 0; i < shelves.length; i++) {
+                shelves[i].classList.remove('active');
+            }
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('active');
+            }
+            
+            // Show selected shelf and activate button
+            if (shelves[index]) {
+                shelves[index].classList.add('active');
+            }
+            if (buttons[index]) {
+                buttons[index].classList.add('active');
+            }
+        }
+        
+        function openBookOverlay(title, author, description) {
+            var overlay = document.getElementById('book-overlay');
+            var backdrop = document.getElementById('overlay-backdrop');
+            var overlayTitle = document.getElementById('overlay-title');
+            var overlayAuthor = document.getElementById('overlay-author');
+            var overlayDescription = document.getElementById('overlay-description');
+            
+            if (overlayTitle) overlayTitle.textContent = title;
+            if (overlayAuthor) overlayAuthor.textContent = 'By ' + author;
+            if (overlayDescription) overlayDescription.textContent = description;
+            
+            if (overlay) overlay.classList.add('active');
+            if (backdrop) backdrop.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeOverlay() {
+            var overlay = document.getElementById('book-overlay');
+            var backdrop = document.getElementById('overlay-backdrop');
+            
+            if (overlay) overlay.classList.remove('active');
+            if (backdrop) backdrop.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        function toggleTheme() {
+            var html = document.documentElement;
+            var currentTheme = html.getAttribute('data-theme');
+            var newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            console.log('Toggling from', currentTheme, 'to', newTheme);
+            
+            html.setAttribute('data-theme', newTheme);
+            
+            var themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+    </script>
+    
+    <script>
+        // Theme toggle functionality
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+        }
+        
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setTheme(prefersDark ? 'dark' : 'light');
+        
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+            updateToggleText();
+        });
+        
+        function updateToggleText() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        }
+        
+        updateToggleText();
+        
+        // Shelf navigation functionality
+        const shelves = document.querySelectorAll('.bookshelf-section');
+        const navButtons = document.querySelectorAll('.shelf-nav-btn');
+        
+        navButtons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                // Remove active class from all shelves and buttons
+                shelves.forEach(shelf => shelf.classList.remove('active'));
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding shelf
+                button.classList.add('active');
+                shelves[index].classList.add('active');
+            });
+        });
+        
+        // Book overlay functionality
+        const books = document.querySelectorAll('.book');
+        const overlay = document.getElementById('book-overlay');
+        const backdrop = document.getElementById('overlay-backdrop');
+        const closeBtn = document.getElementById('close-overlay');
+        const overlayTitle = document.getElementById('overlay-title');
+        const overlayAuthor = document.getElementById('overlay-author');
+        const overlayDescription = document.getElementById('overlay-description');
+        
+        books.forEach(book => {
+            book.addEventListener('click', () => {
+                const title = book.getAttribute('data-title');
+                const author = book.getAttribute('data-author');
+                const description = book.getAttribute('data-description');
+                
+                overlayTitle.textContent = title;
+                overlayAuthor.textContent = `By ${author}`;
+                overlayDescription.textContent = description;
+                
+                overlay.classList.add('active');
+                backdrop.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        function closeOverlay() {
+            overlay.classList.remove('active');
+            backdrop.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        closeBtn.addEventListener('click', closeOverlay);
+        backdrop.addEventListener('click', closeOverlay);
+        
+        // Close overlay on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeOverlay();
+            }
+        });
