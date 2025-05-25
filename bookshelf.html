@@ -136,7 +136,7 @@
         }
        
         .bookshelf-section {
-            margin-bottom: 60px;
+            margin: 0 0 40px 0;
             display: block;
         }
         
@@ -155,8 +155,9 @@
             font-size: 16px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 20px;
+            /* margin-bottom: 20px; */
             font-weight: bold;
+            margin: 0px 0 16px 0; /* top 20px, bottom 10px fixed */
         }
         
         .bookshelf {
@@ -171,6 +172,7 @@
             scrollbar-color: var(--border-color) transparent;
             display: flex;
             align-items: flex-end;
+            margin-top: 0 !important;
         }
         
         
@@ -188,11 +190,10 @@
         }
         
         .books-container {
-            display: flex;
+            display: contents;
             gap: 2px;
             padding-bottom: 0px;
             min-width: max-content;
-            align-items: flex-end;
         }
         
         .book {
@@ -443,7 +444,7 @@
             }
             
             .bookshelf {
-                min-height: 350px;
+                min-height: 300px;
             }
             
             .book-hover-overlay {
