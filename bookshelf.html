@@ -134,7 +134,13 @@
             background: var(--text-color);
             color: var(--background-color);
         }
+       
+        .bookshelf-section {
+            margin-bottom: 60px;
+            display: block;
+        }
         
+        /*
         .bookshelf-section {
             margin-bottom: 60px;
             display: none;
@@ -143,6 +149,7 @@
         .bookshelf-section.active {
             display: block;
         }
+        */
         
         .shelf-label {
             font-size: 16px;
@@ -154,22 +161,18 @@
         
         .bookshelf {
             position: relative;
-            background: linear-gradient(to bottom, 
-                transparent 0%, 
-                transparent 75%, 
-                var(--shelf-color) 75%, 
-                var(--shelf-color) 85%, 
-                var(--border-color) 85%, 
-                var(--border-color) 100%);
-            min-height: 400px;
+            background: var(--background-color);
+            border-bottom: 8px solid var(--border-color); /* This is the new "shelf" */
+            min-height: 200px;
             overflow-x: auto;
             overflow-y: visible;
-            padding: 0 10px 20px 10px;
+            padding: 0 10px 0px 10px;
             scrollbar-width: thin;
             scrollbar-color: var(--border-color) transparent;
             display: flex;
             align-items: flex-end;
         }
+        
         
         .bookshelf::-webkit-scrollbar {
             height: 6px;
@@ -187,7 +190,7 @@
         .books-container {
             display: flex;
             gap: 2px;
-            padding-bottom: 10px;
+            padding-bottom: 0px;
             min-width: max-content;
             align-items: flex-end;
         }
@@ -490,14 +493,14 @@
             I don't tend to read much fiction, though I'd like to. Almost all fiction listed here are childhood reads. I don't necessarily like every book for the main message it purports to give. But every book here left me with something lasting. I haven't reread most of the fiction as an adult so I can't recommend them with certainty, but the others I recommend wholeheartedly.
         </div>
         
-        <div class="shelf-navigation">
+        <!-- <div class="shelf-navigation">
             <button class="shelf-nav-btn active" onclick="showShelf(0)">Philosophy & Meaning</button>
             <button class="shelf-nav-btn" onclick="showShelf(1)">Technology & Society</button>
             <button class="shelf-nav-btn" onclick="showShelf(2)">Wonder & Creativity</button>
             <button class="shelf-nav-btn" onclick="showShelf(3)">Essays & Literary Works</button>
             <button class="shelf-nav-btn" onclick="showShelf(4)">Poetry</button>
             <button class="shelf-nav-btn" onclick="showShelf(5)">Fiction</button>
-        </div>
+        </div> -->
         
         <div class="bookshelf-section active">
             <div class="shelf-label">Philosophy & Meaning</div>
@@ -787,6 +790,7 @@
         }
 
         // Define functions immediately - no waiting
+        /*
         function showShelf(index) {
             console.log('showShelf called with index:', index);
             
@@ -812,7 +816,8 @@
             // Recalculate font sizes when switching shelves
             setTimeout(setBookFontSizes, 10);
         }
-        
+        */
+
         function openBookOverlay(title, author, description) {
             var overlay = document.getElementById('book-overlay');
             var backdrop = document.getElementById('overlay-backdrop');
