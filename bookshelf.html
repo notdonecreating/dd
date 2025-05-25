@@ -870,11 +870,6 @@
                 const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
                 setTheme(newTheme);
                 updateToggleText();
-        
-        // Set initial font sizes after a brief delay to ensure elements are rendered
-        setTimeout(() => {
-            setBookFontSizes();
-        }, 100);
             });
         }
         
@@ -944,6 +939,9 @@
                 closeOverlay();
             }
         });
+        
+        // Initialize font sizes - run at the very end after all DOM elements are ready
+        setBookFontSizes();
     </script>
 </body>
 </html>
