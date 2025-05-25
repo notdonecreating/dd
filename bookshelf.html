@@ -194,6 +194,7 @@
         
         .book {
             position: relative;
+            /* Default dimensions - will be overridden by inline styles */
             width: 40px;
             height: 180px;
             border: 1px solid var(--border-color);
@@ -217,7 +218,7 @@
         .book-spine-title {
             writing-mode: vertical-rl;
             text-orientation: mixed;
-            font-size: 9px;
+            font-size: 9px; /* Default size restored */
             font-weight: bold;
             text-align: center;
             line-height: 1.2;
@@ -232,7 +233,7 @@
         .book-spine-author {
             writing-mode: vertical-rl;
             text-orientation: mixed;
-            font-size: 7px;
+            font-size: 7px; /* Default size restored */
             text-align: center;
             margin-top: 5px;
             line-height: 1.1;
@@ -433,19 +434,6 @@
                 grid-template-columns: 1fr;
             }
             
-            .book {
-                width: 35px;
-                height: 160px;
-            }
-            
-            .book-spine-title {
-                font-size: 8px;
-            }
-            
-            .book-spine-author {
-                font-size: 6px;
-            }
-            
             .book-overlay {
                 padding: 20px;
                 width: 95vw;
@@ -478,6 +466,8 @@
 </head>
 <body>
     <div class="overlay-backdrop" id="overlay-backdrop"></div>
+    
+    <button class="theme-toggle" id="theme-toggle">🌙</button>
     
     <div class="container">
         <div class="header">
@@ -513,7 +503,7 @@
             <div class="shelf-label">Philosophy & Meaning</div>
             <div class="bookshelf">
                 <div class="books-container">
-                    <div class="book" data-title="Man's Search for Meaning" data-author="Viktor E. Frankl" data-description="A profound exploration of finding purpose even in the most difficult circumstances. Frankl's experiences in Nazi concentration camps formed the basis for his approach to discovering meaning in all forms of existence, even the most brutal ones.">
+                    <div class="book" data-title="Man's Search for Meaning" data-author="Viktor E. Frankl" data-description="A profound exploration of finding purpose even in the most difficult circumstances. Frankl's experiences in Nazi concentration camps formed the basis for his approach to discovering meaning in all forms of existence, even the most brutal ones." data-pages="165" data-width="5.5" data-height="8.5" style="width: 22px; height: 136px;">
                         <div class="book-hover-overlay">
                             <div class="book-hover-title">Man's Search for Meaning</div>
                             <div class="book-hover-author">By Viktor E. Frankl</div>
@@ -522,7 +512,7 @@
                         <div class="book-spine-title">Man's Search for Meaning</div>
                         <div class="book-spine-author">Frankl</div>
                     </div>
-                    <div class="book" data-title="The Courage to Be" data-author="Paul Tillich" data-description="An examination of anxiety and courage in the modern world. Tillich's analysis of how we face the anxiety of fate and death, emptiness and meaninglessness, and guilt and condemnation has deeply influenced my understanding of the human condition.">
+                    <div class="book" data-title="The Courage to Be" data-author="Paul Tillich" data-description="An examination of anxiety and courage in the modern world. Tillich's analysis of how we face the anxiety of fate and death, emptiness and meaninglessness, and guilt and condemnation has deeply influenced my understanding of the human condition." data-pages="190" data-width="5.0" data-height="8.0" style="width: 25px; height: 128px;">
                         <div class="book-hover-overlay">
                             <div class="book-hover-title">The Courage to Be</div>
                             <div class="book-hover-author">By Paul Tillich</div>
@@ -531,19 +521,19 @@
                         <div class="book-spine-title">The Courage to Be</div>
                         <div class="book-spine-author">Tillich</div>
                     </div>
-                    <div class="book" data-title="The Confessions of St. Augustine" data-author="Saint Augustine" data-description="An introspective masterpiece exploring the journey from worldly desires to spiritual awakening. Augustine's candid reflections on his own struggles and transformation continue to resonate across centuries.">
+                    <div class="book" data-title="The Confessions of St. Augustine" data-author="Saint Augustine" data-description="An introspective masterpiece exploring the journey from worldly desires to spiritual awakening. Augustine's candid reflections on his own struggles and transformation continue to resonate across centuries." data-pages="400" data-width="5.5" data-height="8.0" style="width: 52px; height: 128px;">
                         <div class="book-spine-title">Confessions</div>
                         <div class="book-spine-author">Augustine</div>
                     </div>
-                    <div class="book" data-title="Mere Christianity" data-author="C.S. Lewis" data-description="A thoughtful defense of core Christian beliefs that transcends denominational boundaries. Lewis's logical approach and accessible metaphors make complex theological concepts remarkably clear.">
+                    <div class="book" data-title="Mere Christianity" data-author="C.S. Lewis" data-description="A thoughtful defense of core Christian beliefs that transcends denominational boundaries. Lewis's logical approach and accessible metaphors make complex theological concepts remarkably clear." data-pages="227" data-width="5.25" data-height="8.0" style="width: 30px; height: 128px;">
                         <div class="book-spine-title">Mere Christianity</div>
                         <div class="book-spine-author">Lewis</div>
                     </div>
-                    <div class="book" data-title="The Hero with a Thousand Faces" data-author="Joseph Campbell" data-description="A comparative exploration of mythology that reveals the common patterns in hero stories across cultures. Campbell's concept of the monomyth has influenced my understanding of narrative, meaning, and the human journey.">
+                    <div class="book" data-title="The Hero with a Thousand Faces" data-author="Joseph Campbell" data-description="A comparative exploration of mythology that reveals the common patterns in hero stories across cultures. Campbell's concept of the monomyth has influenced my understanding of narrative, meaning, and the human journey." data-pages="416" data-width="6.0" data-height="9.0" style="width: 41px; height: 144px;">
                         <div class="book-spine-title">Hero with Thousand Faces</div>
                         <div class="book-spine-author">Campbell</div>
                     </div>
-                    <div class="book" data-title="Jung's Red Book" data-author="Carl Jung" data-description="A deeply personal record of Jung's confrontation with his unconscious. This visually stunning and psychologically profound work represents Jung's attempt to understand the universal patterns underlying the human psyche.">
+                    <div class="book" data-title="Jung's Red Book" data-author="Carl Jung" data-description="A deeply personal record of Jung's confrontation with his unconscious. This visually stunning and psychologically profound work represents Jung's attempt to understand the universal patterns underlying the human psyche." data-pages="371" data-width="9.5" data-height="12.5" style="width: 48px; height: 200px;">
                         <div class="book-spine-title">Red Book</div>
                         <div class="book-spine-author">Jung</div>
                     </div>
@@ -555,23 +545,23 @@
             <div class="shelf-label">Technology & Society</div>
             <div class="bookshelf">
                 <div class="books-container">
-                    <div class="book" data-title="Technopoly" data-author="Neil Postman" data-description="A prescient critique of technology's domination of culture and thought. Though written before the internet age, Postman's warnings about surrendering culture to technology feel more relevant than ever.">
+                    <div class="book" data-title="Technopoly" data-author="Neil Postman" data-description="A prescient critique of technology's domination of culture and thought. Though written before the internet age, Postman's warnings about surrendering culture to technology feel more relevant than ever." data-pages="222" data-width="5.5" data-height="8.5" style="width: 29px; height: 136px;">
                         <div class="book-spine-title">Technopoly</div>
                         <div class="book-spine-author">Postman</div>
                     </div>
-                    <div class="book" data-title="The Glass Cage" data-author="Nicholas Carr" data-description="An exploration of automation's human consequences. Carr's nuanced look at how automation changes our relationship with our work, our environment, and ourselves has influenced my thinking on how we should design technology.">
+                    <div class="book" data-title="The Glass Cage" data-author="Nicholas Carr" data-description="An exploration of automation's human consequences. Carr's nuanced look at how automation changes our relationship with our work, our environment, and ourselves has influenced my thinking on how we should design technology." data-pages="276" data-width="5.75" data-height="8.5" style="width: 36px; height: 136px;">
                         <div class="book-spine-title">Glass Cage</div>
                         <div class="book-spine-author">Carr</div>
                     </div>
-                    <div class="book" data-title="The World-Ending Fire" data-author="Wendell Berry" data-description="A collection of essays that articulates a profound vision of sustainable living and local economics. Berry's insights on community, agriculture, and our relationship with the land offer an alternative to technological solutionism.">
+                    <div class="book" data-title="The World-Ending Fire" data-author="Wendell Berry" data-description="A collection of essays that articulates a profound vision of sustainable living and local economics. Berry's insights on community, agriculture, and our relationship with the land offer an alternative to technological solutionism." data-pages="340" data-width="5.5" data-height="8.25" style="width: 44px; height: 132px;">
                         <div class="book-spine-title">World-Ending Fire</div>
                         <div class="book-spine-author">Berry</div>
                     </div>
-                    <div class="book" data-title="Zero to One" data-author="Peter Thiel" data-description="A contrarian perspective on innovation and startup building. Thiel's emphasis on creating new categories rather than competing in existing ones has shaped my thinking about genuine progress.">
+                    <div class="book" data-title="Zero to One" data-author="Peter Thiel" data-description="A contrarian perspective on innovation and startup building. Thiel's emphasis on creating new categories rather than competing in existing ones has shaped my thinking about genuine progress." data-pages="210" data-width="5.5" data-height="8.25" style="width: 27px; height: 132px;">
                         <div class="book-spine-title">Zero to One</div>
                         <div class="book-spine-author">Thiel</div>
                     </div>
-                    <div class="book" data-title="The Prosperity Paradox" data-author="Clayton M. Christensen, Efosa Ojomo, and Karen Dillon" data-description="A fresh approach to addressing poverty through market-creating innovations. The authors' focus on developing solutions from within rather than imposing external aid has influenced my thinking on sustainable development.">
+                    <div class="book" data-title="The Prosperity Paradox" data-author="Clayton M. Christensen, Efosa Ojomo, and Karen Dillon" data-description="A fresh approach to addressing poverty through market-creating innovations. The authors' focus on developing solutions from within rather than imposing external aid has influenced my thinking on sustainable development." data-pages="304" data-width="6.0" data-height="9.0" style="width: 30px; height: 144px;">
                         <div class="book-spine-title">Prosperity Paradox</div>
                         <div class="book-spine-author">Christensen</div>
                     </div>
@@ -583,27 +573,27 @@
             <div class="shelf-label">Wonder & Creativity</div>
             <div class="bookshelf">
                 <div class="books-container">
-                    <div class="book" data-title="The Zen of Seeing" data-author="Frederick Franck" data-description="A meditation on seeing as a form of contemplation. Franck's approach to drawing not as a technical skill but as a way of truly seeing the world has transformed how I experience everyday life.">
+                    <div class="book" data-title="The Zen of Seeing" data-author="Frederick Franck" data-description="A meditation on seeing as a form of contemplation. Franck's approach to drawing not as a technical skill but as a way of truly seeing the world has transformed how I experience everyday life." data-pages="132" data-width="6.5" data-height="9.0" style="width: 17px; height: 144px;">
                         <div class="book-spine-title">Zen of Seeing</div>
                         <div class="book-spine-author">Franck</div>
                     </div>
-                    <div class="book" data-title="The Little Prince" data-author="Antoine de Saint-Exupéry" data-description="A deceptively simple tale that contains profound truths about human connection. The fox's lesson that 'what is essential is invisible to the eye' remains one of the most important principles in my life.">
+                    <div class="book" data-title="The Little Prince" data-author="Antoine de Saint-Exupéry" data-description="A deceptively simple tale that contains profound truths about human connection. The fox's lesson that 'what is essential is invisible to the eye' remains one of the most important principles in my life." data-pages="96" data-width="5.0" data-height="7.5" style="width: 13px; height: 120px;">
                         <div class="book-spine-title">Little Prince</div>
                         <div class="book-spine-author">Saint-Exupéry</div>
                     </div>
-                    <div class="book" data-title="The Artist's Way" data-author="Julia Cameron" data-description="A spiritual path to higher creativity through practical exercises and insights. Cameron's morning pages and artist dates have become essential tools for reconnecting with my creative self.">
+                    <div class="book" data-title="The Artist's Way" data-author="Julia Cameron" data-description="A spiritual path to higher creativity through practical exercises and insights. Cameron's morning pages and artist dates have become essential tools for reconnecting with my creative self." data-pages="272" data-width="5.5" data-height="8.5" style="width: 35px; height: 136px;">
                         <div class="book-spine-title">Artist's Way</div>
                         <div class="book-spine-author">Cameron</div>
                     </div>
-                    <div class="book" data-title="Leonardo da Vinci" data-author="Walter Isaacson" data-description="A comprehensive biography that explores da Vinci's extraordinary curiosity and creativity. Isaacson's portrayal of Leonardo's integration of art and science continues to inspire my approach to learning.">
+                    <div class="book" data-title="Leonardo da Vinci" data-author="Walter Isaacson" data-description="A comprehensive biography that explores da Vinci's extraordinary curiosity and creativity. Isaacson's portrayal of Leonardo's integration of art and science continues to inspire my approach to learning." data-pages="624" data-width="6.5" data-height="9.5" style="width: 65px; height: 152px;">
                         <div class="book-spine-title">Leonardo da Vinci</div>
                         <div class="book-spine-author">Isaacson</div>
                     </div>
-                    <div class="book" data-title="Deep Work" data-author="Cal Newport" data-description="A compelling case for focused, distraction-free work in an increasingly fragmented world. Newport's practical strategies for cultivating depth have improved both my productivity and satisfaction.">
+                    <div class="book" data-title="Deep Work" data-author="Cal Newport" data-description="A compelling case for focused, distraction-free work in an increasingly fragmented world. Newport's practical strategies for cultivating depth have improved both my productivity and satisfaction." data-pages="304" data-width="5.5" data-height="8.5" style="width: 40px; height: 136px;">
                         <div class="book-spine-title">Deep Work</div>
                         <div class="book-spine-author">Newport</div>
                     </div>
-                    <div class="book" data-title="Range" data-author="David Epstein" data-description="A counterintuitive exploration of how generalists often thrive in a specialized world. Epstein's research on the benefits of diverse experiences has validated my own nonlinear path.">
+                    <div class="book" data-title="Range" data-author="David Epstein" data-description="A counterintuitive exploration of how generalists often thrive in a specialized world. Epstein's research on the benefits of diverse experiences has validated my own nonlinear path." data-pages="352" data-width="6.0" data-height="9.0" style="width: 35px; height: 144px;">
                         <div class="book-spine-title">Range</div>
                         <div class="book-spine-author">Epstein</div>
                     </div>
@@ -615,23 +605,23 @@
             <div class="shelf-label">Essays & Literary Works</div>
             <div class="bookshelf">
                 <div class="books-container">
-                    <div class="book" data-title="A Room of One's Own" data-author="Virginia Woolf" data-description="My introduction to Woolf's brilliant prose. Beyond its feminist themes, this book contains underappreciated gems that form a decent base of my worldview—not what I expected from the premise.">
+                    <div class="book" data-title="A Room of One's Own" data-author="Virginia Woolf" data-description="My introduction to Woolf's brilliant prose. Beyond its feminist themes, this book contains underappreciated gems that form a decent base of my worldview—not what I expected from the premise." data-pages="112" data-width="5.0" data-height="7.75" style="width: 15px; height: 124px;">
                         <div class="book-spine-title">Room of One's Own</div>
                         <div class="book-spine-author">Woolf</div>
                     </div>
-                    <div class="book" data-title="The Common Reader" data-author="Virginia Woolf" data-description="A collection of essays that demonstrate Woolf's extraordinary insight into literature and life. Her ability to inhabit the minds of authors across centuries continues to astound me.">
+                    <div class="book" data-title="The Common Reader" data-author="Virginia Woolf" data-description="A collection of essays that demonstrate Woolf's extraordinary insight into literature and life. Her ability to inhabit the minds of authors across centuries continues to astound me." data-pages="267" data-width="5.25" data-height="8.0" style="width: 35px; height: 128px;">
                         <div class="book-spine-title">Common Reader</div>
                         <div class="book-spine-author">Woolf</div>
                     </div>
-                    <div class="book" data-title="Emerson's Essays" data-author="Ralph Waldo Emerson" data-description="A treasure trove of wisdom on self-reliance, nature, and the human spirit. There's so much in here that even reading just one essay can be transformative.">
+                    <div class="book" data-title="Emerson's Essays" data-author="Ralph Waldo Emerson" data-description="A treasure trove of wisdom on self-reliance, nature, and the human spirit. There's so much in here that even reading just one essay can be transformative." data-pages="320" data-width="5.5" data-height="8.0" style="width: 42px; height: 128px;">
                         <div class="book-spine-title">Essays</div>
                         <div class="book-spine-author">Emerson</div>
                     </div>
-                    <div class="book" data-title="Lost in Thought" data-author="Zena Hitz" data-description="A defense of intellectual life for its own sake. Hitz's exploration of how learning can be a refuge and source of dignity has affirmed my belief in the inherent value of contemplation.">
+                    <div class="book" data-title="Lost in Thought" data-author="Zena Hitz" data-description="A defense of intellectual life for its own sake. Hitz's exploration of how learning can be a refuge and source of dignity has affirmed my belief in the inherent value of contemplation." data-pages="208" data-width="5.5" data-height="8.25" style="width: 27px; height: 132px;">
                         <div class="book-spine-title">Lost in Thought</div>
                         <div class="book-spine-author">Hitz</div>
                     </div>
-                    <div class="book" data-title="The Intellectual Life" data-author="A.G. Sertillanges" data-description="A guide to cultivating a life of the mind that balances intellectual pursuit with spiritual growth. Sertillanges' practical wisdom on reading, writing, and thinking has shaped my approach to scholarship.">
+                    <div class="book" data-title="The Intellectual Life" data-author="A.G. Sertillanges" data-description="A guide to cultivating a life of the mind that balances intellectual pursuit with spiritual growth. Sertillanges' practical wisdom on reading, writing, and thinking has shaped my approach to scholarship." data-pages="296" data-width="5.25" data-height="8.0" style="width: 39px; height: 128px;">
                         <div class="book-spine-title">Intellectual Life</div>
                         <div class="book-spine-author">Sertillanges</div>
                     </div>
@@ -643,11 +633,11 @@
             <div class="shelf-label">Poetry</div>
             <div class="bookshelf">
                 <div class="books-container">
-                    <div class="book" data-title="Leaves of Grass" data-author="Walt Whitman" data-description="A revolutionary collection that celebrates the individual and the interconnectedness of all life. Whitman's democratic vision and embrace of the body, soul, and natural world continue to resonate deeply with me.">
+                    <div class="book" data-title="Leaves of Grass" data-author="Walt Whitman" data-description="A revolutionary collection that celebrates the individual and the interconnectedness of all life. Whitman's democratic vision and embrace of the body, soul, and natural world continue to resonate deeply with me." data-pages="432" data-width="6.0" data-height="9.0" style="width: 43px; height: 144px;">
                         <div class="book-spine-title">Leaves of Grass</div>
                         <div class="book-spine-author">Whitman</div>
                     </div>
-                    <div class="book" data-title="Howl" data-author="Allen Ginsberg" data-description="A raw, unfiltered cry against conformity and materialism. Ginsberg's passionate defense of those who live outside conventional boundaries challenged me to question societal norms.">
+                    <div class="book" data-title="Howl" data-author="Allen Ginsberg" data-description="A raw, unfiltered cry against conformity and materialism. Ginsberg's passionate defense of those who live outside conventional boundaries challenged me to question societal norms." data-pages="64" data-width="5.5" data-height="8.0" style="width: 8px; height: 128px;">
                         <div class="book-spine-title">Howl</div>
                         <div class="book-spine-author">Ginsberg</div>
                     </div>
@@ -659,15 +649,15 @@
             <div class="shelf-label">Fiction</div>
             <div class="bookshelf">
                 <div class="books-container">
-                    <div class="book" data-title="The Midnight Library" data-author="Matt Haig" data-description="A favorite of my youth that explores the infinite possibilities of life through the story of a library between life and death. It made me consider how seemingly small choices can lead to vastly different lives.">
+                    <div class="book" data-title="The Midnight Library" data-author="Matt Haig" data-description="A favorite of my youth that explores the infinite possibilities of life through the story of a library between life and death. It made me consider how seemingly small choices can lead to vastly different lives." data-pages="288" data-width="5.25" data-height="8.0" style="width: 38px; height: 128px;">
                         <div class="book-spine-title">Midnight Library</div>
                         <div class="book-spine-author">Haig</div>
                     </div>
-                    <div class="book" data-title="The Raven Cycle Series" data-author="Maggie Stiefvater" data-description="Another favorite from my youth that made the world around me feel a little more magical. These books awakened my appreciation for the mystical possibilities hidden in ordinary places.">
+                    <div class="book" data-title="The Raven Cycle Series" data-author="Maggie Stiefvater" data-description="Another favorite from my youth that made the world around me feel a little more magical. These books awakened my appreciation for the mystical possibilities hidden in ordinary places." data-pages="1200" data-width="5.5" data-height="8.25" style="width: 156px; height: 132px;">
                         <div class="book-spine-title">Raven Cycle</div>
                         <div class="book-spine-author">Stiefvater</div>
                     </div>
-                    <div class="book" data-title="Life After Life" data-author="Kate Atkinson" data-description="A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me.">
+                    <div class="book" data-title="Life After Life" data-author="Kate Atkinson" data-description="A novel about a woman who lives her life repeatedly, making different choices each time. Its exploration of how small decisions can have enormous consequences has stayed with me." data-pages="544" data-width="6.0" data-height="9.25" style="width: 55px; height: 148px;">
                         <div class="book-hover-overlay">
                             <div class="book-hover-title">Life After Life</div>
                             <div class="book-hover-author">By Kate Atkinson</div>
@@ -676,23 +666,23 @@
                         <div class="book-spine-title">Life After Life</div>
                         <div class="book-spine-author">Atkinson</div>
                     </div>
-                    <div class="book" data-title="Eleanor Oliphant is Completely Fine" data-author="Gail Honeyman" data-description="A touching story about loneliness, trauma, and the healing power of connection. Eleanor's journey from isolation to community resonated deeply with my understanding of human relationships.">
+                    <div class="book" data-title="Eleanor Oliphant is Completely Fine" data-author="Gail Honeyman" data-description="A touching story about loneliness, trauma, and the healing power of connection. Eleanor's journey from isolation to community resonated deeply with my understanding of human relationships." data-pages="336" data-width="5.25" data-height="8.0" style="width: 44px; height: 128px;">
                         <div class="book-spine-title">Eleanor Oliphant</div>
                         <div class="book-spine-author">Honeyman</div>
                     </div>
-                    <div class="book" data-title="The Alchemist" data-author="Paulo Coelho" data-description="I read this when I was 12 and feeling depressed, and it made things feel meaningful. The simple fable about following one's dreams contains wisdom that spoke to me during a difficult time.">
+                    <div class="book" data-title="The Alchemist" data-author="Paulo Coelho" data-description="I read this when I was 12 and feeling depressed, and it made things feel meaningful. The simple fable about following one's dreams contains wisdom that spoke to me during a difficult time." data-pages="163" data-width="5.0" data-height="8.0" style="width: 21px; height: 128px;">
                         <div class="book-spine-title">The Alchemist</div>
                         <div class="book-spine-author">Coelho</div>
                     </div>
-                    <div class="book" data-title="Anne of Green Gables" data-author="L.M. Montgomery" data-description="Just magic. Anne's imaginative spirit and ability to find wonder in everyday life continue to inspire me to look at the world with fresh eyes.">
+                    <div class="book" data-title="Anne of Green Gables" data-author="L.M. Montgomery" data-description="Just magic. Anne's imaginative spirit and ability to find wonder in everyday life continue to inspire me to look at the world with fresh eyes." data-pages="320" data-width="5.0" data-height="7.5" style="width: 43px; height: 120px;">
                         <div class="book-spine-title">Anne of Green Gables</div>
                         <div class="book-spine-author">Montgomery</div>
                     </div>
-                    <div class="book" data-title="Purple Hibiscus" data-author="Chimamanda Ngozi Adichie" data-description="A powerful coming-of-age story set in postcolonial Nigeria. Adichie's nuanced portrayal of family, faith, and political turmoil offers insights into the complexity of Nigerian society.">
+                    <div class="book" data-title="Purple Hibiscus" data-author="Chimamanda Ngozi Adichie" data-description="A powerful coming-of-age story set in postcolonial Nigeria. Adichie's nuanced portrayal of family, faith, and political turmoil offers insights into the complexity of Nigerian society." data-pages="307" data-width="5.5" data-height="8.25" style="width: 40px; height: 132px;">
                         <div class="book-spine-title">Purple Hibiscus</div>
                         <div class="book-spine-author">Adichie</div>
                     </div>
-                    <div class="book" data-title="Fine Boys" data-author="Eghosa Imasuen" data-description="A compelling novel about university life in Nigeria during the 1990s. Its authentic depiction of friendship, cult violence, and resilience provides a window into a specific moment in Nigerian history.">
+                    <div class="book" data-title="Fine Boys" data-author="Eghosa Imasuen" data-description="A compelling novel about university life in Nigeria during the 1990s. Its authentic depiction of friendship, cult violence, and resilience provides a window into a specific moment in Nigerian history." data-pages="256" data-width="5.25" data-height="8.0" style="width: 34px; height: 128px;">
                         <div class="book-spine-title">Fine Boys</div>
                         <div class="book-spine-author">Imasuen</div>
                     </div>
@@ -717,9 +707,85 @@
         <div class="overlay-description" id="overlay-description"></div>
     </div>
     
-    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">🌙</button>
-    
     <script>
+        // Calculate appropriate font sizes and padding based on book dimensions
+        function setBookFontSizes() {
+            const books = document.querySelectorAll('.book');
+            
+            books.forEach(book => {
+                const width = parseInt(book.style.width) || 40;
+                const height = parseInt(book.style.height) || 180;
+                const titleElement = book.querySelector('.book-spine-title');
+                const authorElement = book.querySelector('.book-spine-author');
+                
+                if (titleElement && authorElement) {
+                    const titleText = titleElement.textContent;
+                    const authorText = authorElement.textContent;
+                    
+                    // Maximum font sizes - NEVER exceed these
+                    const maxTitleSize = 9;
+                    const maxAuthorSize = 7;
+                    
+                    // Adjust padding based on book width
+                    let leftRightPadding, topBottomPadding;
+                    let titleSize, authorSize;
+                    
+                    if (width <= 10) {
+                        // Ultra-thin books like Howl (8px) - minimal padding, readable fonts
+                        leftRightPadding = '1px';
+                        topBottomPadding = '2px';
+                        titleSize = Math.min(maxTitleSize, 5);
+                        authorSize = Math.min(maxAuthorSize, 4);
+                    } else if (width <= 15) {
+                        // Very thin books like Little Prince (13px) - reduced padding
+                        leftRightPadding = '2px';
+                        topBottomPadding = '4px';
+                        titleSize = Math.min(maxTitleSize, 6);
+                        authorSize = Math.min(maxAuthorSize, 5);
+                    } else if (width <= 25) {
+                        // Small books - slightly reduced padding
+                        leftRightPadding = '3px';
+                        topBottomPadding = '6px';
+                        const titleLengthFactor = Math.min(1, 40 / titleText.length);
+                        const authorLengthFactor = Math.min(1, 15 / authorText.length);
+                        
+                        titleSize = Math.min(maxTitleSize, Math.max(6, 8 * titleLengthFactor));
+                        authorSize = Math.min(maxAuthorSize, Math.max(5, 6 * authorLengthFactor));
+                    } else {
+                        // Normal and large books - default padding, only scale for long text
+                        leftRightPadding = '4px';
+                        topBottomPadding = '8px';
+                        const titleLengthFactor = Math.min(1, 40 / titleText.length);
+                        const authorLengthFactor = Math.min(1, 15 / authorText.length);
+                        
+                        titleSize = Math.min(maxTitleSize, maxTitleSize * titleLengthFactor);
+                        authorSize = Math.min(maxAuthorSize, maxAuthorSize * authorLengthFactor);
+                    }
+                    
+                    // Apply padding adjustments for smaller books
+                    if (width <= 25) {
+                        book.style.padding = `${topBottomPadding} ${leftRightPadding}`;
+                        book.style.boxSizing = 'border-box';
+                    }
+                    
+                    // Always apply font sizes for smaller books, conditionally for larger ones
+                    if (width <= 25) {
+                        titleElement.style.fontSize = `${titleSize}px`;
+                        authorElement.style.fontSize = `${authorSize}px`;
+                        console.log(`Small book: ${titleText}, width: ${width}px, padding: ${leftRightPadding}, titleSize: ${titleSize}px`);
+                    } else {
+                        // Only apply if different from default for larger books
+                        if (titleSize < maxTitleSize) {
+                            titleElement.style.fontSize = `${titleSize}px`;
+                        }
+                        if (authorSize < maxAuthorSize) {
+                            authorElement.style.fontSize = `${authorSize}px`;
+                        }
+                    }
+                }
+            });
+        }
+
         // Define functions immediately - no waiting
         function showShelf(index) {
             console.log('showShelf called with index:', index);
@@ -742,6 +808,9 @@
             if (buttons[index]) {
                 buttons[index].classList.add('active');
             }
+            
+            // Recalculate font sizes when switching shelves
+            setTimeout(setBookFontSizes, 10);
         }
         
         function openBookOverlay(title, author, description) {
@@ -770,15 +839,15 @@
         }
         
         function toggleTheme() {
-            var html = document.documentElement;
-            var currentTheme = html.getAttribute('data-theme');
-            var newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             
             console.log('Toggling from', currentTheme, 'to', newTheme);
             
             html.setAttribute('data-theme', newTheme);
             
-            var themeToggle = document.getElementById('theme-toggle');
+            const themeToggle = document.getElementById('theme-toggle');
             if (themeToggle) {
                 themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
             }
@@ -795,12 +864,19 @@
         setTheme(prefersDark ? 'dark' : 'light');
         
         const themeToggle = document.getElementById('theme-toggle');
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            setTheme(newTheme);
-            updateToggleText();
-        });
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                setTheme(newTheme);
+                updateToggleText();
+        
+        // Set initial font sizes after a brief delay to ensure elements are rendered
+        setTimeout(() => {
+            setBookFontSizes();
+        }, 100);
+            });
+        }
         
         function updateToggleText() {
             const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -822,6 +898,9 @@
                 // Add active class to clicked button and corresponding shelf
                 button.classList.add('active');
                 shelves[index].classList.add('active');
+                
+                // Recalculate font sizes when switching shelves
+                setTimeout(setBookFontSizes, 10);
             });
         });
         
@@ -865,3 +944,6 @@
                 closeOverlay();
             }
         });
+    </script>
+</body>
+</html>
