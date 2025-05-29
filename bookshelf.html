@@ -13,7 +13,9 @@
             --text-color: #333;
             --border-color: #333;
             --secondary-text-color: #666;
-            --shelf-color: #e0e0e0;
+            /*--shelf-color: #e0e0e0;*/
+            --shelf-color: #8B4513;
+            --wood-grain-color: #A0522D;
             --book-hover-shadow: rgba(0,0,0,0.2);
         }
         
@@ -23,7 +25,9 @@
                 --text-color: #e0e0e0;
                 --border-color: #e0e0e0;
                 --secondary-text-color: #aaa;
-                --shelf-color: #333;
+                /*--shelf-color: #333;*/
+                --shelf-color: #654321;
+                --wood-grain-color: #8B4513;
                 --book-hover-shadow: rgba(255,255,255,0.1);
             }
         }
@@ -33,7 +37,9 @@
             --text-color: #333;
             --border-color: #333;
             --secondary-text-color: #666;
-            --shelf-color: #e0e0e0;
+            /*--shelf-color: #e0e0e0;*/
+            --shelf-color: #8B4513;
+            --wood-grain-color: #A0522D;
             --book-hover-shadow: rgba(0,0,0,0.2);
         }
         
@@ -42,7 +48,9 @@
             --text-color: #e0e0e0;
             --border-color: #e0e0e0;
             --secondary-text-color: #aaa;
-            --shelf-color: #333;
+            /*--shelf-color: #333;*/
+            --shelf-color: #654321;
+            --wood-grain-color: #8B4513;
             --book-hover-shadow: rgba(255,255,255,0.1);
         }
         
@@ -161,10 +169,11 @@
             margin: 0px 0 16px 0; /* top 20px, bottom 10px fixed */
         }
         
+        /*
         .bookshelf {
             position: relative;
             background: var(--background-color);
-            border-bottom: 8px solid var(--border-color); /* This is the new "shelf" */
+            border-bottom: 8px solid var(--border-color);
             min-height: 200px;
             overflow-x: auto;
             overflow-y: visible;
@@ -174,8 +183,37 @@
             margin-top: 0 !important;
             display: flex;
             align-items: flex-end;
+        } 
+        */
+        
+        .bookshelf {
+            position: relative;
+            background-color: #2b1d1a;
+            background-image: 
+                url('/assets/textures/wood.png'),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.1), transparent 50%, rgba(0, 0, 0, 0.1));
+            background-size: cover;
+            background-repeat: repeat;
+            background-blend-mode: multiply;
+            
+            border-bottom: 12px solid #1a0e0a;
+            border-top: 2px solid rgba(255, 255, 255, 0.05);
+            min-height: 200px;
+            overflow-x: auto;
+            overflow-y: visible;
+            padding: 0 10px 0px 10px;
+            scrollbar-width: thin;
+            scrollbar-color: #5e4b3c transparent;
+            margin-top: 0 !important;
+            display: flex;
+            align-items: flex-end;
+            box-shadow:
+                inset 0 -4px 8px rgba(0, 0, 0, 0.3),
+                inset 0 4px 6px rgba(255, 255, 255, 0.05),
+                0 2px 4px rgba(0, 0, 0, 0.1);
         }
         
+
         
         .bookshelf::-webkit-scrollbar {
             height: 6px;
