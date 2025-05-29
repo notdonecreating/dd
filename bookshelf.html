@@ -145,7 +145,8 @@
         }
        
         .bookshelf-section {
-            margin: 0 0 40px 0;
+            position: relative; /* This is now the positioning parent */
+            margin: 0 0 0px 0;
             display: block;
         }
         
@@ -160,13 +161,37 @@
         }
         */
         
+        /*
         .shelf-label {
             font-size: 16px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            /* margin-bottom: 20px; */
             font-weight: bold;
-            margin: 0px 0 16px 0; /* top 20px, bottom 10px fixed */
+            margin: 0px 0 16px 0;
+        }
+        */
+
+        .shelf-label {
+            position: absolute;
+            left: 10px;
+            bottom: 6px; /* Position it on the front edge of shelf */
+            font-size: 9px;
+            letter-spacing: 0.8px;
+            font-weight: 500;
+            font-family: 'Space Mono', monospace;
+            
+            background: linear-gradient(145deg, #c0c0c0 0%, #a8a8a8 50%, #909090 100%);
+            color: #2c2c2c;
+            border: 1px solid #808080;
+            border-radius: 1px;
+            padding: 3px 10px;
+            
+            box-shadow: 
+                0 1px 2px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+            
+            z-index: 100;
         }
         
         /*
@@ -188,29 +213,31 @@
         
         .bookshelf {
             position: relative;
-            background-color: #2b1d1a;
+            background-color: #4f4641;
             background-image: 
                 url('/assets/textures/wood.png'),
-                linear-gradient(90deg, rgba(0, 0, 0, 0.1), transparent 50%, rgba(0, 0, 0, 0.1));
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02), transparent 50%, rgba(0, 0, 0, 0.06));
             background-size: cover;
             background-repeat: repeat;
             background-blend-mode: multiply;
             
-            border-bottom: 12px solid #1a0e0a;
-            border-top: 2px solid rgba(255, 255, 255, 0.05);
-            min-height: 200px;
+            border-bottom: 35px solid #362f2b;
+            border-top: 2px solid rgba(255, 255, 255, 0.04);
+            min-height: 230px;
+            max-height: 230px;
             overflow-x: auto;
             overflow-y: visible;
             padding: 0 10px 0px 10px;
             scrollbar-width: thin;
-            scrollbar-color: #5e4b3c transparent;
+            scrollbar-color: #362f2b transparent;
             margin-top: 0 !important;
+            margin-bottom: 0 !important;
             display: flex;
             align-items: flex-end;
             box-shadow:
-                inset 0 -4px 8px rgba(0, 0, 0, 0.3),
-                inset 0 4px 6px rgba(255, 255, 255, 0.05),
-                0 2px 4px rgba(0, 0, 0, 0.1);
+                inset 0 -4px 8px rgba(0, 0, 0, 0.12),
+                inset 0 4px 6px rgba(255, 255, 255, 0.04),
+                0 2px 4px rgba(0, 0, 0, 0.04);
         }
         
 
@@ -245,7 +272,7 @@
             /* Default dimensions - will be overridden by inline styles */
             width: 40px;
             height: 180px;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(#333);
             cursor: pointer;
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
@@ -523,7 +550,6 @@
         </div> -->
         
         <div class="bookshelf-section active">
-            <div class="shelf-label">Philosophy & Meaning</div>
             <div class="bookshelf">
                 <div class="books-container">
                     <div class="book" data-title="Man's Search for Meaning" data-author="Viktor E. Frankl" data-description="A profound exploration of finding purpose even in the most difficult circumstances. Frankl's experiences in Nazi concentration camps formed the basis for his approach to discovering meaning in all forms of existence, even the most brutal ones." data-pages="165" data-width="5.5" data-height="8.5" style="width: 22px; height: 136px;">
@@ -562,67 +588,68 @@
                     </div>
 
                     <!-- The Screwtape Letters -->
-<div class="book" data-title="The Screwtape Letters" data-author="C.S. Lewis" data-description="Lewis's brilliant satire on temptation and spiritual warfare, told through letters from a senior demon to his nephew. This masterpiece of religious literature uses wit and irony to expose the subtle ways evil operates in everyday life, while illuminating the path to spiritual victory." data-pages="209" data-width="5.0" data-height="8.0" style="width: 26px; height: 128px;">
-    <div class="book-spine-title">Screwtape Letters</div>
-    <div class="book-spine-author">Lewis</div>
-</div>
+                    <div class="book" data-title="The Screwtape Letters" data-author="C.S. Lewis" data-description="Lewis's brilliant satire on temptation and spiritual warfare, told through letters from a senior demon to his nephew. This masterpiece of religious literature uses wit and irony to expose the subtle ways evil operates in everyday life, while illuminating the path to spiritual victory." data-pages="209" data-width="5.0" data-height="8.0" style="width: 26px; height: 128px;">
+                        <div class="book-spine-title">Screwtape Letters</div>
+                        <div class="book-spine-author">Lewis</div>
+                    </div>
 
-<!-- The Great Divorce -->
-<div class="book" data-title="The Great Divorce" data-author="C.S. Lewis" data-description="A theological fantasy about a bus ride from Hell to Heaven. Lewis explores the nature of good and evil, free will, and the ultimate choice between Heaven and Hell through vivid allegorical encounters. A profound meditation on the human condition and divine grace." data-pages="146" data-width="5.0" data-height="7.5" style="width: 19px; height: 120px;">
-    <div class="book-spine-title">Great Divorce</div>
-    <div class="book-spine-author">Lewis</div>
-</div>
+                    <!-- The Great Divorce -->
+                    <div class="book" data-title="The Great Divorce" data-author="C.S. Lewis" data-description="A theological fantasy about a bus ride from Hell to Heaven. Lewis explores the nature of good and evil, free will, and the ultimate choice between Heaven and Hell through vivid allegorical encounters. A profound meditation on the human condition and divine grace." data-pages="146" data-width="5.0" data-height="7.5" style="width: 19px; height: 120px;">
+                        <div class="book-spine-title">Great Divorce</div>
+                        <div class="book-spine-author">Lewis</div>
+                    </div>
 
-<!-- The Four Loves -->
-<div class="book" data-title="The Four Loves" data-author="C.S. Lewis" data-description="Lewis's examination of affection, friendship, eros, and charity—the four loves that shape human relationships. Drawing on classical sources and Christian theology, he explores how these loves can elevate or corrupt us, and how divine love transforms all human love." data-pages="170" data-width="5.0" data-height="8.0" style="width: 21px; height: 128px;">
-    <div class="book-spine-title">Four Loves</div>
-    <div class="book-spine-author">Lewis</div>
-</div>
+                    <!-- The Four Loves -->
+                    <div class="book" data-title="The Four Loves" data-author="C.S. Lewis" data-description="Lewis's examination of affection, friendship, eros, and charity—the four loves that shape human relationships. Drawing on classical sources and Christian theology, he explores how these loves can elevate or corrupt us, and how divine love transforms all human love." data-pages="170" data-width="5.0" data-height="8.0" style="width: 21px; height: 128px;">
+                        <div class="book-spine-title">Four Loves</div>
+                        <div class="book-spine-author">Lewis</div>
+                    </div>
 
-<!-- A Grief Observed -->
-<div class="book" data-title="A Grief Observed" data-author="C.S. Lewis" data-description="Lewis's raw, honest account of grief after his wife's death from cancer. Written in the white heat of loss, this book doesn't offer easy comfort but rather traces the journey through doubt, anger, and faith. A masterpiece of spiritual honesty that has comforted countless mourners." data-pages="96" data-width="4.5" data-height="7.0" style="width: 12px; height: 112px;">
-    <div class="book-spine-title">Grief Observed</div>
-    <div class="book-spine-author">Lewis</div>
-</div>
+                    <!-- A Grief Observed -->
+                    <div class="book" data-title="A Grief Observed" data-author="C.S. Lewis" data-description="Lewis's raw, honest account of grief after his wife's death from cancer. Written in the white heat of loss, this book doesn't offer easy comfort but rather traces the journey through doubt, anger, and faith. A masterpiece of spiritual honesty that has comforted countless mourners." data-pages="96" data-width="4.5" data-height="7.0" style="width: 12px; height: 112px;">
+                        <div class="book-spine-title">Grief Observed</div>
+                        <div class="book-spine-author">Lewis</div>
+                    </div>
 
-<!-- The Problem of Pain -->
-<div class="book" data-title="The Problem of Pain" data-author="C.S. Lewis" data-description="Lewis's theological examination of why a good God permits suffering. With characteristic clarity and logic, he addresses one of faith's most challenging questions, exploring how pain can be compatible with divine love and how suffering can serve spiritual purposes." data-pages="192" data-width="5.0" data-height="8.0" style="width: 24px; height: 128px;">
-    <div class="book-spine-title">Problem of Pain</div>
-    <div class="book-spine-author">Lewis</div>
-</div>
+                    <!-- The Problem of Pain -->
+                    <div class="book" data-title="The Problem of Pain" data-author="C.S. Lewis" data-description="Lewis's theological examination of why a good God permits suffering. With characteristic clarity and logic, he addresses one of faith's most challenging questions, exploring how pain can be compatible with divine love and how suffering can serve spiritual purposes." data-pages="192" data-width="5.0" data-height="8.0" style="width: 24px; height: 128px;">
+                        <div class="book-spine-title">Problem of Pain</div>
+                        <div class="book-spine-author">Lewis</div>
+                    </div>
 
-<!-- The Abolition of Man -->
-<div class="book" data-title="The Abolition of Man" data-author="C.S. Lewis" data-description="Lewis's philosophical defense of natural law and objective values against relativism. A prophetic critique of modern education and its tendency to 'debunk' traditional values, arguing that without objective morality, we risk creating 'men without chests'—beings lacking the moral sentiments that make us human." data-pages="128" data-width="5.0" data-height="7.5" style="width: 17px; height: 120px;">
-    <div class="book-spine-title">Abolition of Man</div>
-    <div class="book-spine-author">Lewis</div>
-</div>
+                    <!-- The Abolition of Man -->
+                    <div class="book" data-title="The Abolition of Man" data-author="C.S. Lewis" data-description="Lewis's philosophical defense of natural law and objective values against relativism. A prophetic critique of modern education and its tendency to 'debunk' traditional values, arguing that without objective morality, we risk creating 'men without chests'—beings lacking the moral sentiments that make us human." data-pages="128" data-width="5.0" data-height="7.5" style="width: 17px; height: 120px;">
+                        <div class="book-spine-title">Abolition of Man</div>
+                        <div class="book-spine-author">Lewis</div>
+                    </div>
 
-<!-- Miracles -->
-<div class="book" data-title="Miracles" data-author="C.S. Lewis" data-description="Lewis's philosophical defense of the possibility of miracles. Addressing modern skepticism with rigorous logic, he argues that if God exists, miracles are not only possible but expected. A sophisticated treatment of naturalism, supernaturalism, and the relationship between faith and reason." data-pages="294" data-width="5.25" data-height="8.0" style="width: 38px; height: 128px;">
-    <div class="book-spine-title">Miracles</div>
-    <div class="book-spine-author">Lewis</div>
-</div>
+                    <!-- Miracles -->
+                    <div class="book" data-title="Miracles" data-author="C.S. Lewis" data-description="Lewis's philosophical defense of the possibility of miracles. Addressing modern skepticism with rigorous logic, he argues that if God exists, miracles are not only possible but expected. A sophisticated treatment of naturalism, supernaturalism, and the relationship between faith and reason." data-pages="294" data-width="5.25" data-height="8.0" style="width: 38px; height: 128px;">
+                        <div class="book-spine-title">Miracles</div>
+                        <div class="book-spine-author">Lewis</div>
+                    </div>
 
-<!-- The Weight of Glory -->
-<div class="book" data-title="The Weight of Glory" data-author="C.S. Lewis" data-description="A collection of Lewis's most profound essays and sermons, including the titular piece on longing for transcendence. These writings explore themes of glory, transposition, and the deep human desire for something beyond this world—what Lewis calls 'the inconsolable secret.'" data-pages="192" data-width="5.0" data-height="8.0" style="width: 24px; height: 128px;">
-    <div class="book-spine-title">Weight of Glory</div>
-    <div class="book-spine-author">Lewis</div>
-</div>
+                    <!-- The Weight of Glory -->
+                    <div class="book" data-title="The Weight of Glory" data-author="C.S. Lewis" data-description="A collection of Lewis's most profound essays and sermons, including the titular piece on longing for transcendence. These writings explore themes of glory, transposition, and the deep human desire for something beyond this world—what Lewis calls 'the inconsolable secret.'" data-pages="192" data-width="5.0" data-height="8.0" style="width: 24px; height: 128px;">
+                        <div class="book-spine-title">Weight of Glory</div>
+                        <div class="book-spine-author">Lewis</div>
+                    </div>
 
-<!-- Nicomachean Ethics -->
-<div class="book" data-title="Nicomachean Ethics" data-author="Aristotle" data-description="The foundational work of Western virtue ethics. Aristotle's systematic examination of character, virtue, and the good life remains remarkably relevant. His concept of the golden mean and analysis of friendship, courage, and practical wisdom continue to influence moral philosophy and personal development." data-pages="368" data-width="5.5" data-height="8.5" style="width: 47px; height: 136px;">
-    <div class="book-spine-title">Nicomachean Ethics</div>
-    <div class="book-spine-author">Aristotle</div>
-</div>
+                    <!-- Nicomachean Ethics -->
+                    <div class="book" data-title="Nicomachean Ethics" data-author="Aristotle" data-description="The foundational work of Western virtue ethics. Aristotle's systematic examination of character, virtue, and the good life remains remarkably relevant. His concept of the golden mean and analysis of friendship, courage, and practical wisdom continue to influence moral philosophy and personal development." data-pages="368" data-width="5.5" data-height="8.5" style="width: 47px; height: 136px;">
+                        <div class="book-spine-title">Nicomachean Ethics</div>
+                        <div class="book-spine-author">Aristotle</div>
+                    </div>
 
-<!-- Critique of Pure Reason -->
-<div class="book" data-title="Critique of Pure Reason" data-author="Immanuel Kant" data-description="Caveat: I recommend The Critique because its ideas form the foundation of some of my personal philosophy and those of many works that I would like to read. However, I don't fully understand direct unguided readings yet!" data-pages="785" data-width="6.0" data-height="9.0" style="width: 78px; height: 144px;">
-    <div class="book-spine-title">Critique of Pure Reason</div>
-    <div class="book-spine-author">Kant</div>
-</div>
+                    <!-- Critique of Pure Reason -->
+                    <div class="book" data-title="Critique of Pure Reason" data-author="Immanuel Kant" data-description="Caveat: I recommend The Critique because its ideas form the foundation of some of my personal philosophy and those of many works that I would like to read. However, I don't fully understand direct unguided readings yet!" data-pages="785" data-width="6.0" data-height="9.0" style="width: 78px; height: 144px;">
+                        <div class="book-spine-title">Critique of Pure Reason</div>
+                        <div class="book-spine-author">Kant</div>
+                    </div>
 
                 </div>
             </div>
+            <div class="shelf-label">Philosophy & Meaning</div>
         </div>
         
         <div class="bookshelf-section">
