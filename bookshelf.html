@@ -170,9 +170,9 @@
             padding: 0 10px 0px 10px;
             scrollbar-width: thin;
             scrollbar-color: var(--border-color) transparent;
+            margin-top: 0 !important;
             display: flex;
             align-items: flex-end;
-            margin-top: 0 !important;
         }
         
         
@@ -190,14 +190,19 @@
         }
         
         .books-container {
-            display: contents;
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: flex-end;
             gap: 2px;
             padding-bottom: 0px;
             min-width: max-content;
+            width: max-content;
         }
         
         .book {
             position: relative;
+            flex-shrink: 0;
+            flex-grow: 0;
             /* Default dimensions - will be overridden by inline styles */
             width: 40px;
             height: 180px;
@@ -247,51 +252,26 @@
         
         /* Book color variations - Monochrome grey scale */
         .book:nth-child(6n+1) { 
-            background: linear-gradient(90deg, #f8f9fa 0%, #e9ecef 100%);
-            color: #333;
-        }
-        .book:nth-child(6n+2) { 
-            background: linear-gradient(90deg, #dee2e6 0%, #ced4da 100%);
-            color: #333;
-        }
-        .book:nth-child(6n+3) { 
-            background: linear-gradient(90deg, #adb5bd 0%, #868e96 100%);
-            color: #fff;
-        }
-        .book:nth-child(6n+4) { 
-            background: linear-gradient(90deg, #6c757d 0%, #495057 100%);
-            color: #fff;
-        }
-        .book:nth-child(6n+5) { 
-            background: linear-gradient(90deg, #343a40 0%, #212529 100%);
-            color: #fff;
-        }
-        .book:nth-child(6n+6) { 
-            background: linear-gradient(90deg, #ffffff 0%, #f1f3f4 100%);
-            color: #333;
-        }
-        
-        [data-theme="dark"] .book:nth-child(6n+1) { 
             background: linear-gradient(90deg, #4a5568 0%, #2d3748 100%);
             color: #e2e8f0;
         }
-        [data-theme="dark"] .book:nth-child(6n+2) { 
+        .book:nth-child(6n+2) { 
             background: linear-gradient(90deg, #2d3748 0%, #1a202c 100%);
             color: #e2e8f0;
         }
-        [data-theme="dark"] .book:nth-child(6n+3) { 
+        .book:nth-child(6n+3) { 
             background: linear-gradient(90deg, #718096 0%, #4a5568 100%);
             color: #fff;
         }
-        [data-theme="dark"] .book:nth-child(6n+4) { 
+        .book:nth-child(6n+4) { 
             background: linear-gradient(90deg, #a0aec0 0%, #718096 100%);
             color: #1a202c;
         }
-        [data-theme="dark"] .book:nth-child(6n+5) { 
+        .book:nth-child(6n+5) { 
             background: linear-gradient(90deg, #e2e8f0 0%, #cbd5e0 100%);
             color: #1a202c;
         }
-        [data-theme="dark"] .book:nth-child(6n+6) { 
+        .book:nth-child(6n+6) { 
             background: linear-gradient(90deg, #1a202c 0%, #171923 100%);
             color: #e2e8f0;
         }
@@ -491,7 +471,7 @@
         <p>Literature that has shaped my thinking and perspective</p>
         
         <div class="intro-text">
-            I don't tend to read much fiction, though I'd like to. Almost all fiction listed here are childhood reads. I don't necessarily like every book for the main message it purports to give. But every book here left me with something lasting. I haven't reread most of the fiction as an adult so I can't recommend them with certainty, but the others I recommend wholeheartedly.
+            This page is not a list of recommendations. It is not a list of all the books I've read or those I presently own. And for about 20% of the works here, I have never even read them to completion. But it is a list of my influences. These are works of which some aspect, or all, have served to build, transform or support my worldview. For some, particularly the fiction I mostly read as a child, it's more about the feel of it. For others, it was ideas and frameworks. Others may not take the same meaning.
         </div>
         
         <!-- <div class="shelf-navigation">
