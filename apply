@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply to Miniforge - Microgrant Program</title>
+    <link rel="icon" href="favicon5.png" type="image/png">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+        
+        :root {
+            --background-color: #f5f5f5;
+            --text-color: #333;
+            --border-color: #333;
+            --secondary-text-color: #666;
+            --accent-color: #4a4a4a;
+            --input-bg: #fff;
+            --input-border: #999;
+            --input-focus: #333;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: #1a1a1a;
+                --text-color: #e0e0e0;
+                --border-color: #e0e0e0;
+                --secondary-text-color: #aaa;
+                --accent-color: #b0b0b0;
+                --input-bg: #2a2a2a;
+                --input-border: #666;
+                --input-focus: #e0e0e0;
+            }
+        }
+        
+        [data-theme="light"] {
+            --background-color: #f5f5f5;
+            --text-color: #333;
+            --border-color: #333;
+            --secondary-text-color: #666;
+            --accent-color: #4a4a4a;
+            --input-bg: #fff;
+            --input-border: #999;
+            --input-focus: #333;
+        }
+        
+        [data-theme="dark"] {
+            --background-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --border-color: #e0e0e0;
+            --secondary-text-color: #aaa;
+            --accent-color: #b0b0b0;
+            --input-bg: #2a2a2a;
+            --input-border: #666;
+            --input-focus: #e0e0e0;
+        }
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            background: var(--text-color);
+            color: var(--background-color);
+            border: 1px solid var(--border-color);
+            padding: 5px 8px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            opacity: 1;
+        }
+        
+        .theme-toggle:hover {
+            opacity: 1;
+        }
+        
+        .header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: end;
+        }
+        
+        .back-link {
+            color: var(--text-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: opacity 0.3s;
+        }
+        
+        .back-link:hover {
+            opacity: 0.7;
+        }
+        
+        h1 {
+            font-size: 28px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 0 0 10px 0;
+        }
+        
+        h2 {
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 30px 0 20px 0;
+            border-bottom: 1px dotted var(--border-color);
+            padding-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 16px;
+            color: var(--secondary-text-color);
+            font-style: italic;
+            margin: 0 0 30px 0;
+        }
+        
+        .intro-section {
+            font-size: 14px;
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            background: var(--background-color);
+            color: var(--secondary-text-color);
+        }
+        
+        .form-section {
+            margin: 30px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: var(--text-color);
+        }
+        
+        .form-help {
+            font-size: 12px;
+            color: var(--secondary-text-color);
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--input-border);
+            background: var(--input-bg);
+            color: var(--text-color);
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+        
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--input-focus);
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-select {
+            cursor: pointer;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .checkbox-input {
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+        
+        .checkbox-label {
+            font-size: 12px;
+            line-height: 1.4;
+            color: var(--secondary-text-color);
+            text-transform: none;
+            letter-spacing: normal;
+            font-weight: normal;
+        }
+        
+        .submit-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            border: 2px solid var(--border-color);
+        }
+        
+        .submit-btn {
+            background: var(--text-color);
+            color: var(--background-color);
+            padding: 15px 30px;
+            border: 2px solid var(--text-color);
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: var(--background-color);
+            color: var(--text-color);
+        }
+        
+        .form-message {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            display: none;
+            font-size: 14px;
+        }
+        
+        .form-message.success {
+            background: var(--background-color);
+            color: var(--text-color);
+            border-color: var(--accent-color);
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            color: var(--secondary-text-color);
+        }
+        
+        .required {
+            color: var(--accent-color);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 0 10px;
+            }
+            
+            .header {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .back-link {
+                margin-top: 20px;
+                text-align: center;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+            
+            .intro-section {
+                padding: 15px;
+                font-size: 12px;
+            }
+            
+            .submit-section {
+                padding: 20px;
+                margin: 30px 0;
+            }
+            
+            .submit-btn {
+                padding: 12px 20px;
+                font-size: 12px;
+            }
+            
+            .theme-toggle {
+                top: 5px;
+                right: 5px;
+                padding: 3px 6px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>MINIFORGE APPLICATION</h1>
+                <div class="tagline">Ready to bring your idea to life?</div>
+            </div>
+            <div>
+                <a href="miniforge.html" class="back-link">← Back to Program</a>
+            </div>
+        </div>
+        
+        <div class="intro-section">
+            We're excited to learn about your project! This application should take about 10-15 minutes to complete. Be yourself—we want to understand your vision, your motivation, and what you're hoping to achieve. Don't worry about having everything perfectly figured out.
+        </div>
+        
+        <div class="divider">• • • • • • • • • • • • • • • • • • • • • • • • •</div>
+        
+        <!-- Hidden iframe to prevent page reload -->
+        <iframe id="hiddenIframe" name="hiddenIframe" style="display:none;"></iframe>
+        
+        <form id="applicationForm" class="form-section" target="hiddenIframe" onsubmit="return submitForm();" 
+              action="https://docs.google.com/forms/d/e/1FAIpQLSdEXAMPLE_FORM_ID/formResponse">
+            
+            <h2>About You</h2>
+            
+            <div class="form-group">
+                <label class="form-label" for="fullName">Full Name <span class="required">*</span></label>
+                <input type="text" id="fullName" name="entry.1234567890" class="form-input" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="email">Email Address <span class="required">*</span></label>
+                <input type="email" id="email" name="entry.1234567891" class="form-input" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="phone">Phone Number <span class="required">*</span></label>
+                <input type="tel" id="phone" name="entry.1234567892" class="form-input" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="age">Age <span class="required">*</span></label>
+                <input type="number" id="age" name="entry.1234567893" class="form-input" min="18" max="30" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="status">Current Status <span class="required">*</span></label>
+                <select id="status" name="entry.1234567894" class="form-select" required>
+                    <option value="">Select your current status</option>
+                    <option value="undergraduate">Undergraduate Student</option>
+                    <option value="graduate">Graduate Student</option>
+                    <option value="nysc">NYSC Member</option>
+                    <option value="recent-graduate">Recent Graduate</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="institution">Institution/Organization</label>
+                <div class="form-help">Current school, university, or NYSC posting location</div>
+                <input type="text" id="institution" name="entry.1234567895" class="form-input">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="location">Location (City, State) <span class="required">*</span></label>
+                <input type="text" id="location" name="entry.1234567896" class="form-input" required>
+            </div>
+            
+            <h2>Your Project</h2>
+            
+            <div class="form-group">
+                <label class="form-label" for="projectName">Project Name <span class="required">*</span></label>
+                <div class="form-help">What do you call your project or idea?</div>
+                <input type="text" id="projectName" name="entry.1234567897" class="form-input" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="projectCategory">Project Category <span class="required">*</span></label>
+                <select id="projectCategory" name="entry.1234567898" class="form-select" required>
+                    <option value="">Select the category that best fits</option>
+                    <option value="technology">Technology/Software</option>
+                    <option value="creative">Creative Arts</option>
+                    <option value="research">Research</option>
+                    <option value="business">Business/Venture</option>
+                    <option value="social-impact">Social Impact</option>
+                    <option value="education">Education</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="projectDescription">Project Description <span class="required">*</span></label>
+                <div class="form-help">Describe your project in detail. What are you building or creating? What problem does it solve?</div>
+                <textarea id="projectDescription" name="entry.1234567899" class="form-textarea" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="projectStage">Current Stage <span class="required">*</span></label>
+                <div class="form-help">Where are you in your project journey?</div>
+                <select id="projectStage" name="entry.1234567900" class="form-select" required>
+                    <option value="">Select your current stage</option>
+                    <option value="idea">Just an idea</option>
+                    <option value="planning">Planning phase</option>
+                    <option value="prototyping">Building prototype</option>
+                    <option value="testing">Testing/validation</option>
+                    <option value="early-users">Have early users/feedback</option>
+                    <option value="scaling">Ready to scale</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="twoMonthPlan">2-Month Plan <span class="required">*</span></label>
+                <div class="form-help">What specifically will you accomplish in the 2 months? Be as detailed as possible.</div>
+                <textarea id="twoMonthPlan" name="entry.1234567901" class="form-textarea" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="success">Success Metrics</label>
+                <div class="form-help">How will you measure success? What would make you feel proud at the end of 2 months?</div>
+                <textarea id="success" name="entry.1234567902" class="form-textarea"></textarea>
+            </div>
+            
+            <h2>Motivation & Impact</h2>
+            
+            <div class="form-group">
+                <label class="form-label" for="motivation">Why This Project? <span class="required">*</span></label>
+                <div class="form-help">What drives you to work on this? Why does it matter to you personally?</div>
+                <textarea id="motivation" name="entry.1234567903" class="form-textarea" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="impact">Expected Impact</label>
+                <div class="form-help">Who will benefit from your project? How will it make a difference?</div>
+                <textarea id="impact" name="entry.1234567904" class="form-textarea"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="challenges">Biggest Challenge <span class="required">*</span></label>
+                <div class="form-help">What's the main obstacle you're facing right now? How would this grant help?</div>
+                <textarea id="challenges" name="entry.1234567905" class="form-textarea" required></textarea>
+            </div>
+            
+            <h2>Experience & Background</h2>
+            
+            <div class="form-group">
+                <label class="form-label" for="experience">Relevant Experience</label>
+                <div class="form-help">What skills, experiences, or previous projects prepare you for this?</div>
+                <textarea id="experience" name="entry.1234567906" class="form-textarea"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="resources">Current Resources</label>
+                <div class="form-help">What tools, skills, or support do you already have? What do you still need?</div>
+                <textarea id="resources" name="entry.1234567907" class="form-textarea"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="futureVision">Future Vision</label>
+                <div class="form-help">Where do you see this project (and yourself) in 6 months or 1 year?</div>
+                <textarea id="futureVision" name="entry.1234567908" class="form-textarea"></textarea>
+            </div>
+            
+            <h2>Additional Information</h2>
+            
+            <div class="form-group">
+                <label class="form-label" for="hearAbout">How did you hear about Miniforge?</label>
+                <select id="hearAbout" name="entry.1234567909" class="form-select">
+                    <option value="">Select an option</option>
+                    <option value="website">Website/Archive</option>
+                    <option value="social-media">Social Media</option>
+                    <option value="friend">Friend/Word of Mouth</option>
+                    <option value="university">University/School</option>
+                    <option value="nysc">NYSC Network</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="anything-else">Anything Else?</label>
+                <div class="form-help">Anything else you'd like us to know? Links to work, questions, or additional context?</div>
+                <textarea id="anything-else" name="entry.1234567910" class="form-textarea"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="consent" name="entry.1234567911" class="checkbox-input" value="Yes" required>
+                    <label for="consent" class="checkbox-label">
+                        I confirm that all information provided is accurate and I'm committed to working on this project for the 2-month period. I understand this is trust-based support and I'm prepared to provide regular updates on my progress. <span class="required">*</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="divider">• • • • • • • • • • • • • • • • • • • • • • • • •</div>
+            
+            <div class="submit-section">
+                <button type="submit" class="submit-btn">Submit Application</button>
+                <div id="formMessage" class="form-message"></div>
+                <div style="margin-top: 20px; font-size: 12px; color: var(--secondary-text-color); font-style: italic;">
+                    Applications are reviewed on a rolling basis. You'll hear back within 1-2 weeks.
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <button class="theme-toggle" id="theme-toggle">Toggle Dark Mode</button>
+    
+    <script>
+        function submitForm() {
+            const form = document.getElementById('applicationForm');
+            const messageDiv = document.getElementById('formMessage');
+            
+            // Show success message
+            messageDiv.innerHTML = 'Thank you for your application! We\'ll review it and get back to you within 1-2 weeks. Keep working on your project in the meantime!';
+            messageDiv.className = 'form-message success';
+            messageDiv.style.display = 'block';
+            
+            // Scroll to message
+            messageDiv.scrollIntoView({ behavior: 'smooth' });
+            
+            // Reset form after successful submission
+            setTimeout(function() {
+                form.reset();
+                messageDiv.style.display = 'none';
+            }, 10000);
+            
+            return true; // Allow form to submit
+        }
+        
+        // Theme toggle functionality
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            try {
+                localStorage.setItem('theme', theme);
+            } catch (e) {
+                console.log('localStorage not available, theme preference will not persist');
+            }
+        }
+        
+        let savedTheme = null;
+        try {
+            savedTheme = localStorage.getItem('theme');
+        } catch (e) {
+            console.log('localStorage not available, using system preference only');
+        }
+        
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (prefersDark) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+        
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+            updateToggleText();
+        });
+        
+        function updateToggleText() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        }
+        
+        updateToggleText();
+    </script>
+</body>
+</html>
