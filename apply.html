@@ -296,6 +296,22 @@
             color: var(--accent-color);
         }
         
+        .loading-spinner {
+            display: none;
+            width: 30px;
+            height: 30px;
+            margin: 15px auto;
+            border: 3px solid var(--secondary-text-color);
+            border-top: 3px solid var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -358,12 +374,8 @@
         
         <div class="divider">• • • • • • • • • • • • • • • • • • • • • • • • •</div>
         
-        <!-- Hidden iframe to prevent page reload -->
-        <iframe id="hiddenIframe" name="hiddenIframe" style="display:none;"></iframe>
-        
-        <!-- Form with the correct Google Form action URL -->
-        <form id="applicationForm" class="form-section" target="hiddenIframe" onsubmit="return submitForm();" 
-              action="https://docs.google.com/forms/d/e/1FAIpQLSdJn7016X0F6mIzVb1cEvBE_gePynojj3QfIR44P4lzNS2InQ/formResponse">
+        <!-- Form using AJAX submission method -->
+        <form id="applicationForm" class="form-section">
             
             <h2>About You</h2>
             
@@ -537,6 +549,7 @@
             
             <div class="submit-section">
                 <button type="submit" class="submit-btn">Submit Application</button>
+                <div class="loading-spinner" id="loadingSpinner"></div>
                 <div id="formMessage" class="form-message"></div>
                 <div style="margin-top: 20px; font-size: 12px; color: var(--secondary-text-color); font-style: italic;">
                     Applications are reviewed on a rolling basis. You'll hear back within 1-2 weeks.
@@ -548,7 +561,81 @@
     <button class="theme-toggle" id="theme-toggle">Toggle Dark Mode</button>
     
     <script>
-        // Enhanced form submission with validation
+        // Form validation and submission
+        document.getElementById('applicationForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent normal form submission
+            
+            if (!validateForm()) {
+                return false;
+            }
+            
+            // Show loading spinner
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            loadingSpinner.style.display = 'block';
+            
+            // Get form data
+            const formData = new FormData(this);
+            
+            // Log form data for debugging
+            console.log("Form data being sent:");
+            for (let pair of formData.entries()) {
+                console.log(pair[0] + ': ' + pair[1]);
+            }
+            
+            // Convert FormData to URL-encoded string
+            const urlEncodedData = new URLSearchParams(formData).toString();
+            
+            // Create a new XMLHttpRequest
+            const xhr = new XMLHttpRequest();
+            
+            // Define what happens on successful data submission
+            xhr.addEventListener("load", function(event) {
+                // Hide loading spinner
+                loadingSpinner.style.display = 'none';
+                
+                // Show success message
+                const messageDiv = document.getElementById('formMessage');
+                messageDiv.innerHTML = 'Thank you for your application! We\'ll review it and get back to you within 1-2 weeks. Keep working on your project in the meantime!';
+                messageDiv.className = 'form-message success';
+                messageDiv.style.display = 'block';
+                
+                // Scroll to message
+                messageDiv.scrollIntoView({ behavior: 'smooth' });
+                
+                console.log("Form submitted successfully");
+                
+                // Reset form after successful submission
+                setTimeout(function() {
+                    document.getElementById('applicationForm').reset();
+                    messageDiv.style.display = 'none';
+                }, 10000);
+            });
+            
+            // Define what happens in case of error
+            xhr.addEventListener("error", function(event) {
+                // Hide loading spinner
+                loadingSpinner.style.display = 'none';
+                
+                // Show error message
+                const messageDiv = document.getElementById('formMessage');
+                messageDiv.innerHTML = 'There was an error submitting the form. Your application has been saved. Please try again or contact us if the problem persists.';
+                messageDiv.className = 'form-message error';
+                messageDiv.style.display = 'block';
+                
+                console.error("Form submission error:", event);
+            });
+            
+            // Set up our request
+            xhr.open("POST", "https://docs.google.com/forms/d/e/1FAIpQLSdJn7016X0F6mIzVb1cEvBE_gePynojj3QfIR44P4lzNS2InQ/formResponse");
+            
+            // Add header for URL encoded form data
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            
+            // Send the data
+            xhr.send(urlEncodedData);
+        });
+        
+        // Form validation function
         function validateForm() {
             const requiredFields = document.querySelectorAll('[required]');
             let valid = true;
@@ -594,17 +681,8 @@
                 }
             });
             
-            return valid;
-        }
-        
-        function isValidEmail(email) {
-            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(String(email).toLowerCase());
-        }
-        
-        function submitForm() {
-            if (!validateForm()) {
-                // Show error message
+            // If not valid, show general error and scroll to first error
+            if (!valid) {
                 const messageDiv = document.getElementById('formMessage');
                 messageDiv.innerHTML = 'Please fix the errors in the form before submitting.';
                 messageDiv.className = 'form-message error';
@@ -615,28 +693,14 @@
                 if (firstError) {
                     firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
-                
-                return false;
             }
             
-            const form = document.getElementById('applicationForm');
-            const messageDiv = document.getElementById('formMessage');
-            
-            // Show success message
-            messageDiv.innerHTML = 'Thank you for your application! We\'ll review it and get back to you within 1-2 weeks. Keep working on your project in the meantime!';
-            messageDiv.className = 'form-message success';
-            messageDiv.style.display = 'block';
-            
-            // Scroll to message
-            messageDiv.scrollIntoView({ behavior: 'smooth' });
-            
-            // Reset form after successful submission
-            setTimeout(function() {
-                form.reset();
-                messageDiv.style.display = 'none';
-            }, 10000);
-            
-            return true; // Allow form to submit
+            return valid;
+        }
+        
+        function isValidEmail(email) {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
         }
         
         // Theme toggle functionality
