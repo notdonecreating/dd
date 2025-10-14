@@ -316,6 +316,44 @@
             100% { transform: rotate(360deg); }
         }
         
+        #thankYouMessage {
+            display: none;
+            text-align: center;
+            margin: 50px 0;
+            padding: 30px;
+            border: 2px solid var(--success-color);
+            background-color: var(--background-color);
+        }
+        
+        #thankYouMessage h2 {
+            color: var(--success-color);
+            border-bottom: none;
+        }
+        
+        #thankYouMessage p {
+            margin-bottom: 20px;
+        }
+        
+        #thankYouMessage .return-btn {
+            display: inline-block;
+            background: var(--text-color);
+            color: var(--background-color);
+            padding: 10px 20px;
+            border: 2px solid var(--text-color);
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        #thankYouMessage .return-btn:hover {
+            background: var(--background-color);
+            color: var(--text-color);
+        }
+        
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -362,318 +400,256 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <div>
-                <h1>MINIFORGE APPLICATION</h1>
-                <div class="tagline">Ready to bring your idea to life?</div>
-            </div>
-            <div>
-                <a href="miniforge.html" class="back-link">← Back to Program</a>
-            </div>
-        </div>
-        
-        <div class="intro-section">
-            We're excited to learn about your project! This application should take about 10-15 minutes to complete. Be yourself—we want to understand your vision, your motivation, and what you're hoping to achieve. Don't worry about having everything perfectly figured out.
-        </div>
-        
-        <div class="divider">• • • • • • • • • • • • • • • • • • • • • • • • •</div>
-        
-        <!-- Form with no action - submission handled by JavaScript -->
-        <form id="applicationForm" class="form-section">
-            
-            <h2>About You</h2>
-            
-            <div class="form-group">
-                <label class="form-label" for="fullName">Full Name <span class="required">*</span></label>
-                <input type="text" id="fullName" name="entry.1500017940" class="form-input" required>
-                <div class="error-text" id="fullName-error">Please enter your full name</div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="email">Email Address <span class="required">*</span></label>
-                <input type="email" id="email" name="entry.329869323" class="form-input" required>
-                <div class="error-text" id="email-error">Please enter a valid email address</div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="phone">Phone Number <span class="required">*</span></label>
-                <input type="tel" id="phone" name="entry.948298581" class="form-input" required>
-                <div class="error-text" id="phone-error">Please enter your phone number</div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="age">Age <span class="required">*</span></label>
-                <input type="number" id="age" name="entry.376700596" class="form-input" min="18" max="30" required>
-                <div class="error-text" id="age-error">Please enter your age (between 18-30)</div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="status">Current Status <span class="required">*</span></label>
-                <select id="status" name="entry.2005410860" class="form-select" required>
-                    <option value="">Select your current status</option>
-                    <option value="Secondary School Student/Recent Graduate">Secondary School Student/Recent Graduate</option>
-                    <option value="Undergraduate Student">Undergraduate Student</option>
-                    <option value="Graduate Student">Graduate Student</option>
-                    <option value="NYSC Member">NYSC Member</option>
-                    <option value="Recent Graduate">Recent Graduate</option>
-                    <option value="Other">Other</option>
-                </select>
-                <div class="error-text" id="status-error">Please select your current status</div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="institution">Institution/Organization</label>
-                <div class="form-help">Current school, university, or NYSC posting location</div>
-                <input type="text" id="institution" name="entry.524848919" class="form-input">
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="location">Location (City, State) <span class="required">*</span></label>
-                <input type="text" id="location" name="entry.724958313" class="form-input" required>
-                <div class="error-text" id="location-error">Please enter your location</div>
-            </div>
-            
-            <h2>Your Project</h2>
-            
-            <div class="form-group">
-                <label class="form-label" for="projectCategory">Project Category <span class="required">*</span></label>
-                <select id="projectCategory" name="entry.1028252304" class="form-select" required>
-                    <option value="">Select the category that best fits</option>
-                    <option value="Business">Business/Venture</option>
-                    <option value="Creative Arts">Creative Arts</option>
-                    <option value="Research">Research</option>
-                    <option value="Social Impact">Social Impact</option>
-                    <option value="Technology/Software">Technology/Software</option>
-                    <option value="Other">Other</option>
-                </select>
-                <div class="error-text" id="projectCategory-error">Please select a project category</div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="projectDescription">Project Description <span class="required">*</span></label>
-                <div class="form-help">Describe your project in detail. What are you building or creating? What problem does it solve?</div>
-                <textarea id="projectDescription" name="entry.968015306" class="form-textarea" required></textarea>
-                <div class="error-text" id="projectDescription-error">Please enter your project description</div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="projectStage">How far have you gotten? <span class="required">*</span></label>
-                <div class="form-help">It's okay if it's still in the idea phase.</div>
-                <textarea id="projectStage" name="entry.1584637975" class="form-textarea" required></textarea>
-                <div class="error-text" id="projectStage-error">Please describe your current progress</div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="twoMonthPlan">2-Month Plan <span class="required">*</span></label>
-                <div class="form-help">What specifically will you accomplish in the 2 months? Be as detailed as possible.</div>
-                <textarea id="twoMonthPlan" name="entry.1964058972" class="form-textarea" required></textarea>
-                <div class="error-text" id="twoMonthPlan-error">Please describe your 2-month plan</div>
-            </div>
-            
-            <h2>Motivation & Impact</h2>
-            
-            <div class="form-group">
-                <label class="form-label" for="motivation">Why This Project? <span class="required">*</span></label>
-                <div class="form-help">Please respond to at least two of the following. You may respond in any format you'd like: a sentence, a list, a paragraph, a link to a video etc. Format and length does not count against you.</div>
-                <textarea id="motivation" name="entry.831786434" class="form-textarea" required></textarea>
-                <div class="error-text" id="motivation-error">Please describe your motivation</div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="impact">Expected Impact</label>
-                <div class="form-help">Who will benefit from your project? How will it make a difference? This could also be how this project moves you forward toward your dream or who you want to be.</div>
-                <textarea id="impact" name="entry.1942847911" class="form-textarea"></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="challenges">Biggest Challenge <span class="required">*</span></label>
-                <div class="form-help">What's the main obstacle you're facing right now? How would this grant help?</div>
-                <textarea id="challenges" name="entry.1717229353" class="form-textarea" required></textarea>
-                <div class="error-text" id="challenges-error">Please describe your biggest challenge</div>
-            </div>
-            
-            <h2>Experience & Background</h2>
-            
-            <div class="form-group">
-                <label class="form-label" for="experience">Relevant Experience</label>
-                <div class="form-help">What skills, experiences, or previous projects prepare you for this?</div>
-                <textarea id="experience" name="entry.1426456443" class="form-textarea"></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="resumeLink">Resume or Portfolio Link (Optional)</label>
-                <div class="form-help">Please upload your resume or portfolio to Google Drive, Dropbox, or another service and paste the share link here.</div>
-                <input type="url" id="resumeLink" name="entry.548696647" class="form-input" placeholder="https://...">
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="resumeText">Resume or Portfolio Text (Optional)</label>
-                <div class="form-help">Alternatively, you can paste the full text of your resume or portfolio details here.</div>
-                <textarea id="resumeText" name="entry.1758189158" class="form-textarea"></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="futureVision">Future Vision</label>
-                <div class="form-help">Where do you see this project (and yourself) in 6 months or 1 year?</div>
-                <textarea id="futureVision" name="entry.144472175" class="form-textarea"></textarea>
-            </div>
-            
-            <h2>Additional Information</h2>
-            
-            <div class="form-group">
-                <label class="form-label" for="hearAbout">How did you hear about Miniforge?</label>
-                <select id="hearAbout" name="entry.730535848" class="form-select">
-                    <option value="">Select an option</option>
-                    <option value="Website/Archive">Website/Archive</option>
-                    <option value="Social Media">Social Media</option>
-                    <option value="Friend/Word of Mouth">Friend/Word of Mouth</option>
-                    <option value="University/School">University/School</option>
-                    <option value="NYSC Network">NYSC Network</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="anything-else">Anything Else?</label>
-                <div class="form-help">Anything else you'd like us to know? Links to work, questions, or additional context?</div>
-                <textarea id="anything-else" name="entry.302204077" class="form-textarea"></textarea>
-            </div>
-            
-            <div class="form-group">
-                <div class="checkbox-group">
-                    <input type="checkbox" id="consent" name="entry.2003049549" class="checkbox-input" value="I confirm that all information provided is accurate and I'm committed to working on this project for the 2-month period. I understand this is trust-based support and I'm prepared to provide regular updates on my progress." required>
-                    <label for="consent" class="checkbox-label">
-                        I confirm that all information provided is accurate and I'm committed to working on this project for the 2-month period. I understand this is trust-based support and I'm prepared to provide regular updates on my progress. <span class="required">*</span>
-                    </label>
+        <div id="formContainer">
+            <div class="header">
+                <div>
+                    <h1>MINIFORGE APPLICATION</h1>
+                    <div class="tagline">Ready to bring your idea to life?</div>
                 </div>
-                <div class="error-text" id="consent-error">You must agree to the terms</div>
+                <div>
+                    <a href="miniforge.html" class="back-link">← Back to Program</a>
+                </div>
+            </div>
+            
+            <div class="intro-section">
+                We're excited to learn about your project! This application should take about 10-15 minutes to complete. Be yourself—we want to understand your vision, your motivation, and what you're hoping to achieve. Don't worry about having everything perfectly figured out.
             </div>
             
             <div class="divider">• • • • • • • • • • • • • • • • • • • • • • • • •</div>
             
-            <div class="submit-section">
-                <button type="submit" class="submit-btn">Submit Application</button>
-                <div class="loading-spinner" id="loadingSpinner"></div>
-                <div id="formMessage" class="form-message"></div>
-                <div style="margin-top: 20px; font-size: 12px; color: var(--secondary-text-color); font-style: italic;">
-                    Applications are reviewed on a rolling basis. You'll hear back within 1-2 weeks.
+            <!-- Direct form submission with method POST -->
+            <form id="applicationForm" class="form-section" method="POST" action="https://docs.google.com/forms/d/e/1FAIpQLSdJn7016X0F6mIzVb1cEvBE_gePynojj3QfIR44P4lzNS2InQ/formResponse">
+                
+                <h2>About You</h2>
+                
+                <div class="form-group">
+                    <label class="form-label" for="fullName">Full Name <span class="required">*</span></label>
+                    <input type="text" id="fullName" name="entry.1500017940" class="form-input" required>
+                    <div class="error-text" id="fullName-error">Please enter your full name</div>
                 </div>
-            </div>
-        </form>
+                
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="entry.329869323" class="form-input" required>
+                    <div class="error-text" id="email-error">Please enter a valid email address</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="phone">Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="entry.948298581" class="form-input" required>
+                    <div class="error-text" id="phone-error">Please enter your phone number</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="age">Age <span class="required">*</span></label>
+                    <input type="number" id="age" name="entry.376700596" class="form-input" min="18" max="30" required>
+                    <div class="error-text" id="age-error">Please enter your age (between 18-30)</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="status">Current Status <span class="required">*</span></label>
+                    <select id="status" name="entry.2005410860" class="form-select" required>
+                        <option value="">Select your current status</option>
+                        <option value="Secondary School Student/Recent Graduate">Secondary School Student/Recent Graduate</option>
+                        <option value="Undergraduate Student">Undergraduate Student</option>
+                        <option value="Graduate Student">Graduate Student</option>
+                        <option value="NYSC Member">NYSC Member</option>
+                        <option value="Recent Graduate">Recent Graduate</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <div class="error-text" id="status-error">Please select your current status</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="institution">Institution/Organization</label>
+                    <div class="form-help">Current school, university, or NYSC posting location</div>
+                    <input type="text" id="institution" name="entry.524848919" class="form-input">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="location">Location (City, State) <span class="required">*</span></label>
+                    <input type="text" id="location" name="entry.724958313" class="form-input" required>
+                    <div class="error-text" id="location-error">Please enter your location</div>
+                </div>
+                
+                <h2>Your Project</h2>
+                
+                <div class="form-group">
+                    <label class="form-label" for="projectCategory">Project Category <span class="required">*</span></label>
+                    <select id="projectCategory" name="entry.1028252304" class="form-select" required>
+                        <option value="">Select the category that best fits</option>
+                        <option value="Business">Business/Venture</option>
+                        <option value="Creative Arts">Creative Arts</option>
+                        <option value="Research">Research</option>
+                        <option value="Social Impact">Social Impact</option>
+                        <option value="Technology/Software">Technology/Software</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <div class="error-text" id="projectCategory-error">Please select a project category</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="projectDescription">Project Description <span class="required">*</span></label>
+                    <div class="form-help">Describe your project in detail. What are you building or creating? What problem does it solve?</div>
+                    <textarea id="projectDescription" name="entry.968015306" class="form-textarea" required></textarea>
+                    <div class="error-text" id="projectDescription-error">Please enter your project description</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="projectStage">How far have you gotten? <span class="required">*</span></label>
+                    <div class="form-help">It's okay if it's still in the idea phase.</div>
+                    <textarea id="projectStage" name="entry.1584637975" class="form-textarea" required></textarea>
+                    <div class="error-text" id="projectStage-error">Please describe your current progress</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="twoMonthPlan">2-Month Plan <span class="required">*</span></label>
+                    <div class="form-help">What specifically will you accomplish in the 2 months? Be as detailed as possible.</div>
+                    <textarea id="twoMonthPlan" name="entry.1964058972" class="form-textarea" required></textarea>
+                    <div class="error-text" id="twoMonthPlan-error">Please describe your 2-month plan</div>
+                </div>
+                
+                <h2>Motivation & Impact</h2>
+                
+                <div class="form-group">
+                    <label class="form-label" for="motivation">Why This Project? <span class="required">*</span></label>
+                    <div class="form-help">Please respond to at least two of the following. You may respond in any format you'd like: a sentence, a list, a paragraph, a link to a video etc. Format and length does not count against you.</div>
+                    <textarea id="motivation" name="entry.831786434" class="form-textarea" required></textarea>
+                    <div class="error-text" id="motivation-error">Please describe your motivation</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="impact">Expected Impact</label>
+                    <div class="form-help">Who will benefit from your project? How will it make a difference? This could also be how this project moves you forward toward your dream or who you want to be.</div>
+                    <textarea id="impact" name="entry.1942847911" class="form-textarea"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="challenges">Biggest Challenge <span class="required">*</span></label>
+                    <div class="form-help">What's the main obstacle you're facing right now? How would this grant help?</div>
+                    <textarea id="challenges" name="entry.1717229353" class="form-textarea" required></textarea>
+                    <div class="error-text" id="challenges-error">Please describe your biggest challenge</div>
+                </div>
+                
+                <h2>Experience & Background</h2>
+                
+                <div class="form-group">
+                    <label class="form-label" for="experience">Relevant Experience</label>
+                    <div class="form-help">What skills, experiences, or previous projects prepare you for this?</div>
+                    <textarea id="experience" name="entry.1426456443" class="form-textarea"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="resumeLink">Resume or Portfolio Link (Optional)</label>
+                    <div class="form-help">Please upload your resume or portfolio to Google Drive, Dropbox, or another service and paste the share link here.</div>
+                    <input type="url" id="resumeLink" name="entry.548696647" class="form-input" placeholder="https://...">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="resumeText">Resume or Portfolio Text (Optional)</label>
+                    <div class="form-help">Alternatively, you can paste the full text of your resume or portfolio details here.</div>
+                    <textarea id="resumeText" name="entry.1758189158" class="form-textarea"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="futureVision">Future Vision</label>
+                    <div class="form-help">Where do you see this project (and yourself) in 6 months or 1 year?</div>
+                    <textarea id="futureVision" name="entry.144472175" class="form-textarea"></textarea>
+                </div>
+                
+                <h2>Additional Information</h2>
+                
+                <div class="form-group">
+                    <label class="form-label" for="hearAbout">How did you hear about Miniforge?</label>
+                    <select id="hearAbout" name="entry.730535848" class="form-select">
+                        <option value="">Select an option</option>
+                        <option value="Website/Archive">Website/Archive</option>
+                        <option value="Social Media">Social Media</option>
+                        <option value="Friend/Word of Mouth">Friend/Word of Mouth</option>
+                        <option value="University/School">University/School</option>
+                        <option value="NYSC Network">NYSC Network</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="anything-else">Anything Else?</label>
+                    <div class="form-help">Anything else you'd like us to know? Links to work, questions, or additional context?</div>
+                    <textarea id="anything-else" name="entry.302204077" class="form-textarea"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="consent" name="entry.2003049549" class="checkbox-input" value="I confirm that all information provided is accurate and I'm committed to working on this project for the 2-month period. I understand this is trust-based support and I'm prepared to provide regular updates on my progress." required>
+                        <label for="consent" class="checkbox-label">
+                            I confirm that all information provided is accurate and I'm committed to working on this project for the 2-month period. I understand this is trust-based support and I'm prepared to provide regular updates on my progress. <span class="required">*</span>
+                        </label>
+                    </div>
+                    <div class="error-text" id="consent-error">You must agree to the terms</div>
+                </div>
+                
+                <!-- Hidden field to capture form submission -->
+                <input type="hidden" name="fvv" value="1">
+                <input type="hidden" name="fbzx" value="-6076773421131239123">
+                <input type="hidden" name="pageHistory" value="0">
+                
+                <div class="divider">• • • • • • • • • • • • • • • • • • • • • • • • •</div>
+                
+                <div class="submit-section">
+                    <button type="submit" class="submit-btn">Submit Application</button>
+                    <div id="loadingSpinner" class="loading-spinner"></div>
+                    <div id="formMessage" class="form-message"></div>
+                    <div style="margin-top: 20px; font-size: 12px; color: var(--secondary-text-color); font-style: italic;">
+                        Applications are reviewed on a rolling basis. You'll hear back within 1-2 weeks.
+                    </div>
+                </div>
+                
+                <!-- Hidden return URL for redirection after submission -->
+                <input type="hidden" name="redirectUrl" value="https://donedl.me/miniforge-thanks.html">
+            </form>
+        </div>
+        
+        <!-- Thank You message - create a separate thank-you page at this URL -->
+        <div id="thankYouMessage">
+            <h2>Thank You!</h2>
+            <p>Your application has been submitted successfully. We'll review it and get back to you within 1-2 weeks.</p>
+            <p>In the meantime, keep working on your project!</p>
+            <a href="miniforge.html" class="return-btn">Return to Program</a>
+        </div>
     </div>
     
     <button class="theme-toggle" id="theme-toggle">Toggle Dark Mode</button>
     
     <script>
+        // Check if redirected from successful submission
+        window.addEventListener('load', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('submitted') && urlParams.get('submitted') === 'true') {
+                // Show thank you message and hide form
+                document.getElementById('formContainer').style.display = 'none';
+                document.getElementById('thankYouMessage').style.display = 'block';
+                
+                // Update URL without the query parameter
+                history.replaceState(null, '', window.location.pathname);
+            }
+        });
+        
         // Form validation and submission
         document.getElementById('applicationForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent normal form submission
-            
             if (!validateForm()) {
+                e.preventDefault(); // Prevent submission if validation fails
                 return false;
             }
             
             // Show loading spinner
-            const loadingSpinner = document.getElementById('loadingSpinner');
-            loadingSpinner.style.display = 'block';
+            document.getElementById('loadingSpinner').style.display = 'block';
             
-            // Get form data
-            const form = document.getElementById('applicationForm');
-            const formData = new FormData(form);
+            // Log form submission
+            console.log("Form submitting directly...");
             
-            // Log form data for debugging
-            console.log("Form data being submitted:");
-            for (let pair of formData.entries()) {
-                console.log(pair[0] + ': ' + pair[1]);
-            }
-            
-            // Create URL for form submission
-            let url = 'https://docs.google.com/forms/d/e/1FAIpQLSdJn7016X0F6mIzVb1cEvBE_gePynojj3QfIR44P4lzNS2InQ/formResponse?';
-            
-            // Append each form field to the URL
-            for (let pair of formData.entries()) {
-                url += encodeURIComponent(pair[0]) + '=' + encodeURIComponent(pair[1]) + '&';
-            }
-            
-            // Remove trailing ampersand
-            url = url.slice(0, -1);
-            
-            // Method 1: Submit using a hidden iframe
-            // Create a temporary iframe
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            document.body.appendChild(iframe);
-            
-            // Handle success or error
-            iframe.addEventListener('load', function() {
-                handleSubmissionResult(true);
-            });
-            
-            iframe.addEventListener('error', function() {
-                // Even if iframe errors, the submission may still have gone through
-                handleSubmissionResult(true);
-            });
-            
-            // Load the URL in the iframe
-            iframe.src = url;
-            
-            // Method 2: Fallback using form submission (if iframe method fails)
-            // This redirects the user but is more reliable
-            setTimeout(function() {
-                if (!document.getElementById('formMessage').style.display === 'block') {
-                    // Create a temporary form and submit it
-                    const tempForm = document.createElement('form');
-                    tempForm.action = 'https://docs.google.com/forms/d/e/1FAIpQLSdJn7016X0F6mIzVb1cEvBE_gePynojj3QfIR44P4lzNS2InQ/formResponse';
-                    tempForm.method = 'POST';
-                    tempForm.target = '_blank';
-                    tempForm.style.display = 'none';
-                    
-                    // Add each field from the original form
-                    for (let pair of formData.entries()) {
-                        const input = document.createElement('input');
-                        input.type = 'hidden';
-                        input.name = pair[0];
-                        input.value = pair[1];
-                        tempForm.appendChild(input);
-                    }
-                    
-                    // Add form to body and submit
-                    document.body.appendChild(tempForm);
-                    tempForm.submit();
-                    
-                    // Remove the form after submission
-                    setTimeout(function() {
-                        document.body.removeChild(tempForm);
-                    }, 1000);
-                }
-            }, 3000);
+            // Let the form submit directly
+            // The form will redirect to Google Forms and then back to your thank you page
         });
-        
-        function handleSubmissionResult(success) {
-            // Hide loading spinner
-            document.getElementById('loadingSpinner').style.display = 'none';
-            
-            // Show message
-            const messageDiv = document.getElementById('formMessage');
-            if (success) {
-                messageDiv.innerHTML = 'Thank you for your application! We\'ll review it and get back to you within 1-2 weeks. Keep working on your project in the meantime!';
-                messageDiv.className = 'form-message success';
-                
-                // Reset form after successful submission
-                setTimeout(function() {
-                    document.getElementById('applicationForm').reset();
-                    messageDiv.style.display = 'none';
-                }, 10000);
-            } else {
-                messageDiv.innerHTML = 'There was an error submitting the form. Please try again or contact us if the problem persists.';
-                messageDiv.className = 'form-message error';
-            }
-            
-            messageDiv.style.display = 'block';
-            
-            // Scroll to message
-            messageDiv.scrollIntoView({ behavior: 'smooth' });
-        }
         
         // Form validation function
         function validateForm() {
