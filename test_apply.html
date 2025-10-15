@@ -1,122 +1,141 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Form - Miniforge Application</title>
+    <title>Google Form Direct POST Test</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
         }
-        
         h1 {
             color: #333;
         }
-        
+        form {
+            margin-top: 20px;
+        }
         .form-group {
             margin-bottom: 15px;
         }
-        
         label {
             display: block;
             margin-bottom: 5px;
-            font-weight: bold;
         }
-        
-        input, select, textarea {
+        input, textarea, button {
             width: 100%;
             padding: 8px;
-            box-sizing: border-box;
+            margin-bottom: 10px;
         }
-        
         button {
-            background: #333;
+            background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 10px 15px;
-            font-size: 16px;
             cursor: pointer;
+            padding: 10px;
         }
-        
-        .debug-info {
+        #result {
             margin-top: 20px;
             padding: 15px;
-            background: #f5f5f5;
+            background-color: #f9f9f9;
             border: 1px solid #ddd;
-        }
-        
-        .important-note {
-            padding: 10px;
-            background-color: #ffffcc;
-            border-left: 4px solid #ffcc00;
-            margin: 20px 0;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <h1>Test Form - Direct Submission</h1>
+    <h1>Google Form Direct POST Test</h1>
     
-    <div class="important-note">
-        <p><strong>Important:</strong> This is a direct form submission test. After submitting, you will be redirected to Google Forms confirmation page, then back to this page.</p>
-    </div>
-    
-    <form id="testForm" action="https://docs.google.com/forms/d/e/1FAIpQLSdJn7016X0F6mIzVb1cEvBE_gePynojj3QfIR44P4lzNS2InQ/formResponse" method="POST">
+    <form id="simpleTestForm">
         <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="entry.1500017940" value="Test Name" required>
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="entry.1500017940" required>
         </div>
         
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="entry.329869323" value="test@example.com" required>
+            <input type="email" id="email" name="entry.329869323" required>
         </div>
         
         <div class="form-group">
             <label for="phone">Phone:</label>
-            <input type="tel" id="phone" name="entry.948298581" value="1234567890" required>
+            <input type="text" id="phone" name="entry.948298581" required>
         </div>
         
-        <div class="form-group">
-            <label for="status">Status:</label>
-            <select id="status" name="entry.2005410860" required>
-                <option value="Undergraduate Student">Undergraduate Student</option>
-            </select>
-        </div>
-        
-        <div class="form-group">
-            <label for="description">Project Description:</label>
-            <textarea id="description" name="entry.968015306" required>Test project description</textarea>
-        </div>
-        
-        <!-- Hidden fields that might be required -->
+        <!-- Hidden fields required by Google Forms -->
         <input type="hidden" name="fvv" value="1">
         <input type="hidden" name="fbzx" value="-6076773421131239123">
         <input type="hidden" name="pageHistory" value="0">
         
-        <!-- Make sure Google redirects back to our page -->
-        <input type="hidden" name="dlut" value="1605669952">
-        
-        <button type="submit">Submit Test Form</button>
+        <button type="submit">Submit Test</button>
     </form>
     
-    <div class="debug-info">
-        <h3>Troubleshooting Steps:</h3>
-        <ol>
-            <li>This form uses a <strong>direct POST submission</strong> to Google Forms, which will redirect you to Google's confirmation page.</li>
-            <li>After submission, check your Google Form's response tab to see if this test submission is recorded.</li>
-            <li>If this test form works but your main form doesn't, the issue is with your form submission method.</li>
-            <li>If this test form also doesn't work, the issue might be with your Google Form configuration.</li>
-        </ol>
-        
-        <h3>Check Google Form Settings:</h3>
-        <ol>
-            <li>Make sure your Google Form is open to accepting responses</li>
-            <li>Verify the spreadsheet is properly linked to your form</li>
-            <li>Check if there might be form settings limiting submissions</li>
-        </ol>
-    </div>
+    <div id="result"></div>
+    
+    <script>
+        // Wait for the document to load
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('simpleTestForm');
+            const resultDiv = document.getElementById('result');
+            
+            if (!form) {
+                console.error('Form element not found');
+                return;
+            }
+            
+            // Handle form submission
+            form.addEventListener('submit', function(event) {
+                // Prevent default form submission
+                event.preventDefault();
+                
+                resultDiv.innerHTML = "Submitting test form...";
+                resultDiv.style.display = "block";
+                
+                // Method 1: Create and submit a new form directly
+                const directForm = document.createElement('form');
+                directForm.method = 'POST';
+                directForm.action = 'https://docs.google.com/forms/d/e/1FAIpQLSdJn7016X0F6mIzVb1cEvBE_gePynojj3QfIR44P4lzNS2InQ/formResponse';
+                
+                // Copy all form data
+                const formData = new FormData(form);
+                for (const [name, value] of formData.entries()) {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = name;
+                    input.value = value;
+                    directForm.appendChild(input);
+                }
+                
+                // Create a target iframe to prevent page navigation
+                const targetFrame = document.createElement('iframe');
+                targetFrame.name = 'target_frame';
+                targetFrame.style.display = 'none';
+                document.body.appendChild(targetFrame);
+                
+                // Set the form target to the iframe
+                directForm.target = 'target_frame';
+                
+                // Add the form to the document
+                document.body.appendChild(directForm);
+                
+                // Set up a message for when the iframe loads after submission
+                targetFrame.addEventListener('load', function() {
+                    resultDiv.innerHTML = "Form submitted successfully! Check your Google Sheet for results.";
+                    form.reset();
+                    
+                    // Clean up
+                    setTimeout(() => {
+                        document.body.removeChild(directForm);
+                        document.body.removeChild(targetFrame);
+                    }, 1000);
+                });
+                
+                // Submit the form
+                directForm.submit();
+            });
+        });
+    </script>
 </body>
 </html>
