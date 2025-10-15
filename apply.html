@@ -1,690 +1,256 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+    <title>Miniforge Application Form</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apply to Miniforge - Microgrant Program</title>
-    <link rel="icon" href="favicon5.png" type="image/png">
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
-        
-        :root {
-            --background-color: #f5f5f5;
-            --text-color: #333;
-            --border-color: #333;
-            --secondary-text-color: #666;
-            --accent-color: #4a4a4a;
-            --input-bg: #fff;
-            --input-border: #999;
-            --input-focus: #333;
-            --error-color: #cc0000;
-        }
-        
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --background-color: #1a1a1a;
-                --text-color: #e0e0e0;
-                --border-color: #e0e0e0;
-                --secondary-text-color: #aaa;
-                --accent-color: #b0b0b0;
-                --input-bg: #2a2a2a;
-                --input-border: #666;
-                --input-focus: #e0e0e0;
-                --error-color: #ff5555;
-            }
-        }
-        
-        [data-theme="light"] {
-            --background-color: #f5f5f5;
-            --text-color: #333;
-            --border-color: #333;
-            --secondary-text-color: #666;
-            --accent-color: #4a4a4a;
-            --input-bg: #fff;
-            --input-border: #999;
-            --input-focus: #333;
-            --error-color: #cc0000;
-        }
-        
-        [data-theme="dark"] {
-            --background-color: #1a1a1a;
-            --text-color: #e0e0e0;
-            --border-color: #e0e0e0;
-            --secondary-text-color: #aaa;
-            --accent-color: #b0b0b0;
-            --input-bg: #2a2a2a;
-            --input-border: #666;
-            --input-focus: #e0e0e0;
-            --error-color: #ff5555;
-        }
         
         body {
             font-family: 'Space Mono', monospace;
             margin: 0;
             padding: 0;
-            background-color: var(--background-color);
-            color: var(--text-color);
+            background-color: #f5f5f5;
+            color: #333;
             line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        
-        .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            border: 1px solid var(--border-color);
-        }
-        
-        .theme-toggle {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 1000;
-            background: var(--text-color);
-            color: var(--background-color);
-            border: 1px solid var(--border-color);
-            padding: 5px 8px;
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            opacity: 1;
-        }
-        
-        .theme-toggle:hover {
-            opacity: 1;
-        }
-        
-        .header {
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-            display: grid;
-            grid-template-columns: 1fr auto;
-            align-items: end;
-        }
-        
-        .back-link {
-            color: var(--text-color);
-            text-decoration: none;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 2px;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: opacity 0.3s;
-        }
-        
-        .back-link:hover {
-            opacity: 0.7;
         }
         
         h1 {
+            text-align: center;
+            margin-bottom: 30px;
             font-size: 28px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin: 0 0 10px 0;
         }
         
-        h2 {
-            font-size: 18px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin: 30px 0 20px 0;
-            border-bottom: 1px dotted var(--border-color);
-            padding-bottom: 10px;
+        .intro {
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
         }
         
-        .tagline {
-            font-size: 16px;
-            color: var(--secondary-text-color);
-            font-style: italic;
-            margin: 0 0 30px 0;
-        }
-        
-        .intro-section {
-            font-size: 14px;
-            margin: 30px 0;
+        form {
+            background: #fff;
             padding: 20px;
-            border: 1px solid var(--border-color);
-            background: var(--background-color);
-            color: var(--secondary-text-color);
-        }
-        
-        .form-section {
-            margin: 30px 0;
+            border: 1px solid #ddd;
         }
         
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         
-        .form-label {
+        label {
             display: block;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            color: var(--text-color);
-        }
-        
-        .form-help {
-            font-size: 12px;
-            color: var(--secondary-text-color);
-            margin-bottom: 10px;
-            font-style: italic;
-        }
-        
-        .form-input,
-        .form-textarea,
-        .form-select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--input-border);
-            background: var(--input-bg);
-            color: var(--text-color);
-            font-family: 'Space Mono', monospace;
-            font-size: 14px;
-            transition: border-color 0.3s;
-            box-sizing: border-box;
-        }
-        
-        .form-input:focus,
-        .form-textarea:focus,
-        .form-select:focus {
-            outline: none;
-            border-color: var(--input-focus);
-        }
-        
-        .form-textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-        
-        .form-select {
-            cursor: pointer;
-        }
-        
-        .checkbox-group {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-        
-        .checkbox-input {
-            margin-top: 4px;
-            flex-shrink: 0;
-        }
-        
-        .checkbox-label {
-            font-size: 12px;
-            line-height: 1.4;
-            color: var(--secondary-text-color);
-            text-transform: none;
-            letter-spacing: normal;
-            font-weight: normal;
-        }
-        
-        .submit-section {
-            text-align: center;
-            margin: 40px 0;
-            padding: 30px;
-            border: 2px solid var(--border-color);
-        }
-        
-        .submit-btn {
-            background: var(--text-color);
-            color: var(--background-color);
-            padding: 15px 30px;
-            border: 2px solid var(--text-color);
-            font-family: 'Space Mono', monospace;
-            font-size: 14px;
             font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.3s;
+            margin-bottom: 8px;
         }
         
-        .submit-btn:hover {
-            background: var(--background-color);
-            color: var(--text-color);
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            font-family: 'Space Mono', monospace;
         }
         
-        .form-message {
-            margin-top: 20px;
-            padding: 15px;
-            border: 1px solid var(--border-color);
-            display: none;
-            font-size: 14px;
-        }
-        
-        .form-message.success {
-            background: var(--background-color);
-            color: var(--text-color);
-            border-color: var(--accent-color);
-        }
-        
-        .form-message.error {
-            background: var(--background-color);
-            color: var(--error-color);
-            border-color: var(--error-color);
-        }
-        
-        .error-text {
-            color: var(--error-color);
-            font-size: 12px;
-            margin-top: 5px;
-            display: none;
-        }
-        
-        .form-input.error,
-        .form-textarea.error,
-        .form-select.error {
-            border-color: var(--error-color);
-        }
-        
-        .divider {
-            text-align: center;
-            margin: 30px 0;
-            color: var(--secondary-text-color);
+        textarea {
+            min-height: 100px;
         }
         
         .required {
-            color: var(--accent-color);
+            color: red;
         }
         
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-                margin: 0 10px;
-            }
-            
-            .header {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            
-            .back-link {
-                margin-top: 20px;
-                text-align: center;
-            }
-            
-            h1 {
-                font-size: 22px;
-            }
-            
-            .intro-section {
-                padding: 15px;
-                font-size: 12px;
-            }
-            
-            .submit-section {
-                padding: 20px;
-                margin: 30px 0;
-            }
-            
-            .submit-btn {
-                padding: 12px 20px;
-                font-size: 12px;
-            }
-            
-            .theme-toggle {
-                top: 5px;
-                right: 5px;
-                padding: 3px 6px;
-                font-size: 10px;
-            }
+        button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-family: 'Space Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        
+        button:hover {
+            background-color: #555;
+        }
+        
+        h2 {
+            margin-top: 30px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div>
-                <h1>MINIFORGE APPLICATION</h1>
-                <div class="tagline">Ready to bring your idea to life?</div>
-            </div>
-            <div>
-                <a href="miniforge.html" class="back-link">← Back to Program</a>
-            </div>
-        </div>
-        
-        <div class="intro-section">
-            We're excited to learn about your project! This application should take about 10-15 minutes to complete. Be yourself—we want to understand your vision, your motivation, and what you're hoping to achieve. Don't worry about having everything perfectly figured out.
-        </div>
-        
-        <div class="divider">• • • • • • • • • • • • • • • • • • • • • • • • •</div>
-        
-        <!-- Hidden iframe for form submission -->
-        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-        
-        <!-- Form starts here -->
-        <form id="applicationForm" class="form-section" action="https://docs.google.com/forms/d/e/1FAIpQLSdJn7016X0F6mIzVb1cEvBE_gePynojj3QfIR44P4lzNS2InQ/formResponse" method="post" target="hidden_iframe" onsubmit="return handleSubmit()">
-            
-            <h2>About You</h2>
-            
-            <div class="form-group">
-                <label class="form-label" for="fullName">Full Name <span class="required">*</span></label>
-                <input type="text" id="fullName" name="entry.1500017940" class="form-input" required>
-                <div class="error-text" id="fullName-error">Please enter your full name</div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="email">Email Address <span class="required">*</span></label>
-                <input type="email" id="email" name="entry.329869323" class="form-input" required>
-                <div class="error-text" id="email-error">Please enter a valid email address</div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="phone">Phone Number <span class="required">*</span></label>
-                <input type="tel" id="phone" name="entry.948298581" class="form-input" required>
-                <div class="error-text" id="phone-error">Please enter your phone number</div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="age">Age <span class="required">*</span></label>
-                <input type="number" id="age" name="entry.376700596" class="form-input" min="18" max="30" required>
-                <div class="error-text" id="age-error">Please enter your age (between 18-30)</div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="status">Current Status <span class="required">*</span></label>
-                <select id="status" name="entry.2005410860" class="form-select" required>
-                    <option value="">Select your current status</option>
-                    <option value="Secondary School Student/Recent Graduate">Secondary School Student/Recent Graduate</option>
-                    <option value="Undergraduate Student">Undergraduate Student</option>
-                    <option value="Graduate Student">Graduate Student</option>
-                    <option value="NYSC Member">NYSC Member</option>
-                    <option value="Recent Graduate">Recent Graduate</option>
-                    <option value="Other">Other</option>
-                </select>
-                <div class="error-text" id="status-error">Please select your current status</div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="institution">Institution/Organization</label>
-                <div class="form-help">Current school, university, or NYSC posting location</div>
-                <input type="text" id="institution" name="entry.524848919" class="form-input">
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="location">Location (City, State) <span class="required">*</span></label>
-                <input type="text" id="location" name="entry.724958313" class="form-input" required>
-                <div class="error-text" id="location-error">Please enter your location</div>
-            </div>
-            
-            <h2>Your Project</h2>
-            
-            <div class="form-group">
-                <label class="form-label" for="projectCategory">Project Category <span class="required">*</span></label>
-                <select id="projectCategory" name="entry.1028252304" class="form-select" required>
-                    <option value="">Select the category that best fits</option>
-                    <option value="Business/Venture">Business/Venture</option>
-                    <option value="Creative Arts">Creative Arts</option>
-                    <option value="Research">Research</option>
-                    <option value="Social Impact">Social Impact</option>
-                    <option value="Technology/Software">Technology/Software</option>
-                    <option value="Other">Other</option>
-                </select>
-                <div class="error-text" id="projectCategory-error">Please select a project category</div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="projectDescription">Project Description <span class="required">*</span></label>
-                <div class="form-help">Describe your project in detail. What are you building or creating? What problem does it solve?</div>
-                <textarea id="projectDescription" name="entry.968015306" class="form-textarea" required></textarea>
-                <div class="error-text" id="projectDescription-error">Please enter your project description</div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="projectStage">How far have you gotten? <span class="required">*</span></label>
-                <div class="form-help">It's okay if it's still in the idea phase.</div>
-                <textarea id="projectStage" name="entry.1584637975" class="form-textarea" required></textarea>
-                <div class="error-text" id="projectStage-error">Please describe your current progress</div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="twoMonthPlan">2-Month Plan <span class="required">*</span></label>
-                <div class="form-help">What specifically will you accomplish in the 2 months? Be as detailed as possible.</div>
-                <textarea id="twoMonthPlan" name="entry.1964058972" class="form-textarea" required></textarea>
-                <div class="error-text" id="twoMonthPlan-error">Please describe your 2-month plan</div>
-            </div>
-            
-            <h2>Motivation & Impact</h2>
-            
-            <div class="form-group">
-                <label class="form-label" for="motivation">Why This Project? <span class="required">*</span></label>
-                <div class="form-help">Please respond to at least two of the following. You may respond in any format you'd like: a sentence, a list, a paragraph, a link to a video etc. Format and length does not count against you.</div>
-                <textarea id="motivation" name="entry.831786434" class="form-textarea" required></textarea>
-                <div class="error-text" id="motivation-error">Please describe your motivation</div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="impact">Expected Impact</label>
-                <div class="form-help">Who will benefit from your project? How will it make a difference? This could also be how this project moves you forward toward your dream or who you want to be.</div>
-                <textarea id="impact" name="entry.1942847911" class="form-textarea"></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="challenges">Biggest Challenge <span class="required">*</span></label>
-                <div class="form-help">What's the main obstacle you're facing right now? How would this grant help?</div>
-                <textarea id="challenges" name="entry.1717229353" class="form-textarea" required></textarea>
-                <div class="error-text" id="challenges-error">Please describe your biggest challenge</div>
-            </div>
-            
-            <h2>Experience & Background</h2>
-            
-            <div class="form-group">
-                <label class="form-label" for="experience">Relevant Experience</label>
-                <div class="form-help">What skills, experiences, or previous projects prepare you for this?</div>
-                <textarea id="experience" name="entry.1426456443" class="form-textarea"></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="resumeLink">Resume or Portfolio Link (Optional)</label>
-                <div class="form-help">Please upload your resume or portfolio to Google Drive, Dropbox, or another service and paste the share link here.</div>
-                <input type="url" id="resumeLink" name="entry.548696647" class="form-input" placeholder="https://...">
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="resumeText">Resume or Portfolio Text (Optional)</label>
-                <div class="form-help">Alternatively, you can paste the full text of your resume or portfolio details here.</div>
-                <textarea id="resumeText" name="entry.1758189158" class="form-textarea"></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="futureVision">Future Vision</label>
-                <div class="form-help">Where do you see this project (and yourself) in 6 months or 1 year?</div>
-                <textarea id="futureVision" name="entry.144472175" class="form-textarea"></textarea>
-            </div>
-            
-            <h2>Additional Information</h2>
-            
-            <div class="form-group">
-                <label class="form-label" for="hearAbout">How did you hear about Miniforge?</label>
-                <select id="hearAbout" name="entry.730535848" class="form-select">
-                    <option value="">Select an option</option>
-                    <option value="Website/Archive">Website/Archive</option>
-                    <option value="Social Media">Social Media</option>
-                    <option value="Friend/Word of Mouth">Friend/Word of Mouth</option>
-                    <option value="University/School">University/School</option>
-                    <option value="NYSC Network">NYSC Network</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="anythingElse">Anything Else?</label>
-                <div class="form-help">Anything else you'd like us to know? Links to work, questions, or additional context?</div>
-                <textarea id="anythingElse" name="entry.302204077" class="form-textarea"></textarea>
-            </div>
-            
-            <div class="form-group">
-                <div class="checkbox-group">
-                    <input type="checkbox" id="consent" name="entry.2003049549" class="checkbox-input" value="Yes" required>
-                    <label for="consent" class="checkbox-label">
-                        I confirm that all information provided is accurate and I'm committed to working on this project for the 2-month period. I understand this is trust-based support and I'm prepared to provide regular updates on my progress. <span class="required">*</span>
-                    </label>
-                </div>
-                <div class="error-text" id="consent-error">You must agree to the terms</div>
-            </div>
-            
-            <div class="divider">• • • • • • • • • • • • • • • • • • • • • • • • •</div>
-            
-            <div class="submit-section">
-                <button type="submit" class="submit-btn" id="submitButton">Submit Application</button>
-                <div id="formMessage" class="form-message"></div>
-                <div style="margin-top: 20px; font-size: 12px; color: var(--secondary-text-color); font-style: italic;">
-                    Applications are reviewed on a rolling basis. You'll hear back within 1-2 weeks.
-                </div>
-            </div>
-        </form>
+    <h1>MINIFORGE APPLICATION</h1>
+    
+    <div class="intro">
+        We're excited to learn about your project! This application should take about 10-15 minutes to complete. Be yourself—we want to understand your vision, your motivation, and what you're hoping to achieve.
     </div>
     
-    <button class="theme-toggle" id="theme-toggle">Toggle Dark Mode</button>
+    <!-- This uses a traditional form with action/method (reliable approach) -->
+    <form action="https://docs.google.com/forms/d/e/1FAIpQLSdJn7016X0F6mIzVb1cEvBE_gePynojj3QfIR44P4lzNS2InQ/formResponse" method="POST">
+        <h2>About You</h2>
+        
+        <div class="form-group">
+            <label>Full Name <span class="required">*</span></label>
+            <input type="text" name="entry.1500017940" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Email Address <span class="required">*</span></label>
+            <input type="email" name="entry.329869323" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Phone Number <span class="required">*</span></label>
+            <input type="tel" name="entry.948298581" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Age <span class="required">*</span></label>
+            <input type="number" name="entry.376700596" min="18" max="30" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Current Status <span class="required">*</span></label>
+            <select name="entry.2005410860" required>
+                <option value="">Select your current status</option>
+                <option value="Secondary School Student/Recent Graduate">Secondary School Student/Recent Graduate</option>
+                <option value="Undergraduate Student">Undergraduate Student</option>
+                <option value="Graduate Student">Graduate Student</option>
+                <option value="NYSC Member">NYSC Member</option>
+                <option value="Recent Graduate">Recent Graduate</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>Institution/Organization</label>
+            <input type="text" name="entry.524848919">
+        </div>
+        
+        <div class="form-group">
+            <label>Location (City, State) <span class="required">*</span></label>
+            <input type="text" name="entry.724958313" required>
+        </div>
+        
+        <h2>Your Project</h2>
+        
+        <div class="form-group">
+            <label>Project Category <span class="required">*</span></label>
+            <select name="entry.1028252304" required>
+                <option value="">Select the category that best fits</option>
+                <option value="Business/Venture">Business/Venture</option>
+                <option value="Creative Arts">Creative Arts</option>
+                <option value="Research">Research</option>
+                <option value="Social Impact">Social Impact</option>
+                <option value="Technology/Software">Technology/Software</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>Project Description <span class="required">*</span></label>
+            <textarea name="entry.968015306" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>How far have you gotten? <span class="required">*</span></label>
+            <textarea name="entry.1584637975" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>2-Month Plan <span class="required">*</span></label>
+            <textarea name="entry.1964058972" required></textarea>
+        </div>
+        
+        <h2>Motivation & Impact</h2>
+        
+        <div class="form-group">
+            <label>Why This Project? <span class="required">*</span></label>
+            <textarea name="entry.831786434" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>Expected Impact</label>
+            <textarea name="entry.1942847911"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>Biggest Challenge <span class="required">*</span></label>
+            <textarea name="entry.1717229353" required></textarea>
+        </div>
+        
+        <h2>Experience & Background</h2>
+        
+        <div class="form-group">
+            <label>Relevant Experience</label>
+            <textarea name="entry.1426456443"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>Resume or Portfolio Link (Optional)</label>
+            <input type="url" name="entry.548696647" placeholder="https://...">
+        </div>
+        
+        <div class="form-group">
+            <label>Resume or Portfolio Text (Optional)</label>
+            <textarea name="entry.1758189158"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>Future Vision</label>
+            <textarea name="entry.144472175"></textarea>
+        </div>
+        
+        <h2>Additional Information</h2>
+        
+        <div class="form-group">
+            <label>How did you hear about Miniforge?</label>
+            <select name="entry.730535848">
+                <option value="">Select an option</option>
+                <option value="Website/Archive">Website/Archive</option>
+                <option value="Social Media">Social Media</option>
+                <option value="Friend/Word of Mouth">Friend/Word of Mouth</option>
+                <option value="University/School">University/School</option>
+                <option value="NYSC Network">NYSC Network</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>Anything Else?</label>
+            <textarea name="entry.302204077"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="entry.2003049549" value="Yes" required>
+                I confirm that all information provided is accurate and I'm committed to working on this project for the 2-month period. <span class="required">*</span>
+            </label>
+        </div>
+        
+        <button type="submit">Submit Application</button>
+    </form>
     
     <script>
-        // Form validation function
-        function validateForm() {
-            const requiredFields = document.querySelectorAll('[required]');
-            let valid = true;
+        document.querySelector('form').addEventListener('submit', function(e) {
+            // Don't prevent default - let the form submit naturally
             
-            // Reset error states
-            document.querySelectorAll('.error-text').forEach(el => {
-                el.style.display = 'none';
-            });
+            // Show an alert to inform user
+            alert('Thank you for your application! Your submission is being processed.');
             
-            document.querySelectorAll('.form-input, .form-textarea, .form-select').forEach(el => {
-                el.classList.remove('error');
-            });
-            
-            // Validate each required field
-            requiredFields.forEach(field => {
-                // For regular inputs and textareas
-                if ((field.type === 'text' || field.type === 'email' || field.type === 'tel' || field.type === 'number' || field.tagName === 'TEXTAREA' || field.tagName === 'SELECT') && !field.value.trim()) {
-                    field.classList.add('error');
-                    const errorEl = document.getElementById(field.id + '-error');
-                    if (errorEl) {
-                        errorEl.style.display = 'block';
-                    }
-                    valid = false;
-                }
-                
-                // Special case for email validation
-                if (field.type === 'email' && field.value.trim() && !isValidEmail(field.value)) {
-                    field.classList.add('error');
-                    const errorEl = document.getElementById(field.id + '-error');
-                    if (errorEl) {
-                        errorEl.style.display = 'block';
-                    }
-                    valid = false;
-                }
-                
-                // Special case for checkbox
-                if (field.type === 'checkbox' && !field.checked) {
-                    const errorEl = document.getElementById(field.id + '-error');
-                    if (errorEl) {
-                        errorEl.style.display = 'block';
-                    }
-                    valid = false;
-                }
-            });
-            
-            return valid;
-        }
-        
-        function isValidEmail(email) {
-            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(String(email).toLowerCase());
-        }
-        
-        // Handle form submission
-        function handleSubmit() {
-            if (!validateForm()) {
-                // Show error message
-                const messageDiv = document.getElementById('formMessage');
-                messageDiv.innerHTML = 'Please fix the errors in the form before submitting.';
-                messageDiv.className = 'form-message error';
-                messageDiv.style.display = 'block';
-                
-                // Scroll to first error
-                const firstError = document.querySelector('.form-input.error, .form-textarea.error, .form-select.error');
-                if (firstError) {
-                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-                
-                return false;
-            }
-            
-            // Disable the submit button to prevent multiple submissions
-            document.getElementById('submitButton').disabled = true;
-            
-            // Show success message
-            const messageDiv = document.getElementById('formMessage');
-            messageDiv.innerHTML = 'Thank you for your application! We\'ll review it and get back to you within 1-2 weeks. Keep working on your project in the meantime!';
-            messageDiv.className = 'form-message success';
-            messageDiv.style.display = 'block';
-            
-            // Scroll to success message
-            messageDiv.scrollIntoView({ behavior: 'smooth' });
-            
-            // Set up event listener for iframe load
-            const iframe = document.getElementById('hidden_iframe');
-            iframe.onload = function() {
-                // Reset the form after successful submission
-                setTimeout(function() {
-                    document.getElementById('applicationForm').reset();
-                    document.getElementById('submitButton').disabled = false;
-                }, 5000);
-            };
-            
-            return true;
-        }
-        
-        // Theme toggle functionality
-        function setTheme(theme) {
-            document.documentElement.setAttribute('data-theme', theme);
-            try {
-                localStorage.setItem('theme', theme);
-            } catch (e) {
-                console.log('localStorage not available, theme preference will not persist');
-            }
-        }
-        
-        let savedTheme = null;
-        try {
-            savedTheme = localStorage.getItem('theme');
-        } catch (e) {
-            console.log('localStorage not available, using system preference only');
-        }
-        
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        
-        if (savedTheme) {
-            setTheme(savedTheme);
-        } else if (prefersDark) {
-            setTheme('dark');
-        } else {
-            setTheme('light');
-        }
-        
-        const themeToggle = document.getElementById('theme-toggle');
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            setTheme(newTheme);
-            updateToggleText();
+            // You can add additional code here if needed
         });
-        
-        function updateToggleText() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
-        }
-        
-        updateToggleText();
     </script>
 </body>
 </html>
