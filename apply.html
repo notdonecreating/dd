@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Miniforge Application Form</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miniforge Application</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
         
@@ -13,244 +13,68 @@
             padding: 0;
             background-color: #f5f5f5;
             color: #333;
-            line-height: 1.6;
-            max-width: 800px;
+        }
+        
+        .container {
+            max-width: 850px;
             margin: 0 auto;
             padding: 20px;
+            text-align: center;
         }
         
         h1 {
-            text-align: center;
-            margin-bottom: 30px;
             font-size: 28px;
             letter-spacing: 2px;
             text-transform: uppercase;
+            margin: 20px 0;
         }
         
         .intro {
             margin-bottom: 30px;
-            padding: 15px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
+            font-style: italic;
+            color: #666;
         }
         
-        form {
-            background: #fff;
-            padding: 20px;
-            border: 1px solid #ddd;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-        
-        input, textarea, select {
+        .form-container {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            font-family: 'Space Mono', monospace;
-        }
-        
-        textarea {
-            min-height: 100px;
-        }
-        
-        .required {
-            color: red;
-        }
-        
-        button {
-            background-color: #333;
-            color: white;
+            height: 3000px; /* Adjust this height based on your form's length */
             border: none;
-            padding: 12px 24px;
-            cursor: pointer;
-            font-family: 'Space Mono', monospace;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: bold;
-            margin-top: 20px;
+            overflow: hidden;
         }
         
-        button:hover {
-            background-color: #555;
-        }
-        
-        h2 {
+        .back-link {
+            display: inline-block;
             margin-top: 30px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #333;
+            padding-bottom: 2px;
+            transition: opacity 0.3s;
+        }
+        
+        .back-link:hover {
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
-    <h1>MINIFORGE APPLICATION</h1>
-    
-    <div class="intro">
-        We're excited to learn about your project! This application should take about 10-15 minutes to complete. Be yourself—we want to understand your vision, your motivation, and what you're hoping to achieve.
+    <div class="container">
+        <h1>MINIFORGE APPLICATION</h1>
+        <div class="intro">
+            We're excited to learn about your project! This application should take about 10-15 minutes to complete.
+        </div>
+        
+        <!-- Google Form Embed -->
+        <iframe 
+            src="https://docs.google.com/forms/d/e/1FAIpQLSdJn7016X0F6mIzVb1cEvBE_gePynojj3QfIR44P4lzNS2InQ/viewform?embedded=true" 
+            class="form-container" 
+            frameborder="0" 
+            marginheight="0" 
+            marginwidth="0">
+            Loading…
+        </iframe>
+        
+        <a href="miniforge.html" class="back-link">← Back to Program</a>
     </div>
-    
-    <!-- This uses a traditional form with action/method (reliable approach) -->
-    <form action="https://docs.google.com/forms/d/e/1FAIpQLSdJn7016X0F6mIzVb1cEvBE_gePynojj3QfIR44P4lzNS2InQ/formResponse" method="POST">
-        <h2>About You</h2>
-        
-        <div class="form-group">
-            <label>Full Name <span class="required">*</span></label>
-            <input type="text" name="entry.1500017940" required>
-        </div>
-        
-        <div class="form-group">
-            <label>Email Address <span class="required">*</span></label>
-            <input type="email" name="entry.329869323" required>
-        </div>
-        
-        <div class="form-group">
-            <label>Phone Number <span class="required">*</span></label>
-            <input type="tel" name="entry.948298581" required>
-        </div>
-        
-        <div class="form-group">
-            <label>Age <span class="required">*</span></label>
-            <input type="number" name="entry.376700596" min="18" max="30" required>
-        </div>
-        
-        <div class="form-group">
-            <label>Current Status <span class="required">*</span></label>
-            <select name="entry.2005410860" required>
-                <option value="">Select your current status</option>
-                <option value="Secondary School Student/Recent Graduate">Secondary School Student/Recent Graduate</option>
-                <option value="Undergraduate Student">Undergraduate Student</option>
-                <option value="Graduate Student">Graduate Student</option>
-                <option value="NYSC Member">NYSC Member</option>
-                <option value="Recent Graduate">Recent Graduate</option>
-                <option value="Other">Other</option>
-            </select>
-        </div>
-        
-        <div class="form-group">
-            <label>Institution/Organization</label>
-            <input type="text" name="entry.524848919">
-        </div>
-        
-        <div class="form-group">
-            <label>Location (City, State) <span class="required">*</span></label>
-            <input type="text" name="entry.724958313" required>
-        </div>
-        
-        <h2>Your Project</h2>
-        
-        <div class="form-group">
-            <label>Project Category <span class="required">*</span></label>
-            <select name="entry.1028252304" required>
-                <option value="">Select the category that best fits</option>
-                <option value="Business/Venture">Business/Venture</option>
-                <option value="Creative Arts">Creative Arts</option>
-                <option value="Research">Research</option>
-                <option value="Social Impact">Social Impact</option>
-                <option value="Technology/Software">Technology/Software</option>
-                <option value="Other">Other</option>
-            </select>
-        </div>
-        
-        <div class="form-group">
-            <label>Project Description <span class="required">*</span></label>
-            <textarea name="entry.968015306" required></textarea>
-        </div>
-        
-        <div class="form-group">
-            <label>How far have you gotten? <span class="required">*</span></label>
-            <textarea name="entry.1584637975" required></textarea>
-        </div>
-        
-        <div class="form-group">
-            <label>2-Month Plan <span class="required">*</span></label>
-            <textarea name="entry.1964058972" required></textarea>
-        </div>
-        
-        <h2>Motivation & Impact</h2>
-        
-        <div class="form-group">
-            <label>Why This Project? <span class="required">*</span></label>
-            <textarea name="entry.831786434" required></textarea>
-        </div>
-        
-        <div class="form-group">
-            <label>Expected Impact</label>
-            <textarea name="entry.1942847911"></textarea>
-        </div>
-        
-        <div class="form-group">
-            <label>Biggest Challenge <span class="required">*</span></label>
-            <textarea name="entry.1717229353" required></textarea>
-        </div>
-        
-        <h2>Experience & Background</h2>
-        
-        <div class="form-group">
-            <label>Relevant Experience</label>
-            <textarea name="entry.1426456443"></textarea>
-        </div>
-        
-        <div class="form-group">
-            <label>Resume or Portfolio Link (Optional)</label>
-            <input type="url" name="entry.548696647" placeholder="https://...">
-        </div>
-        
-        <div class="form-group">
-            <label>Resume or Portfolio Text (Optional)</label>
-            <textarea name="entry.1758189158"></textarea>
-        </div>
-        
-        <div class="form-group">
-            <label>Future Vision</label>
-            <textarea name="entry.144472175"></textarea>
-        </div>
-        
-        <h2>Additional Information</h2>
-        
-        <div class="form-group">
-            <label>How did you hear about Miniforge?</label>
-            <select name="entry.730535848">
-                <option value="">Select an option</option>
-                <option value="Website/Archive">Website/Archive</option>
-                <option value="Social Media">Social Media</option>
-                <option value="Friend/Word of Mouth">Friend/Word of Mouth</option>
-                <option value="University/School">University/School</option>
-                <option value="NYSC Network">NYSC Network</option>
-                <option value="Other">Other</option>
-            </select>
-        </div>
-        
-        <div class="form-group">
-            <label>Anything Else?</label>
-            <textarea name="entry.302204077"></textarea>
-        </div>
-        
-        <div class="form-group">
-            <label>
-                <input type="checkbox" name="entry.2003049549" value="Yes" required>
-                I confirm that all information provided is accurate and I'm committed to working on this project for the 2-month period. <span class="required">*</span>
-            </label>
-        </div>
-        
-        <button type="submit">Submit Application</button>
-    </form>
-    
-    <script>
-        document.querySelector('form').addEventListener('submit', function(e) {
-            // Don't prevent default - let the form submit naturally
-            
-            // Show an alert to inform user
-            alert('Thank you for your application! Your submission is being processed.');
-            
-            // You can add additional code here if needed
-        });
-    </script>
 </body>
 </html>
