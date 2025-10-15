@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apply to Minishot - Microgrant Program</title>
+    <title>Apply to Miniforge - Microgrant Program</title>
     <link rel="icon" href="favicon5.png" type="image/png">
 
     <style>
@@ -358,8 +358,11 @@
         
         <div class="divider">• • • • • • • • • • • • • • • • • • • • • • • • •</div>
         
+        <!-- Hidden iframe for form submission -->
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+        
         <!-- Form starts here -->
-        <form id="applicationForm" class="form-section" method="POST" action="https://docs.google.com/forms/d/e/1FAIpQLSdJn7016X0F6mIzVb1cEvBE_gePynojj3QfIR44P4lzNS2InQ/formResponse" target="_blank" onsubmit="return validateAndShowMessage();">
+        <form id="applicationForm" class="form-section" action="https://docs.google.com/forms/d/e/1FAIpQLSdJn7016X0F6mIzVb1cEvBE_gePynojj3QfIR44P4lzNS2InQ/formResponse" method="post" target="hidden_iframe" onsubmit="return handleSubmit()">
             
             <h2>About You</h2>
             
@@ -514,9 +517,9 @@
             </div>
             
             <div class="form-group">
-                <label class="form-label" for="anything-else">Anything Else?</label>
+                <label class="form-label" for="anythingElse">Anything Else?</label>
                 <div class="form-help">Anything else you'd like us to know? Links to work, questions, or additional context?</div>
-                <textarea id="anything-else" name="entry.302204077" class="form-textarea"></textarea>
+                <textarea id="anythingElse" name="entry.302204077" class="form-textarea"></textarea>
             </div>
             
             <div class="form-group">
@@ -532,7 +535,7 @@
             <div class="divider">• • • • • • • • • • • • • • • • • • • • • • • • •</div>
             
             <div class="submit-section">
-                <button type="submit" class="submit-btn">Submit Application</button>
+                <button type="submit" class="submit-btn" id="submitButton">Submit Application</button>
                 <div id="formMessage" class="form-message"></div>
                 <div style="margin-top: 20px; font-size: 12px; color: var(--secondary-text-color); font-style: italic;">
                     Applications are reviewed on a rolling basis. You'll hear back within 1-2 weeks.
@@ -598,8 +601,8 @@
             return re.test(String(email).toLowerCase());
         }
         
-        // Combined function to validate and show message
-        function validateAndShowMessage() {
+        // Handle form submission
+        function handleSubmit() {
             if (!validateForm()) {
                 // Show error message
                 const messageDiv = document.getElementById('formMessage');
@@ -616,13 +619,28 @@
                 return false;
             }
             
+            // Disable the submit button to prevent multiple submissions
+            document.getElementById('submitButton').disabled = true;
+            
             // Show success message
             const messageDiv = document.getElementById('formMessage');
-            messageDiv.innerHTML = 'Thank you for your application! We\'ll review it and get back to you within 1-2 weeks. You will be redirected to Google Forms to confirm your submission.';
+            messageDiv.innerHTML = 'Thank you for your application! We\'ll review it and get back to you within 1-2 weeks. Keep working on your project in the meantime!';
             messageDiv.className = 'form-message success';
             messageDiv.style.display = 'block';
             
-            // Allow the form to submit normally
+            // Scroll to success message
+            messageDiv.scrollIntoView({ behavior: 'smooth' });
+            
+            // Set up event listener for iframe load
+            const iframe = document.getElementById('hidden_iframe');
+            iframe.onload = function() {
+                // Reset the form after successful submission
+                setTimeout(function() {
+                    document.getElementById('applicationForm').reset();
+                    document.getElementById('submitButton').disabled = false;
+                }, 5000);
+            };
+            
             return true;
         }
         
