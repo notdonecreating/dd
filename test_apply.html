@@ -3,138 +3,389 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Form Direct POST Test</title>
+    <title>Miniforge Application - Prefill Redirect Approach</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
+            line-height: 1.6;
         }
         h1 {
             color: #333;
+            margin-bottom: 30px;
         }
-        form {
-            margin-top: 20px;
+        h2 {
+            margin-top: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
         }
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         label {
             display: block;
             margin-bottom: 5px;
+            font-weight: bold;
         }
-        input, textarea, button {
+        .form-help {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+            font-style: italic;
+        }
+        input, textarea, select {
             width: 100%;
             padding: 8px;
-            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        textarea {
+            min-height: 100px;
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+        }
+        .checkbox-container input {
+            width: auto;
+            margin-right: 10px;
+            margin-top: 5px;
         }
         button {
             background-color: #4CAF50;
             color: white;
             border: none;
+            padding: 12px 20px;
             cursor: pointer;
-            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+            margin-top: 20px;
         }
-        #result {
+        .error {
+            color: red;
+            display: none;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .result {
             margin-top: 20px;
             padding: 15px;
-            background-color: #f9f9f9;
+            background-color: #f8f8f8;
             border: 1px solid #ddd;
+            border-radius: 4px;
             display: none;
+        }
+        .required {
+            color: red;
         }
     </style>
 </head>
 <body>
-    <h1>Google Form Direct POST Test</h1>
+    <h1>Miniforge Application - Prefill Redirect Approach</h1>
     
-    <form id="simpleTestForm">
+    <p>This form will redirect you to the original Google Form with your answers prefilled. 
+       You'll need to click the "Submit" button on the Google Form page to finalize your submission.</p>
+    
+    <form id="prefillForm">
+        <h2>About You</h2>
+        
         <div class="form-group">
-            <label for="name">Full Name:</label>
-            <input type="text" id="name" name="entry.1500017940" required>
+            <label>Full Name <span class="required">*</span></label>
+            <input type="text" id="fullName" required>
+            <div class="error" id="fullName-error">Please enter your full name</div>
         </div>
         
         <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="entry.329869323" required>
+            <label>Email Address <span class="required">*</span></label>
+            <input type="email" id="email" required>
+            <div class="error" id="email-error">Please enter a valid email address</div>
         </div>
         
         <div class="form-group">
-            <label for="phone">Phone:</label>
-            <input type="text" id="phone" name="entry.948298581" required>
+            <label>Phone Number <span class="required">*</span></label>
+            <input type="tel" id="phone" required>
+            <div class="error" id="phone-error">Please enter your phone number</div>
         </div>
         
-        <!-- Hidden fields required by Google Forms -->
-        <input type="hidden" name="fvv" value="1">
-        <input type="hidden" name="fbzx" value="-6076773421131239123">
-        <input type="hidden" name="pageHistory" value="0">
+        <div class="form-group">
+            <label>Age <span class="required">*</span></label>
+            <input type="number" id="age" min="18" max="30" required>
+            <div class="error" id="age-error">Please enter your age (between 18-30)</div>
+        </div>
         
-        <button type="submit">Submit Test</button>
+        <div class="form-group">
+            <label>Current Status <span class="required">*</span></label>
+            <select id="status" required>
+                <option value="">Select your current status</option>
+                <option value="Secondary School Student/Recent Graduate">Secondary School Student/Recent Graduate</option>
+                <option value="Undergraduate Student">Undergraduate Student</option>
+                <option value="Graduate Student">Graduate Student</option>
+                <option value="NYSC Member">NYSC Member</option>
+                <option value="Recent Graduate">Recent Graduate</option>
+                <option value="Other">Other</option>
+            </select>
+            <div class="error" id="status-error">Please select your current status</div>
+        </div>
+        
+        <div class="form-group">
+            <label>Institution/Organization</label>
+            <div class="form-help">Current school, university, or NYSC posting location</div>
+            <input type="text" id="institution">
+        </div>
+        
+        <div class="form-group">
+            <label>Location (City, State) <span class="required">*</span></label>
+            <input type="text" id="location" required>
+            <div class="error" id="location-error">Please enter your location</div>
+        </div>
+        
+        <h2>Your Project</h2>
+        
+        <div class="form-group">
+            <label>Project Category <span class="required">*</span></label>
+            <select id="projectCategory" required>
+                <option value="">Select the category that best fits</option>
+                <option value="Business">Business/Venture</option>
+                <option value="Creative Arts">Creative Arts</option>
+                <option value="Research">Research</option>
+                <option value="Social Impact">Social Impact</option>
+                <option value="Technology/Software">Technology/Software</option>
+                <option value="Other">Other</option>
+            </select>
+            <div class="error" id="projectCategory-error">Please select a project category</div>
+        </div>
+        
+        <div class="form-group">
+            <label>Project Description <span class="required">*</span></label>
+            <div class="form-help">Describe your project in detail. What are you building or creating? What problem does it solve?</div>
+            <textarea id="projectDescription" required></textarea>
+            <div class="error" id="projectDescription-error">Please enter your project description</div>
+        </div>
+        
+        <div class="form-group">
+            <label>How far have you gotten? <span class="required">*</span></label>
+            <div class="form-help">It's okay if it's still in the idea phase.</div>
+            <textarea id="projectStage" required></textarea>
+            <div class="error" id="projectStage-error">Please describe your current progress</div>
+        </div>
+        
+        <div class="form-group">
+            <label>2-Month Plan <span class="required">*</span></label>
+            <div class="form-help">What specifically will you accomplish in the 2 months? Be as detailed as possible.</div>
+            <textarea id="twoMonthPlan" required></textarea>
+            <div class="error" id="twoMonthPlan-error">Please describe your 2-month plan</div>
+        </div>
+        
+        <h2>Motivation & Impact</h2>
+        
+        <div class="form-group">
+            <label>Why This Project? <span class="required">*</span></label>
+            <textarea id="motivation" required></textarea>
+            <div class="error" id="motivation-error">Please describe your motivation</div>
+        </div>
+        
+        <div class="form-group">
+            <label>Expected Impact</label>
+            <div class="form-help">Who will benefit from your project? How will it make a difference?</div>
+            <textarea id="impact"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>Biggest Challenge <span class="required">*</span></label>
+            <div class="form-help">What's the main obstacle you're facing right now? How would this grant help?</div>
+            <textarea id="challenges" required></textarea>
+            <div class="error" id="challenges-error">Please describe your biggest challenge</div>
+        </div>
+        
+        <h2>Experience & Background</h2>
+        
+        <div class="form-group">
+            <label>Relevant Experience</label>
+            <textarea id="experience"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>Resume or Portfolio Link</label>
+            <input type="url" id="resumeLink" placeholder="https://...">
+        </div>
+        
+        <div class="form-group">
+            <label>Resume or Portfolio Text</label>
+            <textarea id="resumeText"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>Future Vision</label>
+            <textarea id="futureVision"></textarea>
+        </div>
+        
+        <h2>Additional Information</h2>
+        
+        <div class="form-group">
+            <label>How did you hear about Miniforge?</label>
+            <select id="hearAbout">
+                <option value="">Select an option</option>
+                <option value="Website/Archive">Website/Archive</option>
+                <option value="Social Media">Social Media</option>
+                <option value="Friend/Word of Mouth">Friend/Word of Mouth</option>
+                <option value="University/School">University/School</option>
+                <option value="NYSC Network">NYSC Network</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>Anything Else?</label>
+            <textarea id="anythingElse"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <div class="checkbox-container">
+                <input type="checkbox" id="consent" required>
+                <label for="consent">
+                    I confirm that all information provided is accurate and I'm committed to working on this project for the 2-month period. I understand this is trust-based support and I'm prepared to provide regular updates on my progress. <span class="required">*</span>
+                </label>
+            </div>
+            <div class="error" id="consent-error">You must agree to the terms</div>
+        </div>
+        
+        <button type="submit">Continue to Google Form</button>
     </form>
     
-    <div id="result"></div>
+    <div class="result" id="result"></div>
     
     <script>
-        // Wait for the document to load
         document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('simpleTestForm');
+            const form = document.getElementById('prefillForm');
             const resultDiv = document.getElementById('result');
             
-            if (!form) {
-                console.error('Form element not found');
-                return;
-            }
-            
-            // Handle form submission
             form.addEventListener('submit', function(event) {
-                // Prevent default form submission
                 event.preventDefault();
                 
-                resultDiv.innerHTML = "Submitting test form...";
-                resultDiv.style.display = "block";
-                
-                // Method 1: Create and submit a new form directly
-                const directForm = document.createElement('form');
-                directForm.method = 'POST';
-                directForm.action = 'https://docs.google.com/forms/d/e/1FAIpQLSdJn7016X0F6mIzVb1cEvBE_gePynojj3QfIR44P4lzNS2InQ/formResponse';
-                
-                // Copy all form data
-                const formData = new FormData(form);
-                for (const [name, value] of formData.entries()) {
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = name;
-                    input.value = value;
-                    directForm.appendChild(input);
+                if (!validateForm()) {
+                    return;
                 }
                 
-                // Create a target iframe to prevent page navigation
-                const targetFrame = document.createElement('iframe');
-                targetFrame.name = 'target_frame';
-                targetFrame.style.display = 'none';
-                document.body.appendChild(targetFrame);
+                resultDiv.textContent = "Preparing your form submission...";
+                resultDiv.style.display = "block";
                 
-                // Set the form target to the iframe
-                directForm.target = 'target_frame';
+                // Build the prefill URL
+                const baseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdJn7016X0F6mIzVb1cEvBE_gePynojj3QfIR44P4lzNS2InQ/viewform?usp=pp_url";
                 
-                // Add the form to the document
-                document.body.appendChild(directForm);
+                // Map form fields to entry IDs
+                const fieldMappings = {
+                    'fullName': 'entry.1500017940',
+                    'email': 'entry.329869323',
+                    'phone': 'entry.948298581',
+                    'age': 'entry.376700596',
+                    'status': 'entry.2005410860',
+                    'institution': 'entry.524848919',
+                    'location': 'entry.724958313',
+                    'projectCategory': 'entry.1028252304',
+                    'projectDescription': 'entry.968015306',
+                    'projectStage': 'entry.1584637975',
+                    'twoMonthPlan': 'entry.1964058972',
+                    'motivation': 'entry.831786434',
+                    'impact': 'entry.1942847911',
+                    'challenges': 'entry.1717229353',
+                    'experience': 'entry.1426456443',
+                    'resumeLink': 'entry.548696647',
+                    'resumeText': 'entry.1758189158',
+                    'futureVision': 'entry.144472175',
+                    'hearAbout': 'entry.730535848',
+                    'anythingElse': 'entry.302204077',
+                    'consent': 'entry.2003049549'
+                };
                 
-                // Set up a message for when the iframe loads after submission
-                targetFrame.addEventListener('load', function() {
-                    resultDiv.innerHTML = "Form submitted successfully! Check your Google Sheet for results.";
-                    form.reset();
+                let prefillUrl = baseUrl;
+                
+                // Add each field value to the URL
+                for (const [fieldId, entryId] of Object.entries(fieldMappings)) {
+                    const field = document.getElementById(fieldId);
                     
-                    // Clean up
-                    setTimeout(() => {
-                        document.body.removeChild(directForm);
-                        document.body.removeChild(targetFrame);
-                    }, 1000);
+                    // Skip empty fields
+                    if (!field || !field.value && field.type !== 'checkbox') {
+                        continue;
+                    }
+                    
+                    // Handle checkbox differently
+                    let value = field.type === 'checkbox' ? 
+                        (field.checked ? 'I confirm that all information provided is accurate and I\'m committed to working on this project for the 2-month period. I understand this is trust-based support and I\'m prepared to provide regular updates on my progress.' : '') : 
+                        field.value;
+                    
+                    // Encode the value for URL
+                    value = encodeURIComponent(value);
+                    
+                    // Add to URL
+                    prefillUrl += `&${entryId}=${value}`;
+                }
+                
+                // Display the redirect message
+                resultDiv.innerHTML = "Redirecting to Google Form with your information pre-filled...<br><br>" +
+                                     "Please click the 'Submit' button on the Google Form page to complete your submission.";
+                
+                // Redirect after a short delay
+                setTimeout(() => {
+                    window.location.href = prefillUrl;
+                }, 1500);
+            });
+            
+            function validateForm() {
+                const requiredFields = form.querySelectorAll('[required]');
+                let valid = true;
+                
+                // Reset error states
+                document.querySelectorAll('.error').forEach(el => {
+                    el.style.display = 'none';
                 });
                 
-                // Submit the form
-                directForm.submit();
-            });
+                // Validate each required field
+                requiredFields.forEach(field => {
+                    if ((field.type === 'text' || field.type === 'email' || field.type === 'tel' || 
+                         field.type === 'number' || field.tagName === 'TEXTAREA' || 
+                         field.tagName === 'SELECT') && !field.value.trim()) {
+                        const errorEl = document.getElementById(field.id + '-error');
+                        if (errorEl) {
+                            errorEl.style.display = 'block';
+                        }
+                        valid = false;
+                    }
+                    
+                    if (field.type === 'email' && field.value.trim() && !isValidEmail(field.value)) {
+                        const errorEl = document.getElementById(field.id + '-error');
+                        if (errorEl) {
+                            errorEl.style.display = 'block';
+                        }
+                        valid = false;
+                    }
+                    
+                    if (field.type === 'checkbox' && !field.checked) {
+                        const errorEl = document.getElementById(field.id + '-error');
+                        if (errorEl) {
+                            errorEl.style.display = 'block';
+                        }
+                        valid = false;
+                    }
+                });
+                
+                if (!valid) {
+                    // Scroll to first error
+                    const firstError = document.querySelector('.error[style="display: block;"]');
+                    if (firstError) {
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+                
+                return valid;
+            }
+            
+            function isValidEmail(email) {
+                const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            }
         });
     </script>
 </body>
